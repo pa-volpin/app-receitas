@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
-function Login() {
+function Login({ history }) {
   const { email, setEmail } = useContext(ReceitasContext);
   const [enable, setEnable] = useState(false);
   const [pass, setPass] = useState('');
 
-  function handleChange() {
-    const six = /.{6,}/;
-    const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
-    setEnable(reg.test(email) && six.test(pass));
+  function handleClick() {
+    localStorage.setItem('user', JSON.stringify({ email }));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    history.push('/comidas');
+    setEnable(false);
   }
 
   useEffect(() => {
-    handleChange();
+    const seven = /.{7,}/;
+    const reg = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/;
+    setEnable(reg.test(email) && seven.test(pass));
   }, [email, pass]);
 
   return (
@@ -31,7 +36,7 @@ function Login() {
         onChange={({ target }) => setPass(target.value)}
       />
       <button
-        onClick={() => {}}
+        onClick={() => { handleClick(); }}
         data-testid="login-submit-btn"
         type="button"
         className="login-btn"
@@ -42,5 +47,13 @@ function Login() {
     </section>
   );
 }
+
+Login.defaultProps = {
+  history: '/',
+};
+
+Login.propTypes = {
+  history: propTypes.shape(),
+};
 
 export default Login;
