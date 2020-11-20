@@ -4,17 +4,23 @@ import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
-  const [hidden, setHidden] = useState(true);
+  const [disabledProfileIcon, setDisabledProfileIcon] = useState(false);
+  const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
+  const [titleHeader, setTitleHeader] = useState('');
 
-  const infos = {
+  const contextValue = {
     email,
     setEmail,
-    hidden,
-    setHidden,
+    disabledProfileIcon,
+    setDisabledProfileIcon,
+    disabledSearchIcon,
+    setDisabledSearchIcon,
+    titleHeader,
+    setTitleHeader,
   };
 
   return (
-    <ReceitasContext.Provider value={ infos }>
+    <ReceitasContext.Provider value={ contextValue }>
       {children}
     </ReceitasContext.Provider>
   );

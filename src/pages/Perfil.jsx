@@ -1,15 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import profile from '../images/profileIcon.svg';
+import React, { useContext, useEffect } from 'react';
+import Header from '../components/Header';
+import ReceitasContext from '../context/ReceitasContext';
 
 function Perfil() {
+  const { setDisabledSearchIcon, setTitleHeader } = useContext(ReceitasContext);
+  useEffect(() => {
+    setDisabledSearchIcon(true);
+    setTitleHeader('Perfil');
+  }, []);
+
   return (
-    <main>
-      <title data-testid="page-title">Perfil</title>
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profile } alt="" />
-      </Link>
-    </main>
+    <div>
+      <Header />
+    </div>
   );
 }
 
