@@ -27,20 +27,20 @@ function Login({ history }) {
         data-testid="email-input"
         type="email"
         placeholder="Email"
-        onChange={({ target }) => setEmail(target.value)}
+        onChange={ ({ target }) => setEmail(target.value) }
       />
       <input
         data-testid="password-input"
         type="password"
         placeholder="Passowrd"
-        onChange={({ target }) => setPass(target.value)}
+        onChange={ ({ target }) => setPass(target.value) }
       />
       <button
-        onClick={() => { handleClick(); }}
+        onClick={ () => { handleClick(); } }
         data-testid="login-submit-btn"
         type="button"
         className="login-btn"
-        disabled={!enable}
+        disabled={ !enable }
       >
         Entrar
       </button>

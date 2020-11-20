@@ -8,7 +8,7 @@ function ReceitasFavoritas() {
     <div>
       <title data-testid="page-title">Receitas Favoritas</title>
       <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={profile} alt="" />
+        <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
     </div>
   );

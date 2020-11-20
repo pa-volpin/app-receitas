@@ -6,7 +6,7 @@ function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
 
   return (
-    <ReceitasContext.Provider value={{ email, setEmail }}>
+    <ReceitasContext.Provider value={ { email, setEmail } }>
       {children}
     </ReceitasContext.Provider>
   );

@@ -7,7 +7,7 @@ function Perfil() {
     <main>
       <title data-testid="page-title">Perfil</title>
       <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={profile} alt="" />
+        <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
     </main>
   );

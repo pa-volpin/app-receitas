@@ -8,7 +8,7 @@ function ExplorarBebidas() {
     <div>
       <title data-testid="page-title">Explorar Bebidas</title>
       <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={profile} alt="" />
+        <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
     </div>
   );
