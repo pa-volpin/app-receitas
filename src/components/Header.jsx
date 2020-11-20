@@ -13,13 +13,13 @@ function Header({ title }) {
   return (
     <header className="header-container">
       <title data-testid="page-title" value={ title }>{title}</title>
-      <Link to="/explorar" onClick={ handleHiddenInput } data-testid="search-input">
+      <Link to="/explorar" onClick={ handleHiddenInput }>
         <img data-testid="search-top-btn" src={ search } alt="" />
       </Link>
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
-      {hidden ? null : <input type="text" />}
+      {hidden ? '' : <input type="text" data-testid="search-input" />}
     </header>
   );
 }
