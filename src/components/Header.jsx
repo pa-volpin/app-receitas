@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import propTypes from 'prop-types';
-
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 
