@@ -4,9 +4,17 @@ import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
+  const [hidden, setHidden] = useState(true);
+
+  const infos = {
+    email,
+    setEmail,
+    hidden,
+    setHidden,
+  };
 
   return (
-    <ReceitasContext.Provider value={ { email, setEmail } }>
+    <ReceitasContext.Provider value={ infos }>
       {children}
     </ReceitasContext.Provider>
   );

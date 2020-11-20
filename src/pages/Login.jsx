@@ -32,7 +32,7 @@ function Login({ history }) {
       <input
         data-testid="password-input"
         type="password"
-        placeholder="Passowrd"
+        placeholder="Password"
         onChange={ ({ target }) => setPass(target.value) }
       />
       <button
