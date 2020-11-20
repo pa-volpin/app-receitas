@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 import profile from '../images/profileIcon.svg';
 
-function Explorar() {
+function ExplorarBebidasIngredientes() {
   return (
     <div>
-      <title data-testid="page-title">Explorar</title>
+      <title data-testid="page-title">Explorar Ingredientes</title>
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={profile} alt="" />
       </Link>
@@ -14,4 +14,4 @@ function Explorar() {
   );
 }
 
-export default Explorar;
+export default ExplorarBebidasIngredientes;
