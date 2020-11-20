@@ -19,7 +19,6 @@ function Header({ title }) {
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
-      {hidden ? '' : <input type="text" data-testid="search-input" />}
     </header>
   );
 }
