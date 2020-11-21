@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
   const [hidden, setHidden] = useState(true);
-
+  const [recipes, setRecipes] = useState({
+    meals: [],
+    cockTails: [],
+  });
   const [searchType, setSearchType] = useState({
-    ingrediente: false,
+    ingrediente: true,
     first: false,
     name: false,
   });
@@ -19,6 +22,8 @@ function ReceitasProvider({ children }) {
     setHidden,
     searchType,
     setSearchType,
+    recipes,
+    setRecipes,
   };
 
   return (

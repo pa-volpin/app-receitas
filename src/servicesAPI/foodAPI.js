@@ -1,4 +1,4 @@
-const fetchFood = (searchFor, value) => {
+async function fetchFood(searchFor, value) {
   const baseURL = 'https://www.themealdb.com/api/json/v1/1/';
   const searchType = {
     ingredient: 'filter.php?i=',
@@ -7,7 +7,9 @@ const fetchFood = (searchFor, value) => {
     random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
-  return fetch(URL).then((response) => response.json()).then((r) => r.meals);
-};
+  const response = await fetch(URL);
+  const responseJSON = await response.json();
+  return responseJSON.meals;
+}
 
 export default fetchFood;

@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import ReceitasContext from '../context/ReceitasContext';
+import fetchDrink from '../servicesAPI/drinkAPI';
 import Header from '../components/Header';
 
 function Bebidas() {
+  const { recipes, setRecipes } = useContext(ReceitasContext);
+  const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    const requestAPI = async () => {
+      const r = await fetchDrink('random', '');
+      setRecipes(r);
+      setIsFetching(false);
+    };
+    requestAPI();
+  }, []);
+
   return (
-    <div>
+    <main>
       <Header title="Bebidas" />
-      Bebidas
-    </div>
+      {isFetching
+        ? <h2>Loading...</h2>
+        : recipes.map((drink, index) => (<p key={ index }>{ drink.strDrink }</p>))}
+    </main>
   );
 }
 

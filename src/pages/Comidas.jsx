@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import ReceitasContext from '../context/ReceitasContext';
+import fetchFood from '../servicesAPI/foodAPI';
+// import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
-import foodAPI from '../servicesAPI/foodAPI';
 
 function Comidas() {
-  const [meals, setMeals] = useState([]);
-  const [isFetching, setIsFetching] = useState('Loading...');
+  const { recipes, setRecipes } = useContext(ReceitasContext);
+  const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
     const requestAPI = async () => {
-      const r = await foodAPI('random', '');
-      setMeals(r);
+      const r = await fetchFood('random', '');
+      setRecipes(r);
+      setIsFetching(false);
     };
     requestAPI();
   }, []);
@@ -17,7 +20,10 @@ function Comidas() {
   return (
     <main>
       <Header title="Comidas" />
-      { meals.map((meal, index) => (<p key={ index }>{ meal.strMeal }</p>))}
+      {/* <SearchBar /> */}
+      {isFetching
+        ? <h2>Loading...</h2>
+        : recipes.map((meal, index) => (<p key={ index }>{ meal.strMeal }</p>))}
     </main>
   );
 }

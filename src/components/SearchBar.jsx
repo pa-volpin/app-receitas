@@ -1,35 +1,18 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import ReceitasContext from '../context/ReceitasContext';
 
 function SearchBar() {
   const [searchInput, setSearchInput] = useState('');
-  const {
-    hidden,
-    setHidden,
-    setSearchType,
-    fetchApi,
-  } = useContext(ReceitasContext);
-  const handleHiddenInput = () => (hidden ? setHidden(false) : setHidden(true));
+  const { setSearchType, fetchApi } = useContext(ReceitasContext);
 
   return (
     <div>
-      <header>
-        <title data-testid="page-title">Explorar</title>
-        <Link to="/perfil">
-          <img data-testid="profile-top-btn" src={ profile } alt="" />
-        </Link>
-      </header>
       <nav>
-        {hidden ? null : (
-          <div>
-            <Link to="/explorar" onClick={ handleHiddenInput }>
-              <img data-testid="search-top-btn" src={ search } alt="" />
-            </Link>
-            <input
-              onChange={ ({ target }) => setSearchInput(target.value) }
-              type="text"
-              data-testid="search-input"
-            />
-          </div>)}
+        <input
+          onChange={ ({ target }) => setSearchInput(target.value) }
+          type="text"
+          data-testid="search-input"
+        />
         <label htmlFor="ingrediente">
           Ingrediente
           <input
@@ -40,6 +23,7 @@ function SearchBar() {
               name: false,
             }) }
             type="radio"
+            checked="checked"
             name="radio"
             id="ingrediente"
           />
