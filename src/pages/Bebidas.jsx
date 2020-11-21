@@ -14,10 +14,10 @@ function Bebidas() {
     const firstRequestAPI = async () => {
       const response = await fetchDrink('ingredient', '');
       setRecipes({ cockTails: response });
+      setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Bebidas');
       setShowSearchBar(true);
-      setIsFetching(false);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,7 +42,7 @@ function Bebidas() {
               imagePath={ drink.strDrinkThumb }
               itemName={ drink.strDrink }
               id={ drink.idDrink }
-              itemType="bebidas"
+              itemType="bebida"
             />))}
       </section>
     </main>

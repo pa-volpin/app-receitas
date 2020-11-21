@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import profile from '../images/profileIcon.svg';
+import SearchBar from '../components/SearchBar';
 
 function Explorar() {
   const { setDisabledSearchIcon,
@@ -24,6 +25,7 @@ function Explorar() {
       </Link>
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
+      <SearchBar />
     </div>
   );
 }
