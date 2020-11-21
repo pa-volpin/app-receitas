@@ -3,6 +3,7 @@ import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 // import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
+import ReceitasContext from '../context/ReceitasContext';
 
 function Comidas() {
   const { recipes, setRecipes } = useContext(ReceitasContext);
@@ -15,11 +16,15 @@ function Comidas() {
       setIsFetching(false);
     };
     requestAPI();
+
+  const { setTitleHeader } = useContext(ReceitasContext);
+  useEffect(() => {
+    setTitleHeader('Comidas');
   }, []);
 
   return (
     <main>
-      <Header title="Comidas" />
+      <Header />
       {/* <SearchBar /> */}
       {isFetching
         ? <h2>Loading...</h2>

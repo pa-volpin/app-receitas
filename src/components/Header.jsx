@@ -1,30 +1,34 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import propTypes from 'prop-types';
-import ReceitasContext from '../context/ReceitasContext';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
+import ReceitasContext from '../context/ReceitasContext';
 
-function Header({ title }) {
-  const { hidden, setHidden } = useContext(ReceitasContext);
+function Header() {
+  const { disabledSearchIcon, disabledProfileIcon,
+    titleHeader } = useContext(ReceitasContext);
 
-  const handleHiddenInput = () => (hidden === true ? setHidden(false) : setHidden(true));
+  const profileIcon = (
+    <Link to="/perfil">
+      <img data-testid="profile-top-btn" src={ profile } alt="" />
+    </Link>
+  );
+
+  const searchIcon = (
+    <Link to="/explorar">
+      <img data-testid="search-top-btn" src={ search } alt="" />
+    </Link>
+  );
+
+  const titleElement = (<p data-testid="page-title">{ titleHeader }</p>);
 
   return (
     <header className="header-container">
-      <title data-testid="page-title" value={ title }>{title}</title>
-      <Link to="/explorar" onClick={ handleHiddenInput }>
-        <img data-testid="search-top-btn" src={ search } alt="" />
-      </Link>
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profile } alt="" />
-      </Link>
+      { (disabledSearchIcon) ? '' : searchIcon }
+      { (disabledProfileIcon) ? '' : profileIcon }
+      { titleElement }
     </header>
   );
 }
-
-Header.propTypes = {
-  title: propTypes.string.isRequired,
-};
 
 export default Header;

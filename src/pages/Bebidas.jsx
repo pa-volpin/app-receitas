@@ -9,16 +9,21 @@ function Bebidas() {
 
   useEffect(() => {
     const requestAPI = async () => {
-      const r = await fetchDrink('random', '');
-      setRecipes(r);
+      const response = await fetchDrink('random', '');
+      setRecipes(response);
       setIsFetching(false);
     };
     requestAPI();
   }, []);
-
+    
+  const { setTitleHeader } = useContext(ReceitasContext);
+   useEffect(() => {
+     setTitleHeader('Bebidas');
+    }, []);
+    
   return (
     <main>
-      <Header title="Bebidas" />
+       <Header />
       {isFetching
         ? <h2>Loading...</h2>
         : recipes.map((drink, index) => (<p key={ index }>{ drink.strDrink }</p>))}

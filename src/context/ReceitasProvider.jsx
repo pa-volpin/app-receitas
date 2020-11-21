@@ -14,6 +14,9 @@ function ReceitasProvider({ children }) {
     first: false,
     name: false,
   });
+  const [disabledProfileIcon, setDisabledProfileIcon] = useState(false);
+  const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
+  const [titleHeader, setTitleHeader] = useState('');
 
   const contextValue = {
     email,
@@ -24,6 +27,12 @@ function ReceitasProvider({ children }) {
     setSearchType,
     recipes,
     setRecipes,
+    disabledProfileIcon,
+    setDisabledProfileIcon,
+    disabledSearchIcon,
+    setDisabledSearchIcon,
+    titleHeader,
+    setTitleHeader,
   };
 
   return (
