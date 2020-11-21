@@ -15,15 +15,15 @@ function Bebidas() {
     };
     requestAPI();
   }, []);
-    
+
   const { setTitleHeader } = useContext(ReceitasContext);
-   useEffect(() => {
-     setTitleHeader('Bebidas');
-    }, []);
-    
+  useEffect(() => {
+    setTitleHeader('Bebidas');
+  }, []);
+
   return (
     <main>
-       <Header />
+      <Header />
       {isFetching
         ? <h2>Loading...</h2>
         : recipes.map((drink, index) => (<p key={ index }>{ drink.strDrink }</p>))}
