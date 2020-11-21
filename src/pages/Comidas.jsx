@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
-// import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
-import ReceitasContext from '../context/ReceitasContext';
 
 function Comidas() {
-  const { recipes, setRecipes } = useContext(ReceitasContext);
+  const { recipes, setRecipes, setShowSearchBar, setTitleHeader,
+    setDisabledSearchIcon } = useContext(ReceitasContext);
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -14,18 +13,16 @@ function Comidas() {
       const r = await fetchFood('random', '');
       setRecipes(r);
       setIsFetching(false);
+      setDisabledSearchIcon(false);
+      setTitleHeader('Comidas');
+      setShowSearchBar(false);
     };
     requestAPI();
-
-  const { setTitleHeader } = useContext(ReceitasContext);
-  useEffect(() => {
-    setTitleHeader('Comidas');
   }, []);
 
   return (
     <main>
       <Header />
-      {/* <SearchBar /> */}
       {isFetching
         ? <h2>Loading...</h2>
         : recipes.map((meal, index) => (<p key={ index }>{ meal.strMeal }</p>))}

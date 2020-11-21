@@ -17,6 +17,7 @@ function ReceitasProvider({ children }) {
   const [disabledProfileIcon, setDisabledProfileIcon] = useState(false);
   const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
   const [titleHeader, setTitleHeader] = useState('');
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const contextValue = {
     email,
@@ -33,6 +34,8 @@ function ReceitasProvider({ children }) {
     setDisabledSearchIcon,
     titleHeader,
     setTitleHeader,
+    showSearchBar,
+    setShowSearchBar,
   };
 
   return (

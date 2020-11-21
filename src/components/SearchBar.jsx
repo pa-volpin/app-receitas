@@ -23,7 +23,7 @@ function SearchBar() {
               name: false,
             }) }
             type="radio"
-            checked="checked"
+            defaultChecked
             name="radio"
             id="ingrediente"
           />

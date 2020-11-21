@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import ReceitasContext from '../context/ReceitasContext';
+import SearchBar from './SearchBar';
 
 function Header() {
   const { disabledSearchIcon, disabledProfileIcon,
-    titleHeader } = useContext(ReceitasContext);
+    titleHeader, showSearchBar } = useContext(ReceitasContext);
 
   const profileIcon = (
     <Link to="/perfil">
@@ -27,6 +28,11 @@ function Header() {
       { (disabledSearchIcon) ? '' : searchIcon }
       { (disabledProfileIcon) ? '' : profileIcon }
       { titleElement }
+      {showSearchBar && (
+        <div>
+          <SearchBar />
+        </div>
+      )}
     </header>
   );
 }
