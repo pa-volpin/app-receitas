@@ -7,13 +7,10 @@ async function fetchDrink(searchFor, value) {
     random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
-  const response = await fetch(URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    } });
+  console.log(URL);
+  const response = await fetch(URL);
+  console.log(response);
   const responseJSON = await response.json();
-  console.log(responseJSON);
   return responseJSON.drinks;
 }
 

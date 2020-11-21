@@ -12,8 +12,8 @@ function Comidas() {
 
   useEffect(() => {
     const firstRequestAPI = async () => {
-      const r = await fetchFood('ingredient', '');
-      setRecipes({ meals: r });
+      const response = await fetchFood('ingredient', '');
+      setRecipes({ meals: response });
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Comidas');
@@ -28,8 +28,8 @@ function Comidas() {
       <header>
         <Header
           requestAPI={ async () => {
-            const r = await fetchFood(searchType, searchInput);
-            setRecipes(r);
+            const response = await fetchFood(searchType, searchInput);
+            setRecipes(response);
           } }
         />
       </header>

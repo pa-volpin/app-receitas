@@ -12,12 +12,12 @@ function Bebidas() {
 
   useEffect(() => {
     const firstRequestAPI = async () => {
-      const r = await fetchDrink('ingredient', 'margarita');
-      setRecipes({ cockTails: r });
-      setIsFetching(false);
+      const response = await fetchDrink('ingredient', '');
+      setRecipes({ cockTails: response });
       setDisabledSearchIcon(false);
       setTitleHeader('Bebidas');
       setShowSearchBar(true);
+      setIsFetching(false);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,20 +28,20 @@ function Bebidas() {
       <header>
         <Header
           requestAPI={ async () => {
-            const r = await fetchDrink(searchType, searchInput);
-            setRecipes(r);
+            const response = await fetchDrink(searchType, searchInput);
+            setRecipes(response);
           } }
         />
       </header>
       <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>
-          : recipes.cockTails.map((Drink, index) => (
+          : recipes.cockTails.map((drink, index) => (
             <Card
               key={ index }
-              imagePath={ Drink.strDrinkThumb }
-              itemName={ Drink.strDrink }
-              id={ Drink.idDrink }
+              imagePath={ drink.strDrinkThumb }
+              itemName={ drink.strDrink }
+              id={ drink.idDrink }
               itemType="bebidas"
             />))}
       </section>

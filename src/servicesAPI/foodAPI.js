@@ -7,7 +7,9 @@ async function fetchFood(searchFor, value) {
     random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
+  console.log(URL);
   const response = await fetch(URL);
+  console.log(response);
   const responseJSON = await response.json();
   return responseJSON.meals;
 }
