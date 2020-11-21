@@ -1,0 +1,28 @@
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.header-icons {
+  display: flex;
+  flex-direction: row;
+  font-size: 25px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.comidas-cards-list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 100vh;
+}

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 import Header from '../components/Header';
+import Card from '../components/Card';
 
 function Comidas() {
   const { recipes, setRecipes, setShowSearchBar, setTitleHeader,
@@ -10,7 +11,7 @@ function Comidas() {
 
   useEffect(() => {
     const requestAPI = async () => {
-      const r = await fetchFood('random', '');
+      const r = await fetchFood('ingredient', '');
       setRecipes(r);
       setIsFetching(false);
       setDisabledSearchIcon(false);
@@ -21,11 +22,22 @@ function Comidas() {
   }, []);
 
   return (
-    <main>
-      <Header />
-      {isFetching
-        ? <h2>Loading...</h2>
-        : recipes.map((meal, index) => (<p key={ index }>{ meal.strMeal }</p>))}
+    <main className="comidas-jsx-container">
+      <header>
+        <Header />
+      </header>
+      <section className="comidas-cards-list">
+        {isFetching
+          ? <h2>Loading...</h2>
+          : recipes.map((meal, index) => (
+            <Card
+              key={ index }
+              imagePath={ meal.strMealThumb }
+              itemName={ meal.strMeal }
+              id={ meal.idMeal }
+              itemType="comida"
+            />))}
+      </section>
     </main>
   );
 }

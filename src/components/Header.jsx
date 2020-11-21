@@ -21,15 +21,17 @@ function Header() {
     </Link>
   );
 
-  const titleElement = (<p data-testid="page-title">{ titleHeader }</p>);
+  const titleElement = (<h3 data-testid="page-title">{ titleHeader }</h3>);
 
   return (
     <header className="header-container">
-      { (disabledSearchIcon) ? '' : searchIcon }
-      { (disabledProfileIcon) ? '' : profileIcon }
-      { titleElement }
+      <div className="header-icons">
+        { (disabledSearchIcon) ? '' : searchIcon }
+        { titleElement }
+        { (disabledProfileIcon) ? '' : profileIcon }
+      </div>
       {showSearchBar && (
-        <div>
+        <div className="searchBar-header">
           <SearchBar />
         </div>
       )}

@@ -1,0 +1,33 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+}
+
+.card-datails {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  text-align: center;
+}
+
+.card-details-link {
+  background-color: #00000000;
+  border-radius: 0;
+  color: #252525;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.card-image {
+  border-radius: 3px;
+  max-height: 220px;
+  max-width: 270px;
+  object-fit: cover;
+}
