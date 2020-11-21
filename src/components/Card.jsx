@@ -6,7 +6,7 @@ function Card({ imagePath, itemName, id, itemType }) {
   return (
     <div className="card-container">
       <div className="card-datails">
-        <Link className="card-details-link" to={ `/${itemType}/${id}` }>
+        <Link className="card-details-link" to={ `/${itemType}${id}` }>
           <div className="card-info">
             <h4 className="card-title">{itemName}</h4>
           </div>

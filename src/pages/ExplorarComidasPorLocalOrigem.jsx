@@ -6,6 +6,7 @@ function ExplorarComidasPorLocalOrigem() {
   const { setTitleHeader } = useContext(ReceitasContext);
   useEffect(() => {
     setTitleHeader('Explorar Origem');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

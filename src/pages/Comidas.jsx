@@ -1,35 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 import Header from '../components/Header';
 import Card from '../components/Card';
 
 function Comidas() {
-  const { recipes, setRecipes, setShowSearchBar, setTitleHeader,
-    setDisabledSearchIcon } = useContext(ReceitasContext);
-  const [isFetching, setIsFetching] = useState(true);
+  const { recipes, setRecipes, setShowSearchBar,
+    setTitleHeader, setDisabledSearchIcon,
+    isFetching, setIsFetching, searchType,
+    searchInput } = useContext(ReceitasContext);
 
   useEffect(() => {
-    const requestAPI = async () => {
+    const firstRequestAPI = async () => {
       const r = await fetchFood('ingredient', '');
-      setRecipes(r);
+      setRecipes({ meals: r });
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Comidas');
-      setShowSearchBar(false);
+      setShowSearchBar(true);
     };
-    requestAPI();
+    firstRequestAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <main className="comidas-jsx-container">
+    <main className="jsx-container">
       <header>
-        <Header />
+        <Header
+          requestAPI={ async () => {
+            const r = await fetchFood(searchType, searchInput);
+            setRecipes(r);
+          } }
+        />
       </header>
-      <section className="comidas-cards-list">
+      <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>
-          : recipes.map((meal, index) => (
+          : recipes.meals.map((meal, index) => (
             <Card
               key={ index }
               imagePath={ meal.strMealThumb }

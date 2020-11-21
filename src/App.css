@@ -18,7 +18,7 @@ h1, h2, h3 {
   padding: 20px;
 }
 
-.comidas-cards-list {
+.cards-list {
   align-items: center;
   display: flex;
   flex-direction: row;

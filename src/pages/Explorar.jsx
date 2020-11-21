@@ -1,23 +1,29 @@
 import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
-import Header from '../components/Header';
 import ReceitasContext from '../context/ReceitasContext';
+import profile from '../images/profileIcon.svg';
 
 function Explorar() {
   const { setDisabledSearchIcon,
-    setTitleHeader, setShowSearchBar } = useContext(ReceitasContext);
+    setTitleHeader, setShowSearchBar,
+    titleHeader,
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Explorar');
     setShowSearchBar(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <Header />
-      <Link to="/comidas">Comidas</Link>
-      <Link to="/bebidas">Bebidas</Link>
+      <h3 data-testid="page-title">{ titleHeader }</h3>
+      <Link to="/perfil">
+        <img data-testid="profile-top-btn" src={ profile } alt="" />
+      </Link>
+      <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
+      <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
     </div>
   );
 }

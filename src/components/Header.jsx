@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import ReceitasContext from '../context/ReceitasContext';
 import SearchBar from './SearchBar';
 
-function Header() {
+function Header({ requestAPI }) {
   const { disabledSearchIcon, disabledProfileIcon,
     titleHeader, showSearchBar } = useContext(ReceitasContext);
 
@@ -32,11 +33,19 @@ function Header() {
       </div>
       {showSearchBar && (
         <div className="searchBar-header">
-          <SearchBar />
+          <SearchBar requestAPI={ requestAPI } />
         </div>
       )}
     </header>
   );
 }
+
+Header.defaultProps = {
+  requestAPI: () => console.log('Header'),
+};
+
+Header.propTypes = {
+  requestAPI: propTypes.func,
+};
 
 export default Header;

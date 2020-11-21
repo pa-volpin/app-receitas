@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
-function SearchBar() {
-  const [searchInput, setSearchInput] = useState('');
-  const { setSearchType, fetchApi } = useContext(ReceitasContext);
+function SearchBar({ requestAPI }) {
+  const { setSearchType, setSearchInput } = useContext(ReceitasContext);
 
   return (
     <div>
@@ -17,11 +17,7 @@ function SearchBar() {
           Ingrediente
           <input
             data-testid="ingredient-search-radio"
-            onClick={ () => setSearchType({
-              ingrediente: true,
-              first: false,
-              name: false,
-            }) }
+            onClick={ () => setSearchType('ingredient') }
             type="radio"
             defaultChecked
             name="radio"
@@ -31,11 +27,7 @@ function SearchBar() {
         <label htmlFor="first-letter">
           Primeira letra
           <input
-            onClick={ () => setSearchType({
-              ingrediente: false,
-              first: true,
-              name: false,
-            }) }
+            onClick={ () => setSearchType('firstLetter') }
             data-testid="first-letter-search-radio"
             type="radio"
             name="radio"
@@ -45,11 +37,7 @@ function SearchBar() {
         <label htmlFor="name">
           Nome
           <input
-            onClick={ () => setSearchType({
-              ingrediente: false,
-              first: false,
-              name: true,
-            }) }
+            onClick={ () => setSearchType('itemName') }
             data-testid="name-search-radio"
             type="radio"
             name="radio"
@@ -57,7 +45,7 @@ function SearchBar() {
           />
         </label>
         <button
-          onClick={ () => fetchApi(searchInput) }
+          onClick={ requestAPI }
           type="button"
           data-testid="exec-search-btn"
         >
@@ -67,5 +55,13 @@ function SearchBar() {
     </div>
   );
 }
+
+SearchBar.defaultProps = {
+  requestAPI: () => console.log('searchBar'),
+};
+
+SearchBar.propTypes = {
+  requestAPI: propTypes.func,
+};
 
 export default SearchBar;
