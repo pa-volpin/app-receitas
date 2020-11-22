@@ -17,7 +17,7 @@ function Comidas() {
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Comidas');
-      setShowSearchBar(true);
+      setShowSearchBar(false);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps

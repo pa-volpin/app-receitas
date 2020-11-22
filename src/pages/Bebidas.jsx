@@ -26,6 +26,7 @@ function Bebidas() {
   return (
     <main className="jsx-container">
       <header>
+        <h3 data-testid="page-title">Bebidas</h3>
         <Header
           requestAPI={ async () => {
             const response = await fetchDrink(searchType, searchInput);

@@ -2,12 +2,11 @@ import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import profile from '../images/profileIcon.svg';
-import SearchBar from '../components/SearchBar';
+import Header from '../components/Header';
 
 function Explorar() {
   const { setDisabledSearchIcon,
     setTitleHeader, setShowSearchBar,
-    titleHeader,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -19,13 +18,12 @@ function Explorar() {
 
   return (
     <div>
-      <h3 data-testid="page-title">{ titleHeader }</h3>
+      <Header />
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
-      <SearchBar />
     </div>
   );
 }
