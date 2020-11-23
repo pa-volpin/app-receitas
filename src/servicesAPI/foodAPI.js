@@ -7,11 +7,17 @@ async function fetchFood(searchFor, value) {
     random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
-  console.log(URL);
-  const response = await fetch(URL);
-  console.log(response);
-  const responseJSON = await response.json();
-  return responseJSON.meals;
+  const response = await fetch(URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.log(`Deu erro: ${error.message}`);
+    });
+  return response.meals;
 }
 
 export default fetchFood;
