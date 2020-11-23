@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import Header from '../components/Header';
+import fetchFood from '../servicesAPI/foodAPI';
 
 function Explorar() {
   const { setDisabledSearchIcon,
-    setTitleHeader, setShowSearchBar,
+    setTitleHeader, setShowSearchBar, searchType, searchInput, setRecipes,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -17,7 +18,12 @@ function Explorar() {
 
   return (
     <div>
-      <Header />
+      <Header
+        requestAPI={ async () => {
+          const response = await fetchFood(searchType, searchInput);
+          setRecipes(response);
+        } }
+      />
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
     </div>

@@ -1,4 +1,9 @@
 async function fetchFood(searchFor, value) {
+  if (searchFor === 'firstLetter' && value.length > 1) {
+    // eslint-disable-next-line no-alert
+    alert('Sua busca deve conter somente 1 (um) caracter');
+    return;
+  }
   const baseURL = 'https://www.themealdb.com/api/json/v1/1/';
   const searchType = {
     ingredient: 'filter.php?i=',
@@ -12,8 +17,6 @@ async function fetchFood(searchFor, value) {
     .catch((error) => {
       console.log(`Deu erro: ${error.message}`);
     });
-  console.log(searchFor);
-  console.log(value);
   return response.meals;
 }
 

@@ -40,8 +40,12 @@ function Header({ requestAPI }) {
   );
 }
 
+Header.defaultProps = {
+  requestAPI: () => null,
+};
+
 Header.propTypes = {
-  requestAPI: propTypes.func.isRequired,
+  requestAPI: propTypes.func,
 };
 
 export default Header;
