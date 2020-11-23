@@ -7,7 +7,8 @@ import Card from '../components/Card';
 function Comidas() {
   const { recipes, setRecipes, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
-    isFetching, setIsFetching } = useContext(ReceitasContext);
+    isFetching, setIsFetching, searchType,
+    searchInput } = useContext(ReceitasContext);
 
   useEffect(() => {
     const firstRequestAPI = async () => {
@@ -25,7 +26,12 @@ function Comidas() {
   return (
     <main className="jsx-container">
       <header>
-        <Header />
+        <Header
+          requestAPI={ async () => {
+            const response = await fetchFood(searchType, searchInput);
+            setRecipes(response);
+          } }
+        />
       </header>
       <section className="cards-list">
         {isFetching

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 import Header from '../components/Header';
-import fetchFood from '../servicesAPI/foodAPI';
 
-function Explorar() {
+function Explorar({ requestAPI }) {
   const { setDisabledSearchIcon,
-    setTitleHeader, setShowSearchBar, searchType, searchInput, setRecipes,
+    setTitleHeader, setShowSearchBar,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -19,15 +19,20 @@ function Explorar() {
   return (
     <div>
       <Header
-        requestAPI={ async () => {
-          const response = await fetchFood(searchType, searchInput);
-          setRecipes(response);
-        } }
+        requestAPI={ requestAPI }
       />
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
     </div>
   );
 }
+
+Explorar.defaultProps = {
+  requestAPI: () => null,
+};
+
+Explorar.propTypes = {
+  requestAPI: propTypes.func,
+};
 
 export default Explorar;

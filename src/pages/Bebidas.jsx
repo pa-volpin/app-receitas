@@ -12,8 +12,8 @@ function Bebidas() {
 
   useEffect(() => {
     const firstRequestAPI = async () => {
-      const r = await fetchDrink('ingredient', 'vodka');
-      setRecipes({ cockTails: r });
+      const response = await fetchDrink('ingredient', '');
+      setRecipes({ cockTails: response });
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Bebidas');
@@ -28,8 +28,8 @@ function Bebidas() {
       <header>
         <Header
           requestAPI={ async () => {
-            const r = await fetchDrink(searchType, searchInput);
-            setRecipes(r);
+            const response = await fetchDrink(searchType, searchInput);
+            setRecipes(response);
           } }
         />
       </header>
