@@ -12,9 +12,12 @@ async function fetchDrink(searchFor, value) {
     headers: {
       'Content-Type': 'application/json',
     },
-  });
-  const responseJSON = await response.json();
-  return responseJSON.drinks;
+  })
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.log(`Deu erro: ${error.message}`);
+    });
+  return response.drinks;
 }
 
 export default fetchDrink;
