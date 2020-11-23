@@ -12,7 +12,7 @@ function Bebidas() {
 
   useEffect(() => {
     const firstRequestAPI = async () => {
-      const response = await fetchDrink('ingredient', '');
+      const response = await fetchDrink('ingredient', 'vodka');
       setRecipes({ cockTails: response });
       setIsFetching(false);
       setDisabledSearchIcon(false);
