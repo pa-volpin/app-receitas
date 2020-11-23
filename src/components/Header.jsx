@@ -40,12 +40,8 @@ function Header({ requestAPI }) {
   );
 }
 
-Header.defaultProps = {
-  requestAPI: () => console.log('Header'),
-};
-
 Header.propTypes = {
-  requestAPI: propTypes.func,
+  requestAPI: propTypes.func.isRequired,
 };
 
 export default Header;

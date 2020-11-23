@@ -56,12 +56,8 @@ function SearchBar({ requestAPI }) {
   );
 }
 
-SearchBar.defaultProps = {
-  requestAPI: () => console.log('searchBar'),
-};
-
 SearchBar.propTypes = {
-  requestAPI: propTypes.func,
+  requestAPI: propTypes.func.isRequired,
 };
 
 export default SearchBar;

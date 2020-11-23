@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
-import profile from '../images/profileIcon.svg';
 import Header from '../components/Header';
 
 function Explorar() {
@@ -19,9 +18,6 @@ function Explorar() {
   return (
     <div>
       <Header />
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profile } alt="" />
-      </Link>
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
     </div>

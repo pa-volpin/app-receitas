@@ -30,6 +30,7 @@ function Comidas() {
           requestAPI={ async () => {
             const response = await fetchFood(searchType, searchInput);
             setRecipes(response);
+            console.log('chamou');
           } }
         />
       </header>
