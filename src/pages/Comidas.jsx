@@ -10,6 +10,7 @@ function Comidas({ history }) {
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
     searchInput } = useContext(ReceitasContext);
+  const twelve = 12;
 
   useEffect(() => {
     setIsFetching(true);
@@ -17,7 +18,7 @@ function Comidas({ history }) {
     setTitleHeader('Comidas');
     setShowSearchBar(false);
     const firstRequestAPI = async () => {
-      const response = await fetchFood('ingredient', '');
+      const response = await fetchFood('itemName', '');
       setRecipes({ meals: response });
       setIsFetching(false);
     };
@@ -37,6 +38,8 @@ function Comidas({ history }) {
             if (response) {
               setRecipes({ meals: response });
             }
+            // eslint-disable-next-line no-alert
+            alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
           } }
         />
       </header>
@@ -44,13 +47,16 @@ function Comidas({ history }) {
         {isFetching
           ? <h2>Loading...</h2>
           : recipes.meals.map((meal, index) => (
-            <Card
+            index < twelve ? <Card
+              indexId={ index }
               key={ index }
               imagePath={ meal.strMealThumb }
               itemName={ meal.strMeal }
               id={ meal.idMeal }
               itemType="comidas"
-            />))}
+            />
+              : null
+          ))}
       </section>
     </main>
   );

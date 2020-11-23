@@ -3,7 +3,8 @@ import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
 function SearchBar({ requestAPI }) {
-  const { setSearchType, setSearchInput } = useContext(ReceitasContext);
+  const { setSearchType, setSearchInput, searchInput } = useContext(ReceitasContext);
+  const one = /.{1,}/;
 
   return (
     <div>
@@ -48,6 +49,7 @@ function SearchBar({ requestAPI }) {
           onClick={ requestAPI }
           type="button"
           data-testid="exec-search-btn"
+          disabled={ searchInput < one }
         >
           Buscar
         </button>
