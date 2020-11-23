@@ -12,7 +12,7 @@ function Explorar({ requestAPI }) {
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Explorar');
-    setShowSearchBar(true);
+    setShowSearchBar(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -29,7 +29,7 @@ function Bebidas() {
         <Header
           requestAPI={ async () => {
             const response = await fetchDrink(searchType, searchInput);
-            setRecipes(response);
+            if (response) setRecipes({ cockTails: response });
           } }
         />
       </header>

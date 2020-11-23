@@ -9,7 +9,6 @@ async function fetchFood(searchFor, value) {
     ingredient: 'filter.php?i=',
     itemName: 'search.php?s=',
     firstLetter: 'search.php?f=',
-    random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
   const response = await fetch(URL)

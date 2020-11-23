@@ -17,6 +17,12 @@ h1, h2, h3 {
   justify-content: space-between;
   padding: 20px;
 }
+ .header-icon-search {
+   border: none;
+   background: none;
+   cursor: pointer;
+   outline: none;
+ }
 
 .cards-list {
   align-items: center;

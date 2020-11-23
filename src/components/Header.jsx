@@ -8,7 +8,12 @@ import SearchBar from './SearchBar';
 
 function Header({ requestAPI }) {
   const { disabledSearchIcon, disabledProfileIcon,
-    titleHeader, showSearchBar } = useContext(ReceitasContext);
+    titleHeader, showSearchBar, setShowSearchBar } = useContext(ReceitasContext);
+
+  function toggleSearchBar() {
+    if (!showSearchBar) setShowSearchBar(true);
+    if (showSearchBar) setShowSearchBar(false);
+  }
 
   const profileIcon = (
     <Link to="/perfil">
@@ -17,9 +22,9 @@ function Header({ requestAPI }) {
   );
 
   const searchIcon = (
-    <Link to="/explorar">
+    <button className="header-icon-search" type="button" onClick={ toggleSearchBar }>
       <img data-testid="search-top-btn" src={ search } alt="" />
-    </Link>
+    </button>
   );
 
   const titleElement = (<h3 data-testid="page-title">{ titleHeader }</h3>);

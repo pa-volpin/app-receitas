@@ -17,7 +17,7 @@ function Comidas() {
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Comidas');
-      setShowSearchBar(false);
+      setShowSearchBar(true);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,7 +29,8 @@ function Comidas() {
         <Header
           requestAPI={ async () => {
             const response = await fetchFood(searchType, searchInput);
-            setRecipes(response);
+            console.log(response);
+            if (response) setRecipes({ meals: response });
           } }
         />
       </header>
