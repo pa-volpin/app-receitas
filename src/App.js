@@ -9,6 +9,7 @@ import {
 
 import ReceitasProvider from './context/ReceitasProvider';
 import './App.css';
+import './stylesCSS/Card.css';
 
 function App() {
   return (

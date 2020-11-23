@@ -7,6 +7,7 @@ function Perfil() {
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Perfil');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

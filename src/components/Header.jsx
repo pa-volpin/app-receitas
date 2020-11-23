@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import ReceitasContext from '../context/ReceitasContext';
 import SearchBar from './SearchBar';
 
-function Header() {
+function Header({ requestAPI }) {
   const { disabledSearchIcon, disabledProfileIcon,
-    titleHeader, showSearchBar } = useContext(ReceitasContext);
+    titleHeader, showSearchBar, setShowSearchBar } = useContext(ReceitasContext);
+
+  function toggleSearchBar() {
+    if (!showSearchBar) setShowSearchBar(true);
+    if (showSearchBar) setShowSearchBar(false);
+  }
 
   const profileIcon = (
     <Link to="/perfil">
@@ -16,25 +22,35 @@ function Header() {
   );
 
   const searchIcon = (
-    <Link to="/explorar">
+    <button className="header-icon-search" type="button" onClick={ toggleSearchBar }>
       <img data-testid="search-top-btn" src={ search } alt="" />
-    </Link>
+    </button>
   );
 
-  const titleElement = (<p data-testid="page-title">{ titleHeader }</p>);
+  const titleElement = (<h3 data-testid="page-title">{ titleHeader }</h3>);
 
   return (
     <header className="header-container">
-      { (disabledSearchIcon) ? '' : searchIcon }
-      { (disabledProfileIcon) ? '' : profileIcon }
-      { titleElement }
+      <div className="header-icons">
+        { (disabledSearchIcon) ? '' : searchIcon }
+        { titleElement }
+        { (disabledProfileIcon) ? '' : profileIcon }
+      </div>
       {showSearchBar && (
-        <div>
-          <SearchBar />
+        <div className="searchBar-header">
+          <SearchBar requestAPI={ requestAPI } />
         </div>
       )}
     </header>
   );
 }
+
+Header.defaultProps = {
+  requestAPI: () => null,
+};
+
+Header.propTypes = {
+  requestAPI: propTypes.func,
+};
 
 export default Header;

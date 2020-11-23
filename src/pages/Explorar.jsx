@@ -1,25 +1,38 @@
 import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
-import Header from '../components/Header';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
+import Header from '../components/Header';
 
-function Explorar() {
+function Explorar({ requestAPI }) {
   const { setDisabledSearchIcon,
-    setTitleHeader, setShowSearchBar } = useContext(ReceitasContext);
+    setTitleHeader, setShowSearchBar,
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Explorar');
-    setShowSearchBar(true);
+    setShowSearchBar(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <Header />
-      <Link to="/comidas">Comidas</Link>
-      <Link to="/bebidas">Bebidas</Link>
+      <Header
+        requestAPI={ requestAPI }
+      />
+      <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
+      <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
     </div>
   );
 }
+
+Explorar.defaultProps = {
+  requestAPI: () => null,
+};
+
+Explorar.propTypes = {
+  requestAPI: propTypes.func,
+};
 
 export default Explorar;

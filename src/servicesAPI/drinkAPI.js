@@ -1,15 +1,22 @@
 async function fetchDrink(searchFor, value) {
+  if (searchFor === 'firstLetter' && value.length > 1) {
+    // eslint-disable-next-line no-alert
+    alert('Sua busca deve conter somente 1 (um) caracter');
+    return;
+  }
   const baseURL = 'https://www.thecocktaildb.com/api/json/v1/1/';
   const searchType = {
     ingredient: 'filter.php?i=',
-    name: 'search.php?s=',
+    itemName: 'search.php?s=',
     firstLetter: 'search.php?f=',
-    random: 'random.php',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
-  const response = await fetch(URL);
-  const responseJSON = await response.json();
-  return responseJSON.drinks;
+  const response = await fetch(URL)
+    .then((resp) => resp.json())
+    .catch((error) => {
+      console.log(`Deu erro: ${error.message}`);
+    });
+  return response.drinks;
 }
 
 export default fetchDrink;

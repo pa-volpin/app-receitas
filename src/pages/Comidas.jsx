@@ -1,31 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 import Header from '../components/Header';
+import Card from '../components/Card';
 
 function Comidas() {
-  const { recipes, setRecipes, setShowSearchBar, setTitleHeader,
-    setDisabledSearchIcon } = useContext(ReceitasContext);
-  const [isFetching, setIsFetching] = useState(true);
+  const { recipes, setRecipes, setShowSearchBar,
+    setTitleHeader, setDisabledSearchIcon,
+    isFetching, setIsFetching, searchType,
+    searchInput } = useContext(ReceitasContext);
 
   useEffect(() => {
-    const requestAPI = async () => {
-      const r = await fetchFood('random', '');
-      setRecipes(r);
+    const firstRequestAPI = async () => {
+      const response = await fetchFood('ingredient', '');
+      setRecipes({ meals: response });
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Comidas');
-      setShowSearchBar(false);
+      setShowSearchBar(true);
     };
-    requestAPI();
+    firstRequestAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <main>
-      <Header />
-      {isFetching
-        ? <h2>Loading...</h2>
-        : recipes.map((meal, index) => (<p key={ index }>{ meal.strMeal }</p>))}
+    <main className="jsx-container">
+      <header>
+        <Header
+          requestAPI={ async () => {
+            const response = await fetchFood(searchType, searchInput);
+            console.log(response);
+            if (response) setRecipes({ meals: response });
+          } }
+        />
+      </header>
+      <section className="cards-list">
+        {isFetching
+          ? <h2>Loading...</h2>
+          : recipes.meals.map((meal, index) => (
+            <Card
+              key={ index }
+              imagePath={ meal.strMealThumb }
+              itemName={ meal.strMeal }
+              id={ meal.idMeal }
+              itemType="comida"
+            />))}
+      </section>
     </main>
   );
 }
