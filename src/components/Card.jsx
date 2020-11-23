@@ -2,15 +2,20 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function Card({ imagePath, itemName, id, itemType }) {
+function Card({ imagePath, itemName, id, itemType, indexId }) {
   return (
-    <div className="card-container">
+    <div data-testid={ `${indexId}-recipe-card` } className="card-container">
       <div className="card-datails">
-        <Link className="card-details-link" to={ `/${itemType}${id}` }>
-          <div className="card-info">
+        <Link className="card-details-link" to={ `/${itemType}/${id}` }>
+          <div data-testid={ `${indexId}-card-name` } className="card-info">
             <h4 className="card-title">{itemName}</h4>
           </div>
-          <img alt="recipe cover" className="card-image" src={ imagePath } />
+          <img
+            data-testid={ `${indexId}-card-img` }
+            alt="recipe cover"
+            className="card-image"
+            src={ imagePath }
+          />
         </Link>
       </div>
     </div>
@@ -22,6 +27,7 @@ Card.propTypes = {
   itemName: propTypes.string.isRequired,
   id: propTypes.string.isRequired,
   itemType: propTypes.string.isRequired,
+  indexId: propTypes.number.isRequired,
 };
 
 export default Card;
