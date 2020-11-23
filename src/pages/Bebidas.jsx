@@ -12,8 +12,8 @@ function Bebidas() {
 
   useEffect(() => {
     const firstRequestAPI = async () => {
-      const response = await fetchDrink('ingredient', '');
-      setRecipes({ cockTails: response });
+      const r = await fetchDrink('ingredient', 'vodka');
+      setRecipes({ cockTails: r });
       setIsFetching(false);
       setDisabledSearchIcon(false);
       setTitleHeader('Bebidas');
@@ -26,24 +26,23 @@ function Bebidas() {
   return (
     <main className="jsx-container">
       <header>
-        <h3 data-testid="page-title">Bebidas</h3>
         <Header
           requestAPI={ async () => {
-            const response = await fetchDrink(searchType, searchInput);
-            setRecipes(response);
+            const r = await fetchDrink(searchType, searchInput);
+            setRecipes(r);
           } }
         />
       </header>
       <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>
-          : recipes.cockTails.map((drink, index) => (
+          : recipes.cockTails.map((Drink, index) => (
             <Card
               key={ index }
-              imagePath={ drink.strDrinkThumb }
-              itemName={ drink.strDrink }
-              id={ drink.idDrink }
-              itemType="bebida"
+              imagePath={ Drink.strDrinkThumb }
+              itemName={ Drink.strDrink }
+              id={ Drink.idDrink }
+              itemType="bebidas"
             />))}
       </section>
     </main>
