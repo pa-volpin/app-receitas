@@ -1,5 +1,6 @@
 async function fetchFood(searchFor, value) {
-  if (searchFor === 'firstLetter' && value.length > 1) {
+  const zero = 0;
+  if (searchFor === 'firstLetter' && (value.length > 1 || value.length === zero)) {
     // eslint-disable-next-line no-alert
     alert('Sua busca deve conter somente 1 (um) caracter');
     return;
@@ -9,6 +10,7 @@ async function fetchFood(searchFor, value) {
     ingredient: 'filter.php?i=',
     itemName: 'search.php?s=',
     firstLetter: 'search.php?f=',
+    byId: 'lookup.php?i=',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
   const response = await fetch(URL)
