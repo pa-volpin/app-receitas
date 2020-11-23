@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 
 function ExplorarComidasPorLocalOrigem() {
@@ -12,6 +13,7 @@ function ExplorarComidasPorLocalOrigem() {
   return (
     <div>
       <Header />
+      <Footer />
     </div>
   );
 }
