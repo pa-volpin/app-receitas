@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 
 function Perfil() {
@@ -13,6 +14,7 @@ function Perfil() {
   return (
     <div>
       <Header />
+      <Footer />
     </div>
   );
 }
