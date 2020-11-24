@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Card from '../components/Card';
 import Categories from '../components/Categories';
 
@@ -68,6 +69,7 @@ function Comidas({ history }) {
               : null
           ))}
       </section>
+      <Footer />
     </main>
   );
 }

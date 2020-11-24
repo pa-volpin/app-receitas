@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
 import profile from '../images/profileIcon.svg';
+import Footer from '../components/Footer';
 
 function Explorar() {
   const { setDisabledSearchIcon,
@@ -46,6 +47,7 @@ function Explorar() {
       >
         Me Surpreenda!
       </Link>
+      <Footer />
     </div>
   );
 }

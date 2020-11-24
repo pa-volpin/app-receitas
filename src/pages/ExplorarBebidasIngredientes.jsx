@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import profile from '../images/profileIcon.svg';
+import Footer from '../components/Footer';
 
 function ExplorarBebidasIngredientes() {
   return (
@@ -10,6 +11,7 @@ function ExplorarBebidasIngredientes() {
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
+      <Footer />
     </div>
   );
 }

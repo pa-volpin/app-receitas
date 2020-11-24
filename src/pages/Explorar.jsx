@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Explorar({ requestAPI }) {
   const { setDisabledSearchIcon,
@@ -23,6 +24,7 @@ function Explorar({ requestAPI }) {
       />
       <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
       <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
+      <Footer />
     </div>
   );
 }

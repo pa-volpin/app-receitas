@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Footer from '../components/Footer';
 import profile from '../images/profileIcon.svg';
 
 function ExplorarBebidas() {
@@ -10,6 +10,7 @@ function ExplorarBebidas() {
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profile } alt="" />
       </Link>
+      <Footer />
     </div>
   );
 }
