@@ -7,26 +7,32 @@ import Card from '../components/Card';
 import Categories from '../components/Categories';
 
 function Bebidas({ history }) {
-  const { recipes, setRecipes, setShowSearchBar,
+  const { recipesDrinks, setRecipesDrinks, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filter } = useContext(ReceitasContext);
+    searchInput, filterDrink,
+    setExecuteFilter } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
-    setIsFetching(true);
     setDisabledSearchIcon(false);
     setTitleHeader('Bebidas');
     setShowSearchBar(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    setIsFetching(true);
     const firstRequestAPI = async () => {
-      const response = (filter === '')
-        ? await fetchDrink('itemName', '') : await fetchDrink('byCategory', filter);
-      setRecipes({ cockTails: response });
+      const response = (filterDrink === '' || filterDrink === 'All')
+        ? await fetchDrink('itemName', '')
+        : await fetchDrink('byCategory', filterDrink);
+      setRecipesDrinks(response);
       setIsFetching(false);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [filterDrink]);
 
   return (
     <main className="jsx-container">
@@ -38,7 +44,7 @@ function Bebidas({ history }) {
               history.push(`/bebidas/${response[0].idDrink}`);
             }
             if (response) {
-              setRecipes({ cockTails: response });
+              setRecipesDrinks(response);
             }
             // eslint-disable-next-line no-alert
             alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -51,7 +57,7 @@ function Bebidas({ history }) {
       <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>
-          : recipes.cockTails.map((Drink, index) => (
+          : recipesDrinks.map((Drink, index) => (
             index < twelve ? <Card
               indexId={ index }
               key={ index }

@@ -7,16 +7,17 @@ function ReceitasProvider({ children }) {
   const [hidden, setHidden] = useState(true);
   const [isFetching, setIsFetching] = useState(true);
   const [searchInput, setSearchInput] = useState('');
-  const [recipes, setRecipes] = useState({
-    meals: [],
-    cockTails: [],
-  });
+  const [recipesMeals, setRecipesMeals] = useState([]);
+  const [recipesDrinks, setRecipesDrinks] = useState([]);
   const [searchType, setSearchType] = useState('ingredient');
   const [disabledProfileIcon, setDisabledProfileIcon] = useState(false);
   const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
   const [titleHeader, setTitleHeader] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [filter, setFilter] = useState('');
+  const [filterFood, setFilterFood] = useState('');
+  const [filterDrink, setFilterDrink] = useState('');
+  const [executeFilter, setExecuteFilter] = useState(false);
+  const [filterDisabled, setFilterDisabled] = useState(false);
 
   const contextValue = {
     email,
@@ -25,8 +26,10 @@ function ReceitasProvider({ children }) {
     setHidden,
     searchType,
     setSearchType,
-    recipes,
-    setRecipes,
+    recipesMeals,
+    setRecipesMeals,
+    recipesDrinks,
+    setRecipesDrinks,
     disabledProfileIcon,
     setDisabledProfileIcon,
     disabledSearchIcon,
@@ -39,8 +42,14 @@ function ReceitasProvider({ children }) {
     setSearchInput,
     isFetching,
     setIsFetching,
-    filter,
-    setFilter,
+    filterFood,
+    setFilterFood,
+    filterDrink,
+    setFilterDrink,
+    executeFilter,
+    setExecuteFilter,
+    filterDisabled,
+    setFilterDisabled,
   };
 
   return (
