@@ -11,7 +11,7 @@ function Bebidas({ history }) {
   const { recipesDrinks, setRecipesDrinks, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filterDrink,
+    searchInput, filterDrink } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
