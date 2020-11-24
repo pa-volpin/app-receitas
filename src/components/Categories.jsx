@@ -18,19 +18,21 @@ function Categories({ type }) {
     firstRequestAPI();
   }, []);
 
+  const maximumCategories = 5;
   return (
     <div>
       { categories.map(({ strCategory }, index) => (
-        (index < 5)
-          ? <button
+        (index < maximumCategories)
+          ? (
+            <button
               type="button"
               data-testid={ `${strCategory}-category-filter` }
               value={ strCategory }
               onClick={ ({ target }) => setFilter(target.value) }
-          >
-            { strCategory }
-          </button>
-          : ''
+            >
+              { strCategory }
+            </button>)
+          : null
       )) }
     </div>
   );
