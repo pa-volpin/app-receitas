@@ -6,7 +6,7 @@ import fetchDrink from '../servicesAPI/drinkAPI';
 
 function Categories({ type }) {
   const [categories, setCategories] = useState([]);
-  const { setFilter } = useContext(ReceitasContext);
+  const { setFilterFood, setFilterDrink, setExecuteFilter } = useContext(ReceitasContext);
 
   useEffect(() => {
     const firstRequestAPI = async () => {
@@ -18,22 +18,41 @@ function Categories({ type }) {
     firstRequestAPI();
   }, []);
 
-  const maximumCategories = 5;
+  const executeSetFilter = (value) => {
+    setExecuteFilter(true);
+    if (type === 'meals') {
+      setFilterFood((prevState) => (prevState === value ? '' : value));
+    } else {
+      setFilterDrink((prevState) => (prevState === value ? '' : value));
+    }
+  };
+
+  const maxCategoriesPerPage = 5;
   return (
     <div>
       { categories.map(({ strCategory }, index) => (
-        (index < maximumCategories)
+        (index < maxCategoriesPerPage)
           ? (
             <button
+              key={ index }
               type="button"
               data-testid={ `${strCategory}-category-filter` }
               value={ strCategory }
-              onClick={ ({ target }) => setFilter(target.value) }
+              onClick={ ({ target }) => executeSetFilter(target.value) }
             >
               { strCategory }
-            </button>)
-          : null
+            </button>
+          )
+          : ''
       )) }
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        value="All"
+        onClick={ ({ target }) => executeSetFilter(target.value) }
+      >
+        All
+      </button>
     </div>
   );
 }
