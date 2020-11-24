@@ -4,12 +4,13 @@ import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import Categories from '../components/Categories';
 
 function Comidas({ history }) {
   const { recipes, setRecipes, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput } = useContext(ReceitasContext);
+    searchInput, filter } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
@@ -18,7 +19,8 @@ function Comidas({ history }) {
     setTitleHeader('Comidas');
     setShowSearchBar(false);
     const firstRequestAPI = async () => {
-      const response = await fetchFood('itemName', '');
+      const response = (filter === '')
+        ? await fetchFood('itemName', '') : await fetchFood('byCategory', filter);
       setRecipes({ meals: response });
       setIsFetching(false);
     };
@@ -43,6 +45,9 @@ function Comidas({ history }) {
           } }
         />
       </header>
+      <section>
+        <Categories type="meals" />
+      </section>
       <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>

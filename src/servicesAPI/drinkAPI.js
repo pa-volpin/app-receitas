@@ -11,6 +11,8 @@ async function fetchDrink(searchFor, value) {
     itemName: 'search.php?s=',
     firstLetter: 'search.php?f=',
     byId: 'lookup.php?i=',
+    categories: 'list.php?c=list',
+    byCategory: 'filter.php?c=',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
   const response = await fetch(URL)

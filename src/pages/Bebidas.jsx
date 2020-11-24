@@ -4,12 +4,13 @@ import ReceitasContext from '../context/ReceitasContext';
 import fetchDrink from '../servicesAPI/drinkAPI';
 import Header from '../components/Header';
 import Card from '../components/Card';
+import Categories from '../components/Categories';
 
 function Bebidas({ history }) {
   const { recipes, setRecipes, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput } = useContext(ReceitasContext);
+    searchInput, filter } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
@@ -18,7 +19,8 @@ function Bebidas({ history }) {
     setTitleHeader('Bebidas');
     setShowSearchBar(false);
     const firstRequestAPI = async () => {
-      const response = await fetchDrink('itemName', '');
+      const response = (filter === '')
+        ? await fetchDrink('itemName', '') : await fetchDrink('byCategory', filter);
       setRecipes({ cockTails: response });
       setIsFetching(false);
     };
@@ -43,6 +45,9 @@ function Bebidas({ history }) {
           } }
         />
       </header>
+      <section>
+        <Categories type="drinks" />
+      </section>
       <section className="cards-list">
         {isFetching
           ? <h2>Loading...</h2>
