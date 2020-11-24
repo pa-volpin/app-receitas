@@ -16,6 +16,7 @@ function ReceitasProvider({ children }) {
   const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
   const [titleHeader, setTitleHeader] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [filter, setFilter] = useState('');
 
   const contextValue = {
     email,
@@ -38,6 +39,8 @@ function ReceitasProvider({ children }) {
     setSearchInput,
     isFetching,
     setIsFetching,
+    filter,
+    setFilter,
   };
 
   return (
