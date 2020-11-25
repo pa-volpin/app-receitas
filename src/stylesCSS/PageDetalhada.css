@@ -1,0 +1,92 @@
+.detalhes-main {
+  /* border: 3px solid green; */
+}
+
+/* HEADER */
+.detalhes-header {
+  align-items: center;
+  /* border: 3px solid orange; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.detalhes-img {
+  /* border: 1px solid hotpink; */
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.detalhes-img-border {
+  /* border: 1px solid rebeccapurple; */
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.detalhes-img-border img {
+  /* border: 1px solid rebeccapurple; */
+  margin-top: -150px;
+  max-height: 600px;
+  max-width: 100vw;
+}
+
+.detalhes-bar {
+  /* border: 1px solid firebrick; */
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+}
+
+.detalhes-title {
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+.detalhes-subtitle {
+  color: gray;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.detalhes-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detalhes-share, .detalhes-fav {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 5px;
+  outline: none;
+}
+
+/* ARTICLE */
+.detalhes-article {
+  border: 1px solid red;
+  margin-bottom: 20px;
+}
+
+.detalhes-ingredients{
+
+}
+
+.detalhes-instructions {
+
+}
+
+.detalhes-video {
+
+}
+
+.detalhes-list-recomended {
+  display: flex;
+  border: 1px solid red;
+}
+
+/* BUTTON */
+.detalhes-new-recipe-btn {
+  position: fixed;
+  bottom: 0;
+}

@@ -7,6 +7,7 @@ import fetchFood from '../servicesAPI/foodAPI';
 function Recomended({ itemType }) {
   const [isFetchingLocal, setIsFetchingLocal] = useState(false);
   const [recomendations, setRecommendations] = useState([]);
+  const six = 6;
 
   useEffect(() => {
     setIsFetchingLocal(true);
@@ -21,6 +22,12 @@ function Recomended({ itemType }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   setIsFetchingLocal(true);
+  //   console.log('Recomended Desmontou!');
+  //   return setIsFetchingLocal(false);
+  // }, []);
+
   const cardRecomendation = (recomendation, indexId) => {
     const inversePrefix = { comidas: 'Drink', bebidas: 'Meal' };
     const { [`str${inversePrefix[itemType]}Thumb`]: imagePath,
@@ -28,16 +35,23 @@ function Recomended({ itemType }) {
       [`str${inversePrefix[itemType]}`]: itemName } = recomendation;
 
     return (
-      <div data-testid={ `${indexId}-recomendation-card` } className="card-container">
-        <div className="card-datails">
-          <Link className="card-details-link" to={ `/${itemType}/${id}` }>
-            <div data-testid={ `${indexId}-card-name` } className="card-info">
-              <h4 className="card-title">{itemName}</h4>
+      <div
+        key={ indexId }
+        data-testid={ `${indexId}-recomendation-card` }
+        className="recomended-list"
+      >
+        <div className="recomended-datails">
+          <Link className="recomended-details-link" to={ `/${itemType}/${id}` }>
+            <div
+              data-testid={ `${indexId}-recomendation-title` }
+              className="recomended-info"
+            >
+              <h4 className="recomended-title">{itemName}</h4>
             </div>
             <img
               data-testid={ `${indexId}-card-img` }
               alt="recipe cover"
-              className="card-image"
+              className="recomended-image"
               src={ imagePath }
             />
           </Link>
@@ -47,10 +61,10 @@ function Recomended({ itemType }) {
   };
 
   return (
-    <div>
+    <div data-slide-to="2" className="recomended-container">
       { isFetchingLocal
         ? <h2>Loading...</h2>
-        : (recomendations.map((recomendation, index) => ((index < 6)
+        : (recomendations.map((recomendation, index) => ((index < six)
           ? cardRecomendation(recomendation, index)
           : '')))}
     </div>

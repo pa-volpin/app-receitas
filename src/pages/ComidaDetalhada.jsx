@@ -11,6 +11,27 @@ function ComidaDetalhada({ match }) {
   const [meal, setMeal] = useState([]);
   const { id } = match.params;
 
+  function getKeys() {
+    const recipesIngredientsMeasures = [];
+    const ingredientes = Object.keys(meal)
+      .map((key) => (key.includes('strIngredient')
+        ? meal[key]
+        : '')).filter((value) => value !== '');
+    const medidas = Object.keys(meal)
+      .map((key) => (key.includes('strMeasure')
+        ? meal[key]
+        : '')).filter((value) => value !== ' ' && value !== '');
+    const zero = 0;
+    let i = zero;
+    for (i; i < ingredientes.length; i += 1) {
+      recipesIngredientsMeasures[i] = {
+        ingrediente: ingredientes[i],
+        medida: medidas[i],
+      };
+    }
+    return recipesIngredientsMeasures;
+  }
+
   useEffect(() => {
     setIsFetching(true);
     const firstRequestAPI = async () => {
@@ -23,14 +44,16 @@ function ComidaDetalhada({ match }) {
   }, []);
 
   return (
-    <div className="detalhes">
+    <div>
       {isFetching
         ? <h2>Loading...</h2>
         : (
-          <main className="detalhes-container">
+          <main className="detalhes-main">
             <header className="detalhes-header">
               <section className="detalhes-img">
-                <img data-testid="recipe-photo" src={ meal.strMealThumb } alt="" />
+                <section className="detalhes-img-border">
+                  <img data-testid="recipe-photo" src={ meal.strMealThumb } alt="" />
+                </section>
               </section>
               <section className="detalhes-bar">
                 <section className="detalhes-titles">
@@ -61,13 +84,13 @@ function ComidaDetalhada({ match }) {
             </header>
             <article className="detalhes-article">
               <section className="detalhes-ingredients">
-                { Object.keys(meal).map((key) => (key.includes('strIngredient') ? meal[key] : ''))
-                  .map((meal, index) => (
+                { getKeys()
+                  .map((mealKey, index) => (
                     <p
                       data-testid={ `${index}-ingredient-name-and-measure` }
                       key={ index }
                     >
-                      {meal}
+                      {`${mealKey.ingrediente}${' '}${mealKey.medida}`}
                     </p>
                   ))}
               </section>
@@ -91,10 +114,14 @@ function ComidaDetalhada({ match }) {
               <section className="detalhes-list-recomended">
                 <Recomended itemType="comidas" />
               </section>
-              <button data-testid="start-recipe-btn" type="button">
-                iniciar receita
-              </button>
             </article>
+            <button
+              className="detalhes-new-recipe-btn"
+              data-testid="start-recipe-btn"
+              type="button"
+            >
+              iniciar receita
+            </button>
           </main>
         )}
     </div>
