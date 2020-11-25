@@ -69,7 +69,8 @@
 }
 
 .detalhes-ingredients{
-
+  display: flex;
+  flex-direction: column;
 }
 
 .detalhes-instructions {

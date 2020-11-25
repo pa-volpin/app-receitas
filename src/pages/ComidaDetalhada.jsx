@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import fetchFood from '../servicesAPI/foodAPI';
 import ReceitasContext from '../context/ReceitasContext';
@@ -7,9 +8,26 @@ import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
 function ComidaDetalhada({ match }) {
-  const { setIsFetching, isFetching } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching,
+    recipesDone, recipesInProgress, setRecipesInProgress } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
   const { id } = match.params;
+  const isDone = recipesDone.find((recipeId) => recipeId === id);
+  const isProgress = (!!recipesInProgress.meals[id]);
+
+  function execSetProgress() {
+    if (!isProgress) {
+      setRecipesInProgress((prevState) => ({
+        ...prevState,
+        meals: {
+          ...prevState.meals,
+          [id]: ['1'],
+        },
+      }));
+    } else {
+      console.log('não deu kk');
+    }
+  }
 
   function getKeys() {
     const recipesIngredientsMeasures = [];
@@ -40,6 +58,7 @@ function ComidaDetalhada({ match }) {
       setIsFetching(false);
     };
     firstRequestAPI();
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -112,16 +131,23 @@ function ComidaDetalhada({ match }) {
                 />
               </section>
               <section className="detalhes-list-recomended">
-                <Recomended itemType="comidas" />
+                <Recomended itemType="bebidas" />
               </section>
             </article>
-            <button
-              className="detalhes-new-recipe-btn"
-              data-testid="start-recipe-btn"
-              type="button"
-            >
-              iniciar receita
-            </button>
+            {!isDone
+              && (
+                <Link className="card-details-link" to={ `/comidas/${id}/in-progress` }>
+                  <button
+                    className="detalhes-new-recipe-btn"
+                    data-testid="start-recipe-btn"
+                    type="button"
+                    value="Iniciar Receita"
+                    onClick={ () => execSetProgress() }
+                  >
+                    {!isProgress ? 'Iniciar Receita' : 'Continuar Receita'}
+                  </button>
+                </Link>
+              )}
           </main>
         )}
     </div>

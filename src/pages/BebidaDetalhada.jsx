@@ -100,7 +100,7 @@ function BebidaDetalhada({ match }) {
                 <p data-testid="instructions">{drink.strInstructions}</p>
               </section>
               <section className="detalhes-list-recomended">
-                <Recomended itemType="bebidas" />
+                <Recomended itemType="comidas" />
               </section>
             </article>
             <button
@@ -108,7 +108,7 @@ function BebidaDetalhada({ match }) {
               data-testid="start-recipe-btn"
               type="button"
             >
-              iniciar receita
+              Iniciar Receita
             </button>
           </main>
         )}

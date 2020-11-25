@@ -10,26 +10,24 @@ function Recomended({ itemType }) {
   const six = 6;
 
   useEffect(() => {
+    let mounted = true;
     setIsFetchingLocal(true);
     const firstRequestAPI = async () => {
       const response = (itemType === 'comidas')
-        ? await fetchDrink('itemName', '')
-        : await fetchFood('itemName', '');
-      setRecommendations(response);
-      setIsFetchingLocal(false);
+        ? await fetchFood('itemName', '')
+        : await fetchDrink('itemName', '');
+      if (mounted) {
+        setRecommendations(response);
+        setIsFetchingLocal(false);
+      }
     };
     firstRequestAPI();
+    return () => { mounted = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   setIsFetchingLocal(true);
-  //   console.log('Recomended Desmontou!');
-  //   return setIsFetchingLocal(false);
-  // }, []);
-
   const cardRecomendation = (recomendation, indexId) => {
-    const inversePrefix = { comidas: 'Drink', bebidas: 'Meal' };
+    const inversePrefix = { comidas: 'Meal', bebidas: 'Drink' };
     const { [`str${inversePrefix[itemType]}Thumb`]: imagePath,
       [`id${inversePrefix[itemType]}`]: id,
       [`str${inversePrefix[itemType]}`]: itemName } = recomendation;
