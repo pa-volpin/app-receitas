@@ -13,10 +13,14 @@ function ComidaDetalhada({ match }) {
   const [meal, setMeal] = useState([]);
   const { id } = match.params;
   const isDone = recipesDone.find((recipeId) => recipeId === id);
-  const isProgress = (!!recipesInProgress.meals[id]);
+  let recipesInProgressLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  recipesInProgressLS = recipesInProgressLS !== null ? recipesInProgressLS : recipesInProgress;
+  const isProgress = Object.keys(recipesInProgressLS.meals)
+    .find((recipeId) => recipeId === id);
 
   function execSetProgress() {
-    if (!isProgress) {
+    if (isProgress !== id) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
       setRecipesInProgress((prevState) => ({
         ...prevState,
         meals: {
@@ -58,7 +62,6 @@ function ComidaDetalhada({ match }) {
       setIsFetching(false);
     };
     firstRequestAPI();
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -144,7 +147,7 @@ function ComidaDetalhada({ match }) {
                     value="Iniciar Receita"
                     onClick={ () => execSetProgress() }
                   >
-                    {!isProgress ? 'Iniciar Receita' : 'Continuar Receita'}
+                    {isProgress !== id ? 'Iniciar Receita' : 'Continuar Receita'}
                   </button>
                 </Link>
               )}
