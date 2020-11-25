@@ -10,7 +10,6 @@ function ComidaDetalhada({ match }) {
   const { setIsFetching, isFetching } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
   const { id } = match.params;
-  const six = 6;
 
   useEffect(() => {
     setIsFetching(true);
@@ -62,18 +61,15 @@ function ComidaDetalhada({ match }) {
             </header>
             <article className="detalhes-article">
               <section className="detalhes-ingredients">
-                {isFetching
-                  ? <h2>Loading...</h2>
-                  : Object.keys(meal).map((key, index) => (key.includes('strIngredient')
-                    ? (
-                      <p
-                        data-testid={ `${index}-ingredient-name-and-measure` }
-                        key={ index }
-                      >
-                        {meal[key]}
-                      </p>
-                    )
-                    : ''))}
+                { Object.keys(meal).map((key) => (key.includes('strIngredient') ? meal[key] : ''))
+                  .map((meal, index) => (
+                    <p
+                      data-testid={ `${index}-ingredient-name-and-measure` }
+                      key={ index }
+                    >
+                      {meal}
+                    </p>
+                  ))}
               </section>
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{meal.strInstructions}</p>
@@ -92,10 +88,8 @@ function ComidaDetalhada({ match }) {
                   allowFullScreen
                 />
               </section>
-              <section size="2" className="detalhes-list-recomended">
-                {isFetching
-                  ? <h2>Loading...</h2>
-                  : <Recomended itemType="comidas" />}
+              <section className="detalhes-list-recomended">
+                <Recomended itemType="comidas" />
               </section>
               <button data-testid="start-recipe-btn" type="button">
                 iniciar receita
