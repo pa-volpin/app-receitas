@@ -11,11 +11,10 @@ function Comidas({ history }) {
   const { recipesMeals, setRecipesMeals, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filterFood, recipesInProgress } = useContext(ReceitasContext);
+    searchInput, filterFood } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
-    console.log(recipesInProgress.meals);
     setDisabledSearchIcon(false);
     setTitleHeader('Comidas');
     setShowSearchBar(false);

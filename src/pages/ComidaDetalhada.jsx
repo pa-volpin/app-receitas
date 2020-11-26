@@ -39,11 +39,11 @@ function ComidaDetalhada({ match }) {
     const ingredientes = Object.keys(meal)
       .map((key) => (key.includes('strIngredient')
         ? meal[key]
-        : '')).filter((value) => value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const medidas = Object.keys(meal)
       .map((key) => (key.includes('strMeasure')
         ? meal[key]
-        : '')).filter((value) => value !== ' ' && value !== '');
+        : '')).filter((value) => value !== ' ' && value !== '' && value !== null);
     const zero = 0;
     let i = zero;
     for (i; i < ingredientes.length; i += 1) {
@@ -113,7 +113,8 @@ function ComidaDetalhada({ match }) {
                       data-testid={ `${index}-ingredient-name-and-measure` }
                       key={ index }
                     >
-                      {`${mealKey.ingrediente}${' '}${mealKey.medida}`}
+                      {`${mealKey.ingrediente}
+                        ${mealKey.medida ? mealKey.medida : ''}`}
                     </p>
                   ))}
               </section>

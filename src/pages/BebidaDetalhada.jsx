@@ -22,13 +22,11 @@ function BebidaDetalhada({ match }) {
 
   function execSetProgress() {
     if (isProgress !== id) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(
-        { meals: recipesInProgress.meals, cocktails: recipesInProgress.drinks },
-      ));
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
       setRecipesInProgress((prevState) => ({
         ...prevState,
-        drinks: {
-          ...prevState.cocktails,
+        cocktails: {
+          ...prevState.drinks,
           [id]: ['1'],
         },
       }));
@@ -42,11 +40,11 @@ function BebidaDetalhada({ match }) {
     const ingredientes = Object.keys(drink)
       .map((key) => (key.includes('strIngredient')
         ? drink[key]
-        : '')).filter((value) => value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const medidas = Object.keys(drink)
       .map((key) => (key.includes('strMeasure')
         ? drink[key]
-        : '')).filter((value) => value !== ' ' && value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const zero = 0;
     let i = zero;
     for (i; i < ingredientes.length; i += 1) {
@@ -116,26 +114,13 @@ function BebidaDetalhada({ match }) {
                       data-testid={ `${index}-ingredient-name-and-measure` }
                       key={ index }
                     >
-                      {`${drinkKey.ingrediente}${' '}${drinkKey.medida}`}
+                      {`${drinkKey.ingrediente}
+                        ${drinkKey.medida ? drinkKey.medida : ''}`}
                     </p>
                   ))}
               </section>
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{drink.strInstructions}</p>
-              </section>
-              <section className="detalhes-video">
-                <iframe
-                  title={ `Como Fazer ${drink.strDrink}` }
-                  data-testid="video"
-                  width="560"
-                  height="315"
-                  src={ !drink.strYoutube
-                    ? <h2>Loading...</h2>
-                    : drink.strYoutube.replace('watch?v=', 'embed/') }
-                  frameBorder="0"
-                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
               </section>
               <section className="detalhes-list-recomended">
                 <Recomended itemType="comidas" />

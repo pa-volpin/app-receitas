@@ -10,7 +10,7 @@ function ComidaEmProgresso({ match }) {
   const { setIsFetching, isFetching, setRecipesDone,
     recipesInProgress } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
-  const [setChecked] = useState([]);
+  const [checked, setChecked] = useState([]);
   const { id } = match.params;
 
   function execSetDone() {
@@ -26,11 +26,11 @@ function ComidaEmProgresso({ match }) {
     const ingredientes = Object.keys(meal)
       .map((key) => (key.includes('strIngredient')
         ? meal[key]
-        : '')).filter((value) => value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const medidas = Object.keys(meal)
       .map((key) => (key.includes('strMeasure')
         ? meal[key]
-        : '')).filter((value) => value !== ' ' && value !== '');
+        : '')).filter((value) => value !== ' ' && value !== '' && value !== null);
     const zero = 0;
     let i = zero;
     for (i; i < ingredientes.length; i += 1) {
@@ -43,13 +43,13 @@ function ComidaEmProgresso({ match }) {
   }
 
   useEffect(() => {
-    console.log(recipesInProgress);
     setIsFetching(true);
     const firstRequestAPI = async () => {
       const response = await fetchFood('byId', id);
       setMeal(...response);
       setIsFetching(false);
     };
+    console.log(checked);
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -105,7 +105,8 @@ function ComidaEmProgresso({ match }) {
                         key={ index }
                         onChange={ () => setChecked(true) }
                       />
-                      {`${mealKey.ingrediente}${' '}${mealKey.medida}`}
+                      {`${mealKey.ingrediente}
+                        ${mealKey.medida ? mealKey.medida : ''}`}
                     </label>
                   ))}
               </section>

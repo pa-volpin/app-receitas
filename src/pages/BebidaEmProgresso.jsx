@@ -10,7 +10,7 @@ function BebidaEmProgresso({ match }) {
   const { setIsFetching, isFetching, setRecipesDone,
     recipesInProgress } = useContext(ReceitasContext);
   const [drink, setDrink] = useState([]);
-  const [setChecked] = useState([]);
+  const [checked, setChecked] = useState([]);
   const { id } = match.params;
 
   function execSetDone() {
@@ -26,11 +26,11 @@ function BebidaEmProgresso({ match }) {
     const ingredientes = Object.keys(drink)
       .map((key) => (key.includes('strIngredient')
         ? drink[key]
-        : '')).filter((value) => value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const medidas = Object.keys(drink)
       .map((key) => (key.includes('strMeasure')
         ? drink[key]
-        : '')).filter((value) => value !== ' ' && value !== '');
+        : '')).filter((value) => value !== '' && value !== null);
     const zero = 0;
     let i = zero;
     for (i; i < ingredientes.length; i += 1) {
@@ -49,6 +49,7 @@ function BebidaEmProgresso({ match }) {
       setDrink(...response);
       setIsFetching(false);
     };
+    console.log(checked);
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -104,7 +105,8 @@ function BebidaEmProgresso({ match }) {
                         key={ index }
                         onChange={ () => setChecked(true) }
                       />
-                      {`${drinkKey.ingrediente}${' '}${drinkKey.medida}`}
+                      {`${drinkKey.ingrediente}
+                        ${drinkKey.medida ? drinkKey.medida : ''}`}
                     </label>
                   ))}
               </section>
