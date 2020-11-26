@@ -16,6 +16,7 @@ function Categories({ type }) {
       setCategories(response);
     };
     firstRequestAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const executeSetFilter = (value) => {

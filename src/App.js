@@ -10,6 +10,9 @@ import {
 import ReceitasProvider from './context/ReceitasProvider';
 import './App.css';
 import './stylesCSS/Card.css';
+import './stylesCSS/Recomended.css';
+import './stylesCSS/PageDetalhada.css';
+import './stylesCSS/DetalhesResponsive.css';
 
 function App() {
   return (

@@ -18,6 +18,11 @@ function ReceitasProvider({ children }) {
   const [filterDrink, setFilterDrink] = useState('');
   const [executeFilter, setExecuteFilter] = useState(false);
   const [filterDisabled, setFilterDisabled] = useState(false);
+  const [recipesDone, setRecipesDone] = useState([]);
+  const [recipesInProgress, setRecipesInProgress] = useState({
+    cocktails: {},
+    meals: {},
+  });
 
   const contextValue = {
     email,
@@ -50,6 +55,10 @@ function ReceitasProvider({ children }) {
     setExecuteFilter,
     filterDisabled,
     setFilterDisabled,
+    recipesDone,
+    setRecipesDone,
+    recipesInProgress,
+    setRecipesInProgress,
   };
 
   return (
