@@ -10,7 +10,7 @@ function ExplorarComidasIngredientes() {
   const { setDisabledSearchIcon,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
-  const [ingredientes, setIngredientes] = useState('');
+  const [ingredientes, setIngredientes] = useState([]);
   const twelve = 12;
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function ExplorarComidasIngredientes() {
           index < twelve ? <Card
             indexId={ index }
             key={ index }
-            imagePath={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}.png` }
+            imagePath={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
             itemName={ meal.strIngredient }
             id=""
             itemType="comidas"

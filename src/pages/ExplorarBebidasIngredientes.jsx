@@ -10,7 +10,7 @@ function ExplorarBebidasIngredientes() {
   const { setDisabledSearchIcon,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
-  const [ingredientes, setIngredientes] = useState('');
+  const [ingredientes, setIngredientes] = useState([]);
   const twelve = 12;
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function ExplorarBebidasIngredientes() {
             index < twelve ? <Card
               indexId={ index }
               key={ index }
-              imagePath={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-small.png` }
+              imagePath={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
               itemName={ drink.strIngredient1 }
               id=""
               itemType="bebidas"

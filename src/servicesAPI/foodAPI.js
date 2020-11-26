@@ -15,6 +15,7 @@ async function fetchFood(searchFor, value) {
     byCategory: 'filter.php?c=',
     random: 'random.php',
     listIngredient: 'list.php?i=list',
+    byArea: 'list.php?a=list',
   };
   const URL = `${baseURL}${searchType[searchFor]}${value}`;
   const response = await fetch(URL)
