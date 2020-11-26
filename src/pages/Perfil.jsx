@@ -25,11 +25,11 @@ function PagePerfil() {
       <Header />
       <section className="profile-container">
         <section className="profile-email">
-          {isFetching
+          {isFetching && userEmail.email === 'email@mail.com'
             ? <p>{email}</p>
             : (
               <h3 data-testid="profile-email" className="email">
-                {userEmail.email}
+                {email}
               </h3>)}
         </section>
         <section className="profile-buttons">
