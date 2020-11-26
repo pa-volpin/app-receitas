@@ -12,10 +12,13 @@ function PagePerfil() {
 
   useEffect(() => {
     setIsFetching(true);
-    setUserEmail(JSON.parse(localStorage.getItem('user')));
     setDisabledSearchIcon(true);
     setTitleHeader('Perfil');
     setShowSearchBar(false);
+    const setEmailUser = async () => {
+      setUserEmail(JSON.parse(localStorage.getItem('user')));
+    };
+    setEmailUser();
     setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -25,11 +28,12 @@ function PagePerfil() {
       <Header />
       <section className="profile-container">
         <section className="profile-email">
-          {isFetching && userEmail.email === 'email@mail.com'
-            ? <p>{email}</p>
+          {isFetching && userEmail.email === 'email@mail.com' && userEmail.email !== email
+            ? null
             : (
               <h3 data-testid="profile-email" className="email">
                 {email}
+                {/* Requisito mais idiota que já VI */}
               </h3>)}
         </section>
         <section className="profile-buttons">
