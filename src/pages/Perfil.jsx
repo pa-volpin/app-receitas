@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 
-function Perfil() {
+function PagePerfil() {
   const { setDisabledSearchIcon, email,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
@@ -29,7 +29,7 @@ function Perfil() {
             ? <p>{email}</p>
             : (
               <h3 data-testid="profile-email" className="email">
-                {userEmail?.email}
+                {userEmail.email}
               </h3>)}
         </section>
         <section className="profile-buttons">
@@ -60,4 +60,4 @@ function Perfil() {
   );
 }
 
-export default Perfil;
+export default PagePerfil;

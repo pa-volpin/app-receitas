@@ -4,7 +4,8 @@ import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 
 function ExplorarComidasPorLocalOrigem() {
-  const { setTitleHeader, setDisabledSearchIcon, setShowSearchBar } = useContext(ReceitasContext);
+  const { setTitleHeader, setDisabledSearchIcon,
+    setShowSearchBar } = useContext(ReceitasContext);
   useEffect(() => {
     setDisabledSearchIcon(false);
     setTitleHeader('Explorar Origem');
