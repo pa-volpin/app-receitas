@@ -10,7 +10,7 @@ function ComidaEmProgresso({ match }) {
   const { setIsFetching, isFetching, setRecipesDone,
     recipesInProgress } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
-  const [checked, setChecked] = useState([]);
+  const [setChecked] = useState([]);
   const { id } = match.params;
 
   function execSetDone() {

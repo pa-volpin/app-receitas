@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import fetchDrink from '../servicesAPI/drinkAPI';
 import ReceitasContext from '../context/ReceitasContext';
@@ -7,20 +8,45 @@ import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
 function BebidaDetalhada({ match }) {
-  const { setIsFetching, isFetching } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching,
+    recipesDone, recipesInProgress, setRecipesInProgress } = useContext(ReceitasContext);
   const [drink, setDrink] = useState([]);
   const { id } = match.params;
+  const isDone = recipesDone.find((recipeId) => recipeId === id);
+  let recipesInProgressLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  recipesInProgressLS = recipesInProgressLS !== null
+    ? recipesInProgressLS : recipesInProgress;
+  const keyConvert = recipesInProgressLS !== null ? 'cocktails' : 'drinks';
+  const isProgress = Object.keys(recipesInProgressLS[keyConvert])
+    .find((recipeId) => recipeId === id);
+
+  function execSetProgress() {
+    if (isProgress !== id) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(
+        { meals: recipesInProgress.meals, cocktails: recipesInProgress.drinks },
+      ));
+      setRecipesInProgress((prevState) => ({
+        ...prevState,
+        drinks: {
+          ...prevState.cocktails,
+          [id]: ['1'],
+        },
+      }));
+    } else {
+      console.log('não deu kk');
+    }
+  }
 
   function getKeys() {
     const recipesIngredientsMeasures = [];
     const ingredientes = Object.keys(drink)
       .map((key) => (key.includes('strIngredient')
         ? drink[key]
-        : '')).filter((value) => value !== '' && value !== null);
+        : '')).filter((value) => value !== '');
     const medidas = Object.keys(drink)
       .map((key) => (key.includes('strMeasure')
         ? drink[key]
-        : '')).filter((value) => value !== '' && value !== null);
+        : '')).filter((value) => value !== ' ' && value !== '');
     const zero = 0;
     let i = zero;
     for (i; i < ingredientes.length; i += 1) {
@@ -38,7 +64,6 @@ function BebidaDetalhada({ match }) {
       const response = await fetchDrink('byId', id);
       setDrink(...response);
       setIsFetching(false);
-      console.log(response);
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -91,25 +116,45 @@ function BebidaDetalhada({ match }) {
                       data-testid={ `${index}-ingredient-name-and-measure` }
                       key={ index }
                     >
-                      {`${drinkKey.ingrediente}
-                        ${' '}${drinkKey.medida ? drinkKey.medida : ''}`}
+                      {`${drinkKey.ingrediente}${' '}${drinkKey.medida}`}
                     </p>
                   ))}
               </section>
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{drink.strInstructions}</p>
               </section>
+              <section className="detalhes-video">
+                <iframe
+                  title={ `Como Fazer ${drink.strDrink}` }
+                  data-testid="video"
+                  width="560"
+                  height="315"
+                  src={ !drink.strYoutube
+                    ? <h2>Loading...</h2>
+                    : drink.strYoutube.replace('watch?v=', 'embed/') }
+                  frameBorder="0"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </section>
               <section className="detalhes-list-recomended">
                 <Recomended itemType="comidas" />
               </section>
             </article>
-            <button
-              className="detalhes-new-recipe-btn"
-              data-testid="start-recipe-btn"
-              type="button"
-            >
-              Iniciar Receita
-            </button>
+            {!isDone
+              && (
+                <Link className="card-details-link" to={ `/bebidas/${id}/in-progress` }>
+                  <button
+                    className="detalhes-new-recipe-btn"
+                    data-testid="start-recipe-btn"
+                    type="button"
+                    value="Iniciar Receita"
+                    onClick={ () => execSetProgress() }
+                  >
+                    {isProgress !== id ? 'Iniciar Receita' : 'Continuar Receita'}
+                  </button>
+                </Link>
+              )}
           </main>
         )}
     </div>

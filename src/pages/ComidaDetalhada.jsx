@@ -14,7 +14,8 @@ function ComidaDetalhada({ match }) {
   const { id } = match.params;
   const isDone = recipesDone.find((recipeId) => recipeId === id);
   let recipesInProgressLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  recipesInProgressLS = recipesInProgressLS !== null ? recipesInProgressLS : recipesInProgress;
+  recipesInProgressLS = recipesInProgressLS !== null
+    ? recipesInProgressLS : recipesInProgress;
   const isProgress = Object.keys(recipesInProgressLS.meals)
     .find((recipeId) => recipeId === id);
 
