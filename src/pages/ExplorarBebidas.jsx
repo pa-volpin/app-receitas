@@ -2,19 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchDrink from '../servicesAPI/drinkAPI';
-import profile from '../images/profileIcon.svg';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExplorarBebidas() {
   const { setDisabledSearchIcon, setIsFetching, isFetching,
-    setTitleHeader, setShowSearchBar, titleHeader,
+    setTitleHeader, setShowSearchBar,
   } = useContext(ReceitasContext);
   const [randomId, setRandomId] = useState('');
 
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Explorar Bebidas');
-    setShowSearchBar(true);
+    setShowSearchBar(false);
     setIsFetching(true);
     const firstRequestAPI = async () => {
       const response = await fetchDrink('random', '');
@@ -27,10 +27,7 @@ function ExplorarBebidas() {
 
   return (
     <div>
-      <h3 data-testid="page-title">{ titleHeader }</h3>
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profile } alt="" />
-      </Link>
+      <Header />
       <Link
         data-testid="explore-by-ingredient"
         to="/explorar/bebidas/ingredientes"
