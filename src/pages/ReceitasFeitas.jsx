@@ -20,7 +20,7 @@ function ReceitasFeitas() {
 
   useEffect(() => {
     setTitleHeader('Receitas Feitas');
-    setDisabledSearchIcon(false);
+    setDisabledSearchIcon(true);
     setShowSearchBar(false);
     setIsFetching(true);
     const localStorageFeitas = localStorage.getItem('doneRecipes');

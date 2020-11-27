@@ -18,7 +18,7 @@ function ReceitasFavoritas() {
 
   useEffect(() => {
     setTitleHeader('Receitas Favoritas');
-    setDisabledSearchIcon(false);
+    setDisabledSearchIcon(true);
     setShowSearchBar(false);
     setIsFetching(true);
     const localStorageFavoritas = localStorage.getItem('favoriteRecipes');
