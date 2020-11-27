@@ -25,7 +25,7 @@ function ReceitasFavoritas() {
     console.log(localStorageFavoritas);
     if (localStorageFavoritas !== null) {
       const { favoriteRecipes } = JSON.parse(localStorageFavoritas);
-      setFavoritas(...favoriteRecipes);
+      setFavoritas(favoriteRecipes);
     }
     setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps

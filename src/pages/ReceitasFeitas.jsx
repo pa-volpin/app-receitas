@@ -27,7 +27,7 @@ function ReceitasFeitas() {
     console.log(localStorageFeitas);
     if (localStorageFeitas !== null) {
       const { doneRecipes } = JSON.parse(localStorageFeitas);
-      setFeitas(...doneRecipes);
+      setFeitas(doneRecipes);
     }
     setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
