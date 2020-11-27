@@ -24,6 +24,22 @@ function ReceitasProvider({ children }) {
     meals: {},
   });
 
+  function renderEmail(param) {
+    return (
+      <div>
+        {param
+          ? (
+            <p data-testid="profile-email">{email}</p>
+          )
+          : (
+            <h3 data-testid="profile-email">
+              {JSON.parse(localStorage.getItem('user')).email}
+            </h3>
+          )}
+      </div>
+    );
+  }
+
   const contextValue = {
     email,
     setEmail,
@@ -59,6 +75,7 @@ function ReceitasProvider({ children }) {
     setRecipesDone,
     recipesInProgress,
     setRecipesInProgress,
+    renderEmail,
   };
 
   return (
