@@ -1,59 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import IngredientsList from './IngredientsList';
 import fetchFood from '../servicesAPI/foodAPI';
+import fetchDrink from '../servicesAPI/drinkAPI';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
 function ComidaDetalhada({ match }) {
-  const { setIsFetching, isFetching,
-    recipesDone, recipesInProgress, setRecipesInProgress } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
   const { id } = match.params;
-  const isDone = recipesDone.find((recipeId) => recipeId === id);
-  let recipesInProgressLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  recipesInProgressLS = recipesInProgressLS !== null
-    ? recipesInProgressLS : recipesInProgress;
-  const isProgress = Object.keys(recipesInProgressLS.meals)
-    .find((recipeId) => recipeId === id);
-
-  function execSetProgress() {
-    if (isProgress !== id) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
-      setRecipesInProgress((prevState) => ({
-        ...prevState,
-        meals: {
-          ...prevState.meals,
-          [id]: ['1'],
-        },
-      }));
-    } else {
-      console.log('não deu kk');
-    }
-  }
-
-  function getKeys() {
-    const recipesIngredientsMeasures = [];
-    const ingredientes = Object.keys(meal)
-      .map((key) => (key.includes('strIngredient')
-        ? meal[key]
-        : '')).filter((value) => value !== '' && value !== null);
-    const medidas = Object.keys(meal)
-      .map((key) => (key.includes('strMeasure')
-        ? meal[key]
-        : '')).filter((value) => value !== ' ' && value !== '' && value !== null);
-    const zero = 0;
-    let i = zero;
-    for (i; i < ingredientes.length; i += 1) {
-      recipesIngredientsMeasures[i] = {
-        ingrediente: ingredientes[i],
-        medida: medidas[i],
-      };
-    }
-    return recipesIngredientsMeasures;
-  }
+  const fetchOpt = {
+    meal: (key, value) => fetchFood(key, value),
+    drink: (key, value) => fetchDrink(key, value),
+  };
 
   useEffect(() => {
     setIsFetching(true);
@@ -106,18 +68,7 @@ function ComidaDetalhada({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <section className="detalhes-ingredients">
-                { getKeys()
-                  .map((mealKey, index) => (
-                    <p
-                      data-testid={ `${index}-ingredient-name-and-measure` }
-                      key={ index }
-                    >
-                      {`${mealKey.ingrediente}
-                        ${mealKey.medida ? mealKey.medida : ''}`}
-                    </p>
-                  ))}
-              </section>
+              <IngredientsList recipe={ meal } type="meal" />
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{meal.strInstructions}</p>
               </section>
@@ -139,20 +90,6 @@ function ComidaDetalhada({ match }) {
                 <Recomended itemType="bebidas" />
               </section>
             </article>
-            {!isDone
-              && (
-                <Link className="card-details-link" to={ `/comidas/${id}/in-progress` }>
-                  <button
-                    className="detalhes-new-recipe-btn"
-                    data-testid="start-recipe-btn"
-                    type="button"
-                    value="Iniciar Receita"
-                    onClick={ () => execSetProgress() }
-                  >
-                    {isProgress !== id ? 'Iniciar Receita' : 'Continuar Receita'}
-                  </button>
-                </Link>
-              )}
           </main>
         )}
     </div>

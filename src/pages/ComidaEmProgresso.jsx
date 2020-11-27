@@ -1,46 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
+import IngredientsListInProgress from './IngredientsListInProgress';
 import fetchFood from '../servicesAPI/foodAPI';
 import ReceitasContext from '../context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
 function ComidaEmProgresso({ match }) {
-  const { setIsFetching, isFetching, setRecipesDone,
-    recipesInProgress } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching } = useContext(ReceitasContext);
   const [meal, setMeal] = useState([]);
-  const [checked, setChecked] = useState([]);
   const { id } = match.params;
-
-  function execSetDone() {
-    setRecipesDone((prevState) => ([
-      ...prevState,
-      id,
-    ]));
-    delete recipesInProgress.meals[id];
-  }
-
-  function getKeys() {
-    const recipesIngredientsMeasures = [];
-    const ingredientes = Object.keys(meal)
-      .map((key) => (key.includes('strIngredient')
-        ? meal[key]
-        : '')).filter((value) => value !== '' && value !== null);
-    const medidas = Object.keys(meal)
-      .map((key) => (key.includes('strMeasure')
-        ? meal[key]
-        : '')).filter((value) => value !== ' ' && value !== '' && value !== null);
-    const zero = 0;
-    let i = zero;
-    for (i; i < ingredientes.length; i += 1) {
-      recipesIngredientsMeasures[i] = {
-        ingrediente: ingredientes[i],
-        medida: medidas[i],
-      };
-    }
-    return recipesIngredientsMeasures;
-  }
 
   useEffect(() => {
     setIsFetching(true);
@@ -49,7 +18,6 @@ function ComidaEmProgresso({ match }) {
       setMeal(...response);
       setIsFetching(false);
     };
-    console.log(checked);
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -94,36 +62,11 @@ function ComidaEmProgresso({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <section className="detalhes-ingredients">
-                { getKeys()
-                  .map((mealKey, index) => (
-                    <label key={ index } htmlFor={ index }>
-                      <input
-                        id={ index }
-                        type="checkbox"
-                        data-testid={ `${index}-ingredient-step` }
-                        key={ index }
-                        onChange={ () => setChecked(true) }
-                      />
-                      {`${mealKey.ingrediente}
-                        ${mealKey.medida ? mealKey.medida : ''}`}
-                    </label>
-                  ))}
-              </section>
+              <IngredientsListInProgress recipeId={ id } type="meal" />
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{meal.strInstructions}</p>
               </section>
             </article>
-            <Link className="card-details-link" to="/comidas">
-              <button
-                className="detalhes-new-recipe-btn"
-                data-testid="finish-recipe-btn"
-                type="button"
-                onClick={ () => execSetDone() }
-              >
-                Finalizar Receita
-              </button>
-            </Link>
           </main>
         )}
     </div>
