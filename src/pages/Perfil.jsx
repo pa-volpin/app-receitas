@@ -1,17 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ReceitasContext from '../context/ReceitasContext';
 
-function Perfil() {
+function PagePerfil() {
   const { setDisabledSearchIcon,
-    setTitleHeader, setShowSearchBar } = useContext(ReceitasContext);
+    setTitleHeader, setShowSearchBar,
+    isFetching, setIsFetching } = useContext(ReceitasContext);
+  const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Perfil');
     setShowSearchBar(false);
+    const localStorageEmail = localStorage.getItem('user');
+    if (localStorageEmail) {
+      const { email } = JSON.parse(localStorageEmail);
+      setUserEmail(email);
+    }
+    setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -20,9 +28,7 @@ function Perfil() {
       <Header />
       <section className="profile-container">
         <section className="profile-email">
-          <h3 data-testid="profile-email" className="email">
-            {JSON.parse(localStorage.getItem('user')).email}
-          </h3>
+          {!isFetching && <h3 data-testid="profile-email">{userEmail}</h3>}
         </section>
         <section className="profile-buttons">
           <Link to="/receitas-feitas">
@@ -52,4 +58,4 @@ function Perfil() {
   );
 }
 
-export default Perfil;
+export default PagePerfil;
