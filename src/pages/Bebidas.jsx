@@ -35,7 +35,7 @@ function Bebidas({ history }) {
   }, [filterDrink]);
 
   return (
-    <main className="jsx-container">
+    <main className="bebidas-container">
       <header>
         <Header
           requestAPI={ async () => {
@@ -51,24 +51,26 @@ function Bebidas({ history }) {
           } }
         />
       </header>
-      <section>
-        <Categories type="drinks" />
-      </section>
-      <section className="cards-list">
-        {isFetching
-          ? <h2>Loading...</h2>
-          : recipesDrinks.map((Drink, index) => (
-            index < twelve ? <Card
-              indexId={ index }
-              key={ index }
-              imagePath={ Drink.strDrinkThumb }
-              itemName={ Drink.strDrink }
-              id={ Drink.idDrink }
-              itemType="bebidas"
-              cardType="recipe"
-            />
-              : null
-          ))}
+      <section className="bebidas-body">
+        <section className="bebidas-filters">
+          <Categories type="drinks" />
+        </section>
+        <section className="cards-list">
+          {isFetching
+            ? <h2>Loading...</h2>
+            : recipesDrinks.map((Drink, index) => (
+              index < twelve ? <Card
+                indexId={ index }
+                key={ index }
+                imagePath={ Drink.strDrinkThumb }
+                itemName={ Drink.strDrink }
+                id={ Drink.idDrink }
+                itemType="bebidas"
+                cardType="recipe"
+              />
+                : null
+            ))}
+        </section>
       </section>
       <Footer />
     </main>

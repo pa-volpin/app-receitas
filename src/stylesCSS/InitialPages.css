@@ -1,0 +1,75 @@
+.comidas-container, .bebidas-container {
+  background: radial-gradient(circle, #defaee 50%, #c5dfd3 100%);
+  background-size: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.comidas-body, .bebidas-body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  overflow: scroll;
+  padding: 130px 0;
+}
+
+.comidas-filters {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 90%;
+}
+
+.category-container {
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 10px 0 20px;
+}
+
+.category-container button {
+  background-image: linear-gradient(180deg, #ffb125ff 30%, #ff901dff 60%, #ff6d3aff 120%);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 1px 2px 2px #558c8cb3;
+  color: #eff7ffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 30px;
+  margin: 10px 0;
+  outline: none;
+  padding: 5px;
+  text-shadow: 
+  /* horizontal-shadow vertical-shadow color; */
+  -1px 0px #ff6d3aff,
+  -1px 1px #ff6d3aff;
+  width: 100px;
+}
+
+.cards-list {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 140vh;
+  justify-content: space-around;
+}
+
+/* 
+CSS HEX
+--black: #000000ff;
+--dark-green: #002e24ff;
+--pine-green: #2b7869ff;
+--steel-teal: #558c8cff;
+--flame: #ed5729ff;
+--orange-crayola: #ff6d3aff;
+--dark-orange: #ff901dff;
+--honey-yellow: #ffb125ff;
+--azure-x-11-web-color: #dae6e7ff;
+--alice-blue: #eff7ffff;
+*/

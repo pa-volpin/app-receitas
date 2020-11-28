@@ -7,7 +7,7 @@ function SearchBar({ requestAPI }) {
   const one = /.{1,}/;
 
   return (
-    <div>
+    <div className="searchBar-container">
       <nav>
         <input
           onChange={ ({ target }) => setSearchInput(target.value) }

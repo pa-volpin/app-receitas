@@ -30,7 +30,7 @@ function Categories({ type }) {
 
   const maxCategoriesPerPage = 5;
   return (
-    <div>
+    <div className="category-container">
       { categories.map(({ strCategory }, index) => (
         (index < maxCategoriesPerPage)
           ? (

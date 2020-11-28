@@ -35,7 +35,7 @@ function Comidas({ history }) {
   }, [filterFood]);
 
   return (
-    <main className="jsx-container">
+    <main className="comidas-container">
       <header>
         <Header
           requestAPI={ async () => {
@@ -51,24 +51,26 @@ function Comidas({ history }) {
           } }
         />
       </header>
-      <section>
-        <Categories type="meals" />
-      </section>
-      <section className="cards-list">
-        {isFetching
-          ? <h2>Loading...</h2>
-          : recipesMeals.map((meal, index) => (
-            index < twelve ? <Card
-              indexId={ index }
-              key={ index }
-              imagePath={ meal.strMealThumb }
-              itemName={ meal.strMeal }
-              id={ meal.idMeal }
-              itemType="comidas"
-              cardType="recipe"
-            />
-              : null
-          ))}
+      <section className="comidas-body">
+        <section className="comidas-filters">
+          <Categories type="meals" />
+        </section>
+        <section className="cards-list">
+          {isFetching
+            ? <h2>Loading...</h2>
+            : recipesMeals.map((meal, index) => (
+              index < twelve ? <Card
+                indexId={ index }
+                key={ index }
+                imagePath={ meal.strMealThumb }
+                itemName={ meal.strMeal }
+                id={ meal.idMeal }
+                itemType="comidas"
+                cardType="recipe"
+              />
+                : null
+            ))}
+        </section>
       </section>
       <Footer />
     </main>

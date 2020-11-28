@@ -2,32 +2,77 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 300px;
-  width: 300px;
+  margin: 25px 0 0;
+  width: 280px;
 }
 
 .card-datails {
+  border: 1px solid #dae6e7ff;
   align-items: center;
+  background-color: #eff7ffff;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px #558c8cff;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 300px;
   margin: 10px;
   text-align: center;
 }
 
 .card-details-link {
-  background-color: #00000000;
+  align-items: center;
   border-radius: 0;
-  color: #252525;
-  margin: 0;
+  box-shadow: none;
+  color: #000000ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 40px 0 0;
   padding: 0;
   text-decoration: none;
-  box-shadow: none;
 }
 
 .card-image {
   border-radius: 3px;
-  max-height: 220px;
-  max-width: 270px;
+  max-height: 200px;
+  max-width: 250px;
   object-fit: cover;
 }
+
+.card-info {
+  font-size: 20px;
+  margin: 15px 0 0;
+}
+
+.card-ver-receita {
+  background-image: linear-gradient(180deg, #ff901dff 30%, #ff6d3aff 80%, #ed5729ff 150%);
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px #558c8cff;
+  color: #eff7ffff;
+  cursor: pointer;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  height: 35px;
+  margin-top: 10px;
+  outline: none;
+  padding: 0 15px ;
+  width: 150px;
+}
+
+/* 
+CSS HEX
+--black: #000000ff;
+--dark-green: #002e24ff;
+--pine-green: #2b7869ff;
+--steel-teal: #558c8cff;
+--flame: #ed5729ff;
+--orange-crayola: #ff6d3aff;
+--dark-orange: #ff901dff;
+--honey-yellow: #ffb125ff;
+--azure-x-11-web-color: #dae6e7ff;
+--alice-blue: #eff7ffff;
+*/
