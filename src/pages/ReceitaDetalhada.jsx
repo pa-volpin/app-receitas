@@ -4,10 +4,12 @@ import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fetchFood from '../servicesAPI/foodAPI';
 import fetchDrink from '../servicesAPI/drinkAPI';
 import CopyToClipBoard from '../components/CopyToClipBoard';
-import FavoriteButton from '../components/FavoriteButton';
+// import FavoriteButton from '../components/FavoriteButton';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
@@ -17,7 +19,7 @@ function ReceitaDetalhada({ match }) {
   const { id } = match.params;
   const textTime = 3000;
   const [copied, setClipboard] = CopyToClipBoard(textTime);
-  // const idPathName = history.location.pathname.split('/')[2];
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     setIsFetching(true);
@@ -31,6 +33,37 @@ function ReceitaDetalhada({ match }) {
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      const favoriteRecipes = JSON.parse(localStorage.favoriteRecipes);
+      favoriteRecipes.forEach((favorite) => {
+        if (favorite.id === id) {
+          setIsFavorite(true);
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const checkFavorite = () => {
+    setIsFavorite(!isFavorite);
+    if (!isFavorite) {
+      localStorage.favoriteRecipes = JSON.stringify([{
+        id,
+        type: type === 'meal' ? 'comida' : 'bebida',
+        area: recipe.strArea,
+        category: recipe.strCategory,
+        alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
+        name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
+        image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
+        doneDate: new Date(),
+        tags: [...recipe.strTags],
+      }]);
+    } else {
+      localStorage.removeItem('favoriteRecipes');
+    }
+  };
 
   return (
     <div>
@@ -67,7 +100,17 @@ function ReceitaDetalhada({ match }) {
                     <img src={ shareIcon } alt="compartilhe" />
                     { copied ? <p>Link copiado!</p> : true }
                   </button>
-                  <FavoriteButton recipe={ recipe } type={ type } />
+                  <button
+                    data-testid="favorite-btn"
+                    type="button"
+                    className="detalhes-fav"
+                    onClick={ () => checkFavorite() }
+                  >
+                    <img
+                      src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+                      alt="Favorite"
+                    />
+                  </button>
                 </section>
               </section>
             </header>
