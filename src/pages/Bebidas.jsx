@@ -65,6 +65,7 @@ function Bebidas({ history }) {
               itemName={ Drink.strDrink }
               id={ Drink.idDrink }
               itemType="bebidas"
+              cardType="recipe"
             />
               : null
           ))}

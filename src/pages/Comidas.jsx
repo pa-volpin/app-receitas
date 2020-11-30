@@ -65,6 +65,7 @@ function Comidas({ history }) {
               itemName={ meal.strMeal }
               id={ meal.idMeal }
               itemType="comidas"
+              cardType="recipe"
             />
               : null
           ))}

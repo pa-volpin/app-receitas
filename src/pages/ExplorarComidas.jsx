@@ -1,34 +1,33 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
-import profile from '../images/profileIcon.svg';
+import fetchFood from '../servicesAPI/foodAPI';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Explorar() {
-  const { setDisabledSearchIcon,
+function ExplorarComidas() {
+  const { setDisabledSearchIcon, setIsFetching, isFetching,
     setTitleHeader, setShowSearchBar,
-    recipes, setIsFetching, titleHeader,
   } = useContext(ReceitasContext);
+  const [randomId, setRandomId] = useState('');
 
   useEffect(() => {
     setDisabledSearchIcon(true);
     setTitleHeader('Explorar Comidas');
-    setShowSearchBar(true);
+    setShowSearchBar(false);
     setIsFetching(true);
+    const firstRequestAPI = async () => {
+      const response = await fetchFood('random', '');
+      setRandomId(response[0].idMeal);
+      setIsFetching(false);
+    };
+    firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setIsFetching(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [recipes]);
-
   return (
     <div>
-      <h3 data-testid="page-title">{ titleHeader }</h3>
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profile } alt="" />
-      </Link>
+      <Header />
       <Link
         data-testid="explore-by-ingredient"
         to="/explorar/comidas/ingredientes"
@@ -41,15 +40,18 @@ function Explorar() {
       >
         Por Local de Origem
       </Link>
-      <Link
-        data-testid="explore-surprise"
-        to="/explorar/comidas"
-      >
-        Me Surpreenda!
-      </Link>
+      {!isFetching
+        ? (
+          <Link
+            data-testid="explore-surprise"
+            to={ `/comidas/${randomId}` }
+          >
+            Me Surpreenda!
+          </Link>)
+        : null}
       <Footer />
     </div>
   );
 }
 
-export default Explorar;
+export default ExplorarComidas;

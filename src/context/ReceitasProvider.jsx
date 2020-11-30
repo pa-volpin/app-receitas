@@ -28,6 +28,22 @@ function ReceitasProvider({ children }) {
   const keyURL = { meal: 'comidas', drink: 'bebidas' };
   const keyObj = { meal: 'meals', drink: 'drinks' };
 
+  function renderEmail(param) {
+    return (
+      <div>
+        {param
+          ? (
+            <p data-testid="profile-email">{email}</p>
+          )
+          : (
+            <h3 data-testid="profile-email">
+              {JSON.parse(localStorage.getItem('user')).email}
+            </h3>
+          )}
+      </div>
+    );
+  }
+
   const contextValue = {
     email,
     setEmail,
@@ -66,6 +82,7 @@ function ReceitasProvider({ children }) {
     keyProps,
     keyObj,
     keyURL,
+    renderEmail,
   };
 
   return (

@@ -7,6 +7,7 @@ import {
   ExplorarComidasPorLocalOrigem, ComidaEmProgresso,
   ReceitaDetalhada, BebidaEmProgresso,
 } from './pages';
+import NotFound from './pages/NotFound';
 
 import ReceitasProvider from './context/ReceitasProvider';
 import './App.css';
@@ -42,6 +43,11 @@ function App() {
           exact
           path="/explorar/comidas/area"
           component={ ExplorarComidasPorLocalOrigem }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas/area"
+          component={ NotFound }
         />
         <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
         <Route exact path="/receitas-favoritas" component={ ReceitasFavoritas } />
