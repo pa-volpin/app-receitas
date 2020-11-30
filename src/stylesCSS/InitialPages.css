@@ -1,6 +1,6 @@
 .comidas-container, .bebidas-container {
   background: radial-gradient(circle, #defaee 50%, #c5dfd3 100%);
-  background-size: 100vh;
+  background-size: 120vh;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,14 +8,15 @@
 
 .comidas-body, .bebidas-body {
   align-items: center;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
   overflow: scroll;
-  padding: 130px 0;
+  padding: 135px 0;
 }
 
-.comidas-filters {
+.comidas-filters, .bebidas-filters {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,7 +29,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 10px 0 20px;
+  margin: 10px 0 30px;
 }
 
 .category-container button {
@@ -38,17 +39,18 @@
   box-shadow: 1px 2px 2px #558c8cb3;
   color: #eff7ffff;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  height: 30px;
+  height: 40px;
   margin: 10px 0;
   outline: none;
+  overflow: auto;
   padding: 5px;
   text-shadow: 
   /* horizontal-shadow vertical-shadow color; */
   -1px 0px #ff6d3aff,
   -1px 1px #ff6d3aff;
-  width: 100px;
+  width: 110px;
 }
 
 .cards-list {
@@ -56,8 +58,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 140vh;
+  height: 135vh;
   justify-content: space-around;
+}
+
+.cards-list:after {
+  content: "";
+  height: 60px;
+  width: 100%;
 }
 
 /* 

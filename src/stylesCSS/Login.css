@@ -77,7 +77,7 @@
 }
 
 .login-email, .login-pass {
-  background-color: #002e24ff;
+  background-color: #2b7869ff;
   border: none;
   border-radius: 6px;
   box-shadow: 2px 2px 5px #000000ff;
@@ -87,6 +87,10 @@
   outline: none;
   padding: 6px 14px;
   width: 270px;
+}
+
+.login-email::placeholder, .login-pass::placeholder {
+  color: #eff7ffff;
 }
 
 .login-button-container {

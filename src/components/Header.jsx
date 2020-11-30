@@ -37,7 +37,7 @@ function Header({ requestAPI }) {
         { (disabledProfileIcon) ? '' : profileIcon }
       </div>
       {showSearchBar && (
-        <div>
+        <div className="header-searchBar">
           <SearchBar requestAPI={ requestAPI } />
         </div>
       )}

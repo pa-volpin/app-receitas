@@ -12,10 +12,11 @@ import ReceitasProvider from './context/ReceitasProvider';
 import './App.css';
 import './stylesCSS/Card.css';
 import './stylesCSS/Login.css';
-import './stylesCSS/InitialPages.css';
 import './stylesCSS/Recomended.css';
 import './stylesCSS/PageDetalhada.css';
 import './stylesCSS/DetalhesResponsive.css';
+import './stylesCSS/InitialPages.css';
+import './stylesCSS/ResponsiveApp.css';
 
 function App() {
   return (
