@@ -4,9 +4,7 @@ import {
   Login, Comidas, Perfil, Explorar, Bebidas, ReceitasFeitas,
   ReceitasFavoritas, ExplorarComidas, ExplorarBebidas,
   ExplorarBebidasIngredientes, ExplorarComidasIngredientes,
-  ExplorarComidasPorLocalOrigem, ComidaEmProgresso,
-  ReceitaDetalhada, BebidaEmProgresso,
-} from './pages';
+  ExplorarComidasPorLocalOrigem, ReceitaDetalhada } from './pages';
 import NotFound from './pages/NotFound';
 
 import ReceitasProvider from './context/ReceitasProvider';
@@ -15,6 +13,7 @@ import './stylesCSS/Card.css';
 import './stylesCSS/Recomended.css';
 import './stylesCSS/PageDetalhada.css';
 import './stylesCSS/DetalhesResponsive.css';
+import ReceitaEmProgresso from './pages/ReceitaEmProgresso';
 
 function App() {
   return (
@@ -25,8 +24,8 @@ function App() {
         <Route exact path="/bebidas" component={ Bebidas } />
         <Route exact path="/comidas/:id" component={ ReceitaDetalhada } />
         <Route exact path="/bebidas/:id" component={ ReceitaDetalhada } />
-        <Route exact path="/bebidas/:id/in-progress" component={ BebidaEmProgresso } />
-        <Route exact path="/comidas/:id/in-progress" component={ ComidaEmProgresso } />
+        <Route exact path="/bebidas/:id/in-progress" component={ ReceitaEmProgresso } />
+        <Route exact path="/comidas/:id/in-progress" component={ ReceitaEmProgresso } />
         <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
         <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
         <Route

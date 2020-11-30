@@ -4,17 +4,21 @@ import ListaIngredientesEmProgresso from './ListaIngredientesEmProgresso';
 import ReceitasContext from '../context/ReceitasContext';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
+import fetchFood from '../servicesAPI/foodAPI';
+import fetchDrink from '../servicesAPI/drinkAPI';
 
 function ReceitaEmProgresso({ match }) {
-  const { setIsFetching, isFetching, fetchOpt, keyProps } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
   const type = (match.path.match('comidas')) ? 'meal' : 'drink';
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState('');
   const { id } = match.params;
 
   useEffect(() => {
     setIsFetching(true);
     const firstRequestAPI = async () => {
-      const response = await fetchOpt.type('byId', id);
+      const response = (type === 'meal')
+        ? await fetchFood('byId', id)
+        : await fetchDrink('byId', id);
       setRecipe(...response);
       setIsFetching(false);
     };
@@ -66,7 +70,9 @@ function ReceitaEmProgresso({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <ListaIngredientesEmProgresso recipeId={ id } type />
+              { recipe !== '' ? (
+                <ListaIngredientesEmProgresso recipe={ recipe } type={ type } />
+              ) : <p>Loading...</p>}
               <section className="detalhes-instructions">
                 <p data-testid="instructions">{recipe.strInstructions}</p>
               </section>

@@ -23,6 +23,7 @@ function ReceitasProvider({ children }) {
     cocktails: {},
     meals: {},
   });
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   const keyProps = { meal: 'Meal', drink: 'Drink' };
   const keyURL = { meal: 'comidas', drink: 'bebidas' };
@@ -83,6 +84,8 @@ function ReceitasProvider({ children }) {
     keyObj,
     keyURL,
     renderEmail,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (

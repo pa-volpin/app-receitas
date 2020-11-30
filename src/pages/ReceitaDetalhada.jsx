@@ -4,15 +4,20 @@ import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
 import shareIcon from '../images/shareIcon.svg';
-import heartIcon from '../images/whiteHeartIcon.svg';
 import fetchFood from '../servicesAPI/foodAPI';
 import fetchDrink from '../servicesAPI/drinkAPI';
+import CopyToClipBoard from '../components/CopyToClipBoard';
+import FavoriteButton from '../components/FavoriteButton';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
   const type = (match.path.match('comidas')) ? 'meal' : 'drink';
+  const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
   const [recipe, setRecipe] = useState([]);
   const { id } = match.params;
+  const textTime = 3000;
+  const [copied, setClipboard] = CopyToClipBoard(textTime);
+  // const idPathName = history.location.pathname.split('/')[2];
 
   useEffect(() => {
     setIsFetching(true);
@@ -57,16 +62,12 @@ function ReceitaDetalhada({ match }) {
                     data-testid="share-btn"
                     type="button"
                     className="detalhes-share"
+                    onClick={ () => setClipboard(`/${urlByType}/${id}`) }
                   >
                     <img src={ shareIcon } alt="compartilhe" />
+                    { copied ? <p>Link copiado!</p> : true }
                   </button>
-                  <button
-                    data-testid="favorite-btn"
-                    type="button"
-                    className="detalhes-fav"
-                  >
-                    <img src={ heartIcon } alt="compartilhe" />
-                  </button>
+                  <FavoriteButton recipe={ recipe } type={ type } />
                 </section>
               </section>
             </header>
