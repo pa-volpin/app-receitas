@@ -18,8 +18,8 @@
   /* horizontal-shadow vertical-shadow blur-radius color; */
   -2px 0px #ff6d3aff,
   -2px 2px #ff6d3aff,
-  -2px 1px 2px #000000ff,
-  -2px 3px 2px #000000ff;
+  -2px 1px 2px #002e24ff,
+  -2px 3px 2px #002e24ff;
 }
 
 @keyframes bounce {
@@ -79,8 +79,10 @@
 .login-email, .login-pass {
   background-color: #2b7869ff;
   border: none;
+  border-bottom: 1px solid #002e2480;
+  border-right: 1px solid #002e2480;
   border-radius: 6px;
-  box-shadow: 2px 2px 5px #000000ff;
+  box-shadow: 1px 2px 3px #558c8cff;
   color: #eff7ffff;
   font-size: 18px;
   height: 35px;
@@ -103,7 +105,7 @@
   background-image: linear-gradient(180deg, #ff901dff 30%, #ff6d3aff 80%, #ed5729ff 150%);
   border: none;
   border-radius: 6px;
-  box-shadow: 2px 2px 5px #000000ff;
+  box-shadow: 1px 2px 3px #558c8cff;
   color: #eff7ffff;
   cursor: pointer;
   font-size: 16px;
@@ -128,7 +130,7 @@ button[disabled] {
   background-image: linear-gradient(180deg, #ffb32580, #ff6e3a80);
   border: none;
   border-radius: 6px;
-  box-shadow: 2px 2px 5px #000000ff;
+  box-shadow: 1px 2px 3px #558c8cff;
   color: #666666;
   cursor: default;
   padding: 0;
