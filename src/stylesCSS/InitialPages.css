@@ -11,8 +11,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
-  overflow: scroll;
+  margin-bottom: 40px;
   padding: 135px 0;
 }
 
@@ -58,13 +57,13 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 135vh;
+  height: 145vh;
   justify-content: space-around;
 }
 
 .cards-list:after {
   content: "";
-  height: 60px;
+  height: 70px;
   width: 100%;
 }
 
