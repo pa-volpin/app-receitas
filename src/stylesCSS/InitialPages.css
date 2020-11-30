@@ -44,6 +44,7 @@
   margin: 10px 0;
   outline: none;
   overflow: auto;
+  overflow-y: hidden;
   padding: 5px;
   text-shadow: 
   /* horizontal-shadow vertical-shadow color; */
