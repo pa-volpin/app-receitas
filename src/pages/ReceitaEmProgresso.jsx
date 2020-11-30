@@ -1,27 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import IngredientsList from './IngredientsList';
-import fetchFood from '../servicesAPI/foodAPI';
-import fetchDrink from '../servicesAPI/drinkAPI';
+import ListaIngredientesEmProgresso from './ListaIngredientesEmProgresso';
 import ReceitasContext from '../context/ReceitasContext';
-import Recomended from '../components/Recomended';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
-function ComidaDetalhada({ match }) {
-  const { setIsFetching, isFetching } = useContext(ReceitasContext);
-  const [meal, setMeal] = useState([]);
+function ReceitaEmProgresso({ match }) {
+  const { setIsFetching, isFetching, fetchOpt, keyProps } = useContext(ReceitasContext);
+  const type = (match.path.match('comidas')) ? 'meal' : 'drink';
+  const [recipe, setRecipe] = useState([]);
   const { id } = match.params;
-  const fetchOpt = {
-    meal: (key, value) => fetchFood(key, value),
-    drink: (key, value) => fetchDrink(key, value),
-  };
 
   useEffect(() => {
     setIsFetching(true);
     const firstRequestAPI = async () => {
-      const response = await fetchFood('byId', id);
-      setMeal(...response);
+      const response = await fetchOpt.type('byId', id);
+      setRecipe(...response);
       setIsFetching(false);
     };
     firstRequestAPI();
@@ -37,16 +31,20 @@ function ComidaDetalhada({ match }) {
             <header className="detalhes-header">
               <section className="detalhes-img">
                 <section className="detalhes-img-border">
-                  <img data-testid="recipe-photo" src={ meal.strMealThumb } alt="" />
+                  <img
+                    data-testid="recipe-photo"
+                    src={ recipe[`str${keyProps[type]}Thumb`] }
+                    alt=""
+                  />
                 </section>
               </section>
               <section className="detalhes-bar">
                 <section className="detalhes-titles">
                   <h3 data-testid="recipe-title" className="detalhes-title">
-                    { meal.strMeal }
+                    { recipe[`str${keyProps[type]}`] }
                   </h3>
                   <h4 data-testid="recipe-category" className="detalhes-subtitle">
-                    { meal.strCategory }
+                    { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
                   </h4>
                 </section>
                 <section className="detalhes-buttons">
@@ -68,26 +66,9 @@ function ComidaDetalhada({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <IngredientsList recipe={ meal } type="meal" />
+              <ListaIngredientesEmProgresso recipeId={ id } type />
               <section className="detalhes-instructions">
-                <p data-testid="instructions">{meal.strInstructions}</p>
-              </section>
-              <section className="detalhes-video">
-                <iframe
-                  title={ `Como Fazer ${meal.strMeal}` }
-                  data-testid="video"
-                  width="560"
-                  height="315"
-                  src={ !meal.strYoutube
-                    ? <h2>Loading...</h2>
-                    : meal.strYoutube.replace('watch?v=', 'embed/') }
-                  frameBorder="0"
-                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </section>
-              <section className="detalhes-list-recomended">
-                <Recomended itemType="bebidas" />
+                <p data-testid="instructions">{recipe.strInstructions}</p>
               </section>
             </article>
           </main>
@@ -96,7 +77,7 @@ function ComidaDetalhada({ match }) {
   );
 }
 
-ComidaDetalhada.propTypes = {
+ReceitaEmProgresso.propTypes = {
   match: propTypes.shape({
     isExact: propTypes.bool,
     params: propTypes.shape({
@@ -109,4 +90,4 @@ ComidaDetalhada.propTypes = {
   }).isRequired,
 };
 
-export default ComidaDetalhada;
+export default ReceitaEmProgresso;

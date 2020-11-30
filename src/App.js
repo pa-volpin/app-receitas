@@ -3,8 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 import {
   Login, Comidas, Perfil, Explorar, Bebidas, ReceitasFeitas,
   ReceitasFavoritas, ExplorarComidas, ExplorarBebidas,
-  ExplorarBebidasIngredientes, ExplorarComidasIngredientes, ExplorarComidasPorLocalOrigem,
-  ComidaDetalhada, ComidaEmProgresso, BebidaDetalhada, BebidaEmProgresso,
+  ExplorarBebidasIngredientes, ExplorarComidasIngredientes,
+  ExplorarComidasPorLocalOrigem, ComidaEmProgresso,
+  ReceitaDetalhada, BebidaEmProgresso,
 } from './pages';
 
 import ReceitasProvider from './context/ReceitasProvider';
@@ -21,8 +22,8 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Comidas } />
         <Route exact path="/bebidas" component={ Bebidas } />
-        <Route exact path="/comidas/:id" component={ ComidaDetalhada } />
-        <Route exact path="/bebidas/:id" component={ BebidaDetalhada } />
+        <Route exact path="/comidas/:id" component={ ReceitaDetalhada } />
+        <Route exact path="/bebidas/:id" component={ ReceitaDetalhada } />
         <Route exact path="/bebidas/:id/in-progress" component={ BebidaEmProgresso } />
         <Route exact path="/comidas/:id/in-progress" component={ ComidaEmProgresso } />
         <Route exact path="/explorar/comidas" component={ ExplorarComidas } />

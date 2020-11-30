@@ -1,21 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import ListaIngredientesEmProgresso from './ListaIngredientesEmProgresso';
-import fetchFood from '../servicesAPI/foodAPI';
+import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
+import Recomended from '../components/Recomended';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
+import fetchFood from '../servicesAPI/foodAPI';
+import fetchDrink from '../servicesAPI/drinkAPI';
 
-function ComidaEmProgresso({ match }) {
-  const { setIsFetching, isFetching } = useContext(ReceitasContext);
-  const [meal, setMeal] = useState([]);
+function ReceitaDetalhada({ match }) {
+  const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
+  const type = (match.path.match('comidas')) ? 'meal' : 'drink';
+  const [recipe, setRecipe] = useState([]);
   const { id } = match.params;
 
   useEffect(() => {
     setIsFetching(true);
     const firstRequestAPI = async () => {
-      const response = await fetchFood('byId', id);
-      setMeal(...response);
+      const response = (type === 'meal')
+        ? await fetchFood('byId', id)
+        : await fetchDrink('byId', id);
+      setRecipe(...response);
       setIsFetching(false);
     };
     firstRequestAPI();
@@ -31,16 +36,20 @@ function ComidaEmProgresso({ match }) {
             <header className="detalhes-header">
               <section className="detalhes-img">
                 <section className="detalhes-img-border">
-                  <img data-testid="recipe-photo" src={ meal.strMealThumb } alt="" />
+                  <img
+                    data-testid="recipe-photo"
+                    src={ recipe[`str${keyProps[type]}Thumb`] }
+                    alt=""
+                  />
                 </section>
               </section>
               <section className="detalhes-bar">
                 <section className="detalhes-titles">
                   <h3 data-testid="recipe-title" className="detalhes-title">
-                    { meal.strMeal }
+                    { recipe[`str${keyProps[type]}`] }
                   </h3>
                   <h4 data-testid="recipe-category" className="detalhes-subtitle">
-                    { meal.strCategory }
+                    { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
                   </h4>
                 </section>
                 <section className="detalhes-buttons">
@@ -62,9 +71,29 @@ function ComidaEmProgresso({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <ListaIngredientesEmProgresso recipe={ meal } type="meal" />
+              <IngredientsList recipe={ recipe } type={ type } />
               <section className="detalhes-instructions">
-                <p data-testid="instructions">{meal.strInstructions}</p>
+                <p data-testid="instructions">{recipe.strInstructions}</p>
+              </section>
+              {type === 'meal'
+              && (
+                <section className="detalhes-video">
+                  <iframe
+                    title={ `Como Fazer ${recipe[`str${keyProps[type]}`]}` }
+                    data-testid="video"
+                    width="560"
+                    height="315"
+                    src={ !recipe.strYoutube
+                      ? <h2>Loading...</h2>
+                      : recipe.strYoutube.replace('watch?v=', 'embed/') }
+                    frameBorder="0"
+                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </section>
+              )}
+              <section className="detalhes-list-recomended">
+                <Recomended itemType={ type === 'meal' ? 'bebidas' : 'comidas' } />
               </section>
             </article>
           </main>
@@ -73,7 +102,7 @@ function ComidaEmProgresso({ match }) {
   );
 }
 
-ComidaEmProgresso.propTypes = {
+ReceitaDetalhada.propTypes = {
   match: propTypes.shape({
     isExact: propTypes.bool,
     params: propTypes.shape({
@@ -86,4 +115,4 @@ ComidaEmProgresso.propTypes = {
   }).isRequired,
 };
 
-export default ComidaEmProgresso;
+export default ReceitaDetalhada;

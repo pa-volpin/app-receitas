@@ -4,82 +4,73 @@ import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
 function IngredientsList({ recipe, type }) {
-  const { recipesDone, recipesInProgress,
-    setRecipesInProgress } = useContext(ReceitasContext);
+  const { recipesDone, recipesInProgress } = useContext(ReceitasContext);
+
+  // Configuração de chaves e id conforme tipo da receita
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
-  const isDone = recipesDone.find((recipeId) => recipeId === id);
-  let recipesInProgressLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const keyConvert = recipesInProgressLS !== null ? 'cocktails' : 'drinks';
-  recipesInProgressLS = recipesInProgressLS !== null
-    ? recipesInProgressLS : recipesInProgress;
-  const keyByType = (type === 'meal') ? 'meals' : keyConvert;
-  const keyByTypeForGlobalState = (type === 'meal') ? 'meals' : 'drinks';
-  const isProgress = Object.keys(recipesInProgressLS[keyByType])
-    .find((recipeId) => recipeId === id);
+  const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
-  const getIngredientsAndMeasure = () => {
-    const recipesIngredientsWithMeasures = [];
-    const ingredientes = Object.keys(recipe)
-      .map((key) => (key.includes('strIngredient')
-        ? recipe[key]
-        : '')).filter((value) => value !== '' && value !== null);
-    const medidas = Object.keys(recipe)
-      .map((key) => (key.includes('strMeasure')
-        ? recipe[key]
-        : '')).filter((value) => value !== ' ' && value !== '' && value !== null);
-    const zero = 0;
-    let i = zero;
-    for (i; i < ingredientes.length; i += 1) {
-      recipesIngredientsWithMeasures[i] = {
-        ingrediente: ingredientes[i],
-        medida: medidas[i],
-      };
-    }
-    return recipesIngredientsWithMeasures;
+  // Recebe as receitas em progresso do local storage ou do estado global
+  const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const recipesInProg = (recipesInProgLS !== null) ? recipesInProgLS : recipesInProgress;
+
+  // Verificação se a receita está em progresso e se está feita
+  const isDone = recipesDone.find((recipeId) => recipeId === id);
+  const recipesIsInProg = Object.keys(recipesInProg[keyByType])
+    .find((recipeId) => recipeId === id) === id;
+
+  // Criação do array de ingredientes com o controle checked
+  const createIngredientList = () => {
+    const keys = Object.keys(recipe);
+    const ingredientsName = keys.reduce((array, key) => {
+      const str = recipe[key];
+      const condition = (key.includes('strIngredient') && str !== '' && str !== null);
+      return (condition) ? array.concat(str) : array;
+    }, []);
+
+    const measures = keys.reduce((array, key) => {
+      const str = (recipe[key] !== ' ' && recipe[key] !== null) ? recipe[key] : '';
+      const condition = key.includes('strMeasure');
+      return (condition) ? array.concat(str) : array;
+    }, []);
+
+    const ingredients = ingredientsName.map((name, index) => ({
+      name,
+      measure: measures[index],
+    }));
+
+    return ingredients;
   };
 
-  const execSetProgress = () => {
-    if (isProgress !== id) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
-      setRecipesInProgress((prevState) => ({
-        ...prevState,
-        [keyByTypeForGlobalState]: {
-          ...prevState[keyByTypeForGlobalState],
-          [id]: [
-            ...getIngredientsAndMeasure()
-              .map((ingredient) => ({ ingredient, checked: false })),
-          ],
-        },
-      }));
-    }
-  };
+  const list = createIngredientList();
 
   return (
     <div>
       <section className="detalhes-ingredients">
-        { getIngredientsAndMeasure()
-          .map((recipeKey, index) => (
-            <p
-              data-testid={ `${index}-ingredient-name-and-measure` }
-              key={ index }
-            >
-              {`${recipeKey.ingrediente}
-              ${recipeKey.medida ? recipeKey.medida : ''}`}
-            </p>
-          ))}
+        { list
+          .map((ingredient, index) => {
+            const { name, measure } = ingredient;
+            return (
+              <p
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ index }
+              >
+                {`${name}
+                ${measure}`}
+              </p>
+            );
+          })}
       </section>
       {!isDone
       && (
         <Link className="card-details-link" to={ `/${urlByType}/${id}/in-progress` }>
           <button
-            className="detalhes-new-recipe-btn"
-            data-testid="start-recipe-btn"
             type="button"
-            value="Iniciar Receita"
-            onClick={ () => execSetProgress() }
+            data-testid="start-recipe-btn"
           >
-            {isProgress !== id ? 'Iniciar Receita' : 'Continuar Receita'}
+            {!recipesIsInProg ? 'Iniciar Receita' : 'Continuar Receita'}
+
           </button>
         </Link>
       )}
