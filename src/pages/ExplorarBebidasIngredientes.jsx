@@ -28,26 +28,28 @@ function ExplorarBebidasIngredientes() {
   }, []);
 
   return (
-    <div>
+    <main className="bebidas-container">
       <Header />
-      <section className="cards-list">
-        {isFetching
-          ? <h2>Loading...</h2>
-          : ingredientes.map((drink, index) => (
-            index < twelve ? <Card
-              indexId={ index }
-              key={ index }
-              imagePath={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
-              itemName={ drink.strIngredient1 }
-              id=""
-              itemType="bebidas"
-              cardType="ingredient"
-            />
-              : null
-          ))}
+      <section className="bebidas-body">
+        <section className="cards-list">
+          {isFetching
+            ? <h2>Loading...</h2>
+            : ingredientes.map((drink, index) => (
+              index < twelve ? <Card
+                indexId={ index }
+                key={ index }
+                imagePath={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+                itemName={ drink.strIngredient1 }
+                id=""
+                itemType="bebidas"
+                cardType="ingredient"
+              />
+                : null
+            ))}
+        </section>
       </section>
       <Footer />
-    </div>
+    </main>
   );
 }
 

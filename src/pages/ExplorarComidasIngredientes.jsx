@@ -28,24 +28,28 @@ function ExplorarComidasIngredientes() {
   }, []);
 
   return (
-    <div>
+    <main className="comidas-container">
       <Header />
-      {isFetching
-        ? <h2>Loading...</h2>
-        : ingredientes.map((meal, index) => (
-          index < twelve ? <Card
-            indexId={ index }
-            key={ index }
-            imagePath={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
-            itemName={ meal.strIngredient }
-            id=""
-            itemType="comidas"
-            cardType="ingredient"
-          />
-            : null
-        ))}
+      <section className="comidas-body">
+        <section className="cards-list">
+          {isFetching
+            ? <h2>Loading...</h2>
+            : ingredientes.map((meal, index) => (
+              index < twelve ? <Card
+                indexId={ index }
+                key={ index }
+                imagePath={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
+                itemName={ meal.strIngredient }
+                id=""
+                itemType="comidas"
+                cardType="ingredient"
+              />
+                : null
+            ))}
+        </section>
+      </section>
       <Footer />
-    </div>
+    </main>
   );
 }
 

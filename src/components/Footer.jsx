@@ -3,7 +3,7 @@ import drinkIncon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 
-const linkElement = (imgSrc, linkTestId, url, name) => (
+const linkElement = (imgSrc, linkTestId, url) => (
   <a
     href={ url }
     data-testid={ linkTestId }

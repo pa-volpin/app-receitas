@@ -16,7 +16,7 @@ function Card({ imagePath, itemName, id, itemType, indexId, cardType }) {
           <div data-testid={ `${indexId}-card-name` } className="card-info">
             <h4 className="card-title">{itemName}</h4>
           </div>
-          <button type="button" className="card-ver-receita">ver receita</button>
+          {id && <button type="button" className="card-ver-receita">ver receita</button>}
         </Link>
       </div>
     </div>

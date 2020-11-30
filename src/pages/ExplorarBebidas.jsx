@@ -26,25 +26,29 @@ function ExplorarBebidas() {
   }, []);
 
   return (
-    <div>
+    <section className="explorar-container">
       <Header />
-      <Link
-        data-testid="explore-by-ingredient"
-        to="/explorar/bebidas/ingredientes"
-      >
-        Por Ingredientes
-      </Link>
-      {!isFetching
-        ? (
-          <Link
-            data-testid="explore-surprise"
-            to={ `/bebidas/${randomId}` }
-          >
-            Me Surpreenda!
-          </Link>)
-        : null}
+      <section className="explorar-body">
+        <Link
+          data-testid="explore-by-ingredient"
+          to="/explorar/bebidas/ingredientes"
+          className="explorar-bebidas-link"
+        >
+          Por Ingredientes
+        </Link>
+        {!isFetching
+          ? (
+            <Link
+              data-testid="explore-surprise"
+              to={ `/bebidas/${randomId}` }
+              className="explorar-bebidas-link"
+            >
+              Me Surpreenda!
+            </Link>)
+          : null}
+      </section>
       <Footer />
-    </div>
+    </section>
   );
 }
 

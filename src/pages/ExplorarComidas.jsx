@@ -26,31 +26,36 @@ function ExplorarComidas() {
   }, []);
 
   return (
-    <div>
+    <section className="explorar-container">
       <Header />
-      <Link
-        data-testid="explore-by-ingredient"
-        to="/explorar/comidas/ingredientes"
-      >
-        Por Ingredientes
-      </Link>
-      <Link
-        data-testid="explore-by-area"
-        to="/explorar/comidas/area"
-      >
-        Por Local de Origem
-      </Link>
-      {!isFetching
-        ? (
-          <Link
-            data-testid="explore-surprise"
-            to={ `/comidas/${randomId}` }
-          >
-            Me Surpreenda!
-          </Link>)
-        : null}
+      <section className="explorar-body">
+        <Link
+          data-testid="explore-by-ingredient"
+          to="/explorar/comidas/ingredientes"
+          className="explorar-comidas-link"
+        >
+          Por Ingredientes
+        </Link>
+        <Link
+          data-testid="explore-by-area"
+          to="/explorar/comidas/area"
+          className="explorar-comidas-link"
+        >
+          Por Local de Origem
+        </Link>
+        {!isFetching
+          ? (
+            <Link
+              data-testid="explore-surprise"
+              to={ `/comidas/${randomId}` }
+              className="explorar-comidas-link"
+            >
+              Me Surpreenda!
+            </Link>)
+          : null}
+      </section>
       <Footer />
-    </div>
+    </section>
   );
 }
 

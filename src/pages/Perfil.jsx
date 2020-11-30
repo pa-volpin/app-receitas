@@ -24,28 +24,36 @@ function PagePerfil() {
   }, []);
 
   return (
-    <div>
+    <section className="profile-container">
       <Header />
-      <section className="profile-container">
+      <section className="profile-body">
         <section className="profile-email">
           {!isFetching && <h3 data-testid="profile-email">{userEmail}</h3>}
         </section>
         <section className="profile-buttons">
-          <Link to="/receitas-feitas">
-            <button data-testid="profile-done-btn" type="button">Receitas Feitas</button>
+          <Link className="profile-link" to="/receitas-feitas">
+            <button
+              className="profile-btn"
+              data-testid="profile-done-btn"
+              type="button"
+            >
+              Receitas Feitas
+            </button>
           </Link>
-          <Link to="/receitas-favoritas">
+          <Link className="profile-link" to="/receitas-favoritas">
             <button
               data-testid="profile-favorite-btn"
               type="button"
+              className="profile-btn"
             >
               Receitas Favoritas
             </button>
           </Link>
-          <Link to="/">
+          <Link className="profile-link" to="/">
             <button
               data-testid="profile-logout-btn"
               type="button"
+              className="profile-btn-sair"
               onClick={ () => localStorage.clear() }
             >
               Sair
@@ -54,7 +62,7 @@ function PagePerfil() {
         </section>
       </section>
       <Footer />
-    </div>
+    </section>
   );
 }
 

@@ -18,14 +18,28 @@ function Explorar({ requestAPI }) {
   }, []);
 
   return (
-    <div>
+    <section className="explorar-container">
       <Header
         requestAPI={ requestAPI }
       />
-      <Link data-testid="explore-food" to="/explorar/comidas">Explorar Comidas</Link>
-      <Link data-testid="explore-drinks" to="/explorar/bebidas">Explorar Bebidas</Link>
+      <section className="explorar-body">
+        <Link
+          className="explorar-comidas-link"
+          data-testid="explore-food"
+          to="/explorar/comidas"
+        >
+          Explorar Comidas
+        </Link>
+        <Link
+          className="explorar-bebidas-link"
+          data-testid="explore-drinks"
+          to="/explorar/bebidas"
+        >
+          Explorar Bebidas
+        </Link>
+      </section>
       <Footer />
-    </div>
+    </section>
   );
 }
 
