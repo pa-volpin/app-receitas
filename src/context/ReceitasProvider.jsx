@@ -24,6 +24,10 @@ function ReceitasProvider({ children }) {
     meals: {},
   });
 
+  const keyProps = { meal: 'Meal', drink: 'Drink' };
+  const keyURL = { meal: 'comidas', drink: 'bebidas' };
+  const keyObj = { meal: 'meals', drink: 'drinks' };
+
   function renderEmail(param) {
     return (
       <div>
@@ -75,6 +79,9 @@ function ReceitasProvider({ children }) {
     setRecipesDone,
     recipesInProgress,
     setRecipesInProgress,
+    keyProps,
+    keyObj,
+    keyURL,
     renderEmail,
   };
 

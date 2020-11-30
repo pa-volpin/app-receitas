@@ -1,9 +1,8 @@
 export { default as Login } from './Login';
 export { default as Comidas } from './Comidas';
-export { default as ComidaDetalhada } from './ComidaDetalhada';
+export { default as ReceitaDetalhada } from './ReceitaDetalhada';
 export { default as ComidaEmProgresso } from './ComidaEmProgresso';
 export { default as Bebidas } from './Bebidas';
-export { default as BebidaDetalhada } from './BebidaDetalhada';
 export { default as BebidaEmProgresso } from './BebidaEmProgresso';
 export { default as ReceitasFeitas } from './ReceitasFeitas';
 export { default as ReceitasFavoritas } from './ReceitasFavoritas';
