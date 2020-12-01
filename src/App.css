@@ -3,6 +3,29 @@ h1, h2, h3, h4 {
   padding: 0;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #defaee; 
+  box-shadow: inset 0 0 5px #558c8cff; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #558c8cff; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #558c8cff; 
+}
+
 .header-container {
   background-image: linear-gradient(0deg, #ff901dff 50%, #ff6d3aff 100%, #ed5729ff 100%);
   border-bottom: 2px solid #ff6e3ab3;
@@ -56,7 +79,7 @@ h1, h2, h3, h4 {
   border: none;
   border-bottom: 1px solid #2b7869ff;
   border-radius: 20px;
-  box-shadow: 2px 2px 3px #558c8cff;
+  box-shadow: 2px 2px 3px #558c8cb3;
   color: #eff7ffff;
   font-size: 14px;
   height: 25px;
@@ -64,6 +87,10 @@ h1, h2, h3, h4 {
   outline: none;
   padding: 4px 18px;
   width: 80%;
+ }
+
+ .searchBar-input:hover {
+  box-shadow: 2px 2px 5px #2b7869ff;
  }
 
  .searchBar-input::placeholder {
@@ -93,6 +120,10 @@ h1, h2, h3, h4 {
   -1px 0px #ff6d3aff,
   -1px 1px #ff6d3aff;
   width: 130px;
+}
+
+.searchBar-radio:hover {
+  box-shadow: 2px 2px 5px #2b7869ff;
 }
 
 .search-label {
@@ -139,6 +170,10 @@ h1, h2, h3, h4 {
   -1px 0px #ff6d3aff,
   -1px 1px #ff6d3aff;
   width: 130px;
+}
+
+.searchBar-buscar:hover {
+  box-shadow: 2px 2px 5px #2b7869ff;
 }
 
 .searchBar-buscar:disabled, .searchBar-buscar[disabled] {

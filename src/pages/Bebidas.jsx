@@ -45,9 +45,10 @@ function Bebidas({ history }) {
             }
             if (response) {
               setRecipesDrinks(response);
+            } else {
+              // eslint-disable-next-line no-alert
+              alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
             }
-            // eslint-disable-next-line no-alert
-            alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
           } }
         />
       </header>

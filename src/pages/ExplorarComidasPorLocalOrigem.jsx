@@ -29,7 +29,6 @@ function ExplorarComidasPorLocalOrigem() {
         : await fetchFood('filterByArea', filterArea);
       const areasOption = await fetchFood('byArea', '');
       setAreas(areasOption);
-      setIsFetching(false);
       setRecipesMeals(response);
       setIsFetching(false);
     };

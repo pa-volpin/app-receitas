@@ -40,18 +40,20 @@ function Recomended({ itemType }) {
       >
         <div className="recomended-datails">
           <Link className="recomended-details-link" to={ `/${itemType}/${id}` }>
+            <div className="recomended-img-body">
+              <img
+                data-testid={ `${indexId}-card-img` }
+                alt="recipe cover"
+                className="recomended-image"
+                src={ imagePath }
+              />
+            </div>
             <div
               data-testid={ `${indexId}-recomendation-title` }
               className="recomended-info"
             >
               <h4 className="recomended-title">{itemName}</h4>
             </div>
-            <img
-              data-testid={ `${indexId}-card-img` }
-              alt="recipe cover"
-              className="recomended-image"
-              src={ imagePath }
-            />
           </Link>
         </div>
       </div>

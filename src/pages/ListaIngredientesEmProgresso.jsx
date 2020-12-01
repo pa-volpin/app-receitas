@@ -5,7 +5,8 @@ import ReceitasContext from '../context/ReceitasContext';
 
 function ListaIngredientesEmProgresso({ recipe, type }) {
   const { setRecipesDone,
-    recipesInProgress, setRecipesInProgress } = useContext(ReceitasContext);
+    recipesInProgress, setRecipesInProgress,
+    isFetching, setIsFetching } = useContext(ReceitasContext);
 
   // Configuração de chaves e id conforme tipo da receita
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
@@ -47,8 +48,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 
   // Ao montar o componente
   useEffect(() => {
+    setIsFetching(true);
     if (!recipesIsInProg) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
       setRecipesInProgress((prevState) => ({
         ...prevState,
         [keyByType]: {
@@ -57,6 +58,9 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
         },
       }));
     }
+    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
+    setIsFetching(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Ao finalizar receita atualiza o estado global e o local storage
@@ -100,7 +104,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
       {list ? (
         <div>
           <section className="detalhes-ingredients">
-            {list
+            {!isFetching && list
               .map((ingredient, index) => {
                 const { name, measure, checked } = ingredient;
                 return (
@@ -126,7 +130,6 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                           key={ index }
                           type="checkbox"
                           onClick={ ({ target }) => check({ target }) }
-                          checked
                           value={ name }
                         />
                       )}
@@ -158,6 +161,6 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 export default ListaIngredientesEmProgresso;
 
 ListaIngredientesEmProgresso.propTypes = {
-  recipe: propTypes.objectOf(propTypes.object).isRequired,
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
 };

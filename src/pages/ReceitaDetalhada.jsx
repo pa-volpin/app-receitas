@@ -3,10 +3,9 @@ import propTypes from 'prop-types';
 import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
-import shareIcon from '../images/shareIcon.svg';
-import heartIcon from '../images/whiteHeartIcon.svg';
 import fetchFood from '../servicesAPI/foodAPI';
 import fetchDrink from '../servicesAPI/drinkAPI';
+import FavoriteShareButtons from '../components/FavoriteShareButtons';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
@@ -32,7 +31,7 @@ function ReceitaDetalhada({ match }) {
       {isFetching
         ? <h2>Loading...</h2>
         : (
-          <div>
+          <section>
             <header className="detalhes-header">
               <section className="detalhes-img">
                 <section className="detalhes-img-border">
@@ -44,59 +43,48 @@ function ReceitaDetalhada({ match }) {
                 </section>
               </section>
               <section className="detalhes-bar">
-                <section className="detalhes-titles">
-                  <h3 data-testid="recipe-title" className="detalhes-title">
-                    { recipe[`str${keyProps[type]}`] }
-                  </h3>
-                  <h4 data-testid="recipe-category" className="detalhes-subtitle">
-                    { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
-                  </h4>
-                </section>
-                <section className="detalhes-buttons">
-                  <button
-                    data-testid="share-btn"
-                    type="button"
-                    className="detalhes-share"
-                  >
-                    <img src={ shareIcon } alt="compartilhe" />
-                  </button>
-                  <button
-                    data-testid="favorite-btn"
-                    type="button"
-                    className="detalhes-fav"
-                  >
-                    <img src={ heartIcon } alt="compartilhe" />
-                  </button>
-                </section>
+                <h3 data-testid="recipe-title" className="detalhes-title">
+                  { recipe[`str${keyProps[type]}`] }
+                </h3>
+                <h4 data-testid="recipe-category" className="detalhes-subtitle">
+                  { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
+                </h4>
+                <FavoriteShareButtons recipe={ recipe } type={ type } />
               </section>
             </header>
             <article className="detalhes-article">
               <IngredientsList recipe={ recipe } type={ type } />
-              <section className="detalhes-instructions">
-                <p data-testid="instructions">{recipe.strInstructions}</p>
-              </section>
-              {type === 'meal'
-              && (
-                <section className="detalhes-video">
-                  <iframe
-                    title={ `Como Fazer ${recipe[`str${keyProps[type]}`]}` }
-                    data-testid="video"
-                    width="560"
-                    height="315"
-                    src={ !recipe.strYoutube
-                      ? <h2>Loading...</h2>
-                      : recipe.strYoutube.replace('watch?v=', 'embed/') }
-                    frameBorder="0"
-                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+              <hr />
+              <section className="detalhes-instructions-container">
+                <h4 className="detalhes-titles">Instruções de preparo</h4>
+                <section className="detalhes-instructions">
+                  <p data-testid="instructions">{recipe.strInstructions}</p>
+                  {type === 'meal' && (
+                    <section className="detalhes-video">
+                      <iframe
+                        title={ `Como Fazer ${recipe[`str${keyProps[type]}`]}` }
+                        data-testid="video"
+                        width="560"
+                        height="315"
+                        src={ !recipe.strYoutube
+                          ? <h2>Loading...</h2>
+                          : recipe.strYoutube.replace('watch?v=', 'embed/') }
+                        frameBorder="0"
+                        allow="accelerometer;
+                          encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </section>
+                  )}
                 </section>
-              )}
+              </section>
+              <hr />
+              <h4 className="detalhes-titles">Recomendações de acompanhamento</h4>
               <section className="detalhes-list-recomended">
                 <Recomended itemType={ type === 'meal' ? 'bebidas' : 'comidas' } />
               </section>
             </article>
-          </div>
+          </section>
         )}
     </main>
   );
