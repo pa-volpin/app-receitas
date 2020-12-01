@@ -51,13 +51,11 @@ function FavoriteButton({ recipe, type }) {
           {
             id,
             type: type === 'meal' ? 'comida' : 'bebida',
-            area: recipe.strArea,
+            area: recipe.strArea || '',
             category: recipe.strCategory,
             alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
             name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
             image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
-            doneDate: new Date(),
-            tags: recipe.strTags,
           },
           ...prevState.slice(favoriteIndex + 1),
         ]);
