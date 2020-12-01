@@ -31,15 +31,6 @@ function PagePerfil() {
           {!isFetching && <h3 data-testid="profile-email">{userEmail}</h3>}
         </section>
         <section className="profile-buttons">
-          <Link className="profile-link" to="/receitas-feitas">
-            <button
-              className="profile-btn"
-              data-testid="profile-done-btn"
-              type="button"
-            >
-              Receitas Feitas
-            </button>
-          </Link>
           <Link className="profile-link" to="/receitas-favoritas">
             <button
               data-testid="profile-favorite-btn"
@@ -47,6 +38,15 @@ function PagePerfil() {
               className="profile-btn"
             >
               Receitas Favoritas
+            </button>
+          </Link>
+          <Link className="profile-link" to="/receitas-feitas">
+            <button
+              className="profile-btn"
+              data-testid="profile-done-btn"
+              type="button"
+            >
+              Receitas Feitas
             </button>
           </Link>
           <Link className="profile-link" to="/">
