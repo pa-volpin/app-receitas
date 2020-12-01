@@ -13,18 +13,14 @@ function FavoriteButton({ recipe, type }) {
   const [copied, setClipboard] = CopyToClipBoard(textTime);
 
   // Configuração de chaves e id conforme tipo da receita
-  const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
   // const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
+  const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
-  // Recebe as receitas em progresso do local storage ou do estado global
-  // const favoriteRecipesLS = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  // const recipesInFavorite = (favoriteRecipesLS !== null)
-  //   ? favoriteRecipesLS : favoriteRecipes;
-
-  // Verificação se a receita está em progresso e se está feita
-  // const isDone = recipesDone.find((recipeId) => recipeId === id);
   const [isFavorite, setIsFavorite] = useState('');
+
+  // Ao clicar no coração
+  const checkFavorite = () => setIsFavorite((prevState) => !prevState);
 
   // Ao montar
   useEffect(() => {
@@ -39,10 +35,8 @@ function FavoriteButton({ recipe, type }) {
 
     setIsFavorite(recipeIsAlreadyFavorite);
     setIsFetching(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Ao clicar no coração
-  const checkFavorite = () => setIsFavorite((prevState) => !prevState);
 
   // Atualiza o estado global que o estado local mudar
   useEffect(() => {
@@ -105,6 +99,7 @@ function FavoriteButton({ recipe, type }) {
           type="button"
           className="detalhes-fav"
           onClick={ checkFavorite }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         >
           <img
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
@@ -116,9 +111,9 @@ function FavoriteButton({ recipe, type }) {
   );
 }
 
-export default FavoriteButton;
-
 FavoriteButton.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
 };
+
+export default FavoriteButton;
