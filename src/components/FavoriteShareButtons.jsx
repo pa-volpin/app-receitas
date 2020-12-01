@@ -13,7 +13,6 @@ function FavoriteButton({ recipe, type }) {
   const [copied, setClipboard] = CopyToClipBoard(textTime);
 
   // Configuração de chaves e id conforme tipo da receita
-  // const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
@@ -38,7 +37,7 @@ function FavoriteButton({ recipe, type }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Atualiza o estado global que o estado local mudar
+  // Atualiza quando o estado local mudar (isFavorite)
   useEffect(() => {
     if (isFavorite) {
       setFavoriteRecipes((prevState) => {
