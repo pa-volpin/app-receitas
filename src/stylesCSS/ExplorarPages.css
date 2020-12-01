@@ -46,3 +46,19 @@
 .explorar-comidas-link:hover, .explorar-bebidas-link:hover {
   box-shadow: 1px 2px 4px #2b7869ff;
 }
+
+.comidas-origin {
+  margin: 20px 0;
+}
+
+.comidas-select {
+  background-color: #eff7ffff;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 2px 2px 3px #558c8cb3;
+  color: #002e24ff;
+  font-size: 14px;
+  outline: none;
+  padding: 10px 12px;
+  width: 180px;
+}

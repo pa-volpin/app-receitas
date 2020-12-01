@@ -1,15 +1,28 @@
 .detalhes-main {
-  /* border: 3px solid green; */
+  background: radial-gradient(circle, #defaee 50%, #c5dfd3 100%);
+  background-size: 120vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 /* HEADER */
 .detalhes-header {
-  align-items: center;
   /* border: 3px solid orange; */
+  background-image: linear-gradient(0deg, #ff901dff 50%, #ff6d3aff 100%, #ed5729ff 100%);
+  border-bottom: 2px solid #ff6e3ab3;
+  color: #eff7ffff;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  height: 250px;
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 0;
+  text-shadow: 
+  /* horizontal-shadow vertical-shadow blur-radius color; */
+  -2px 0px #ff6d3aff,
+  -2px 2px #ff6d3aff;
+  top: 0px;
+  width: 100%;
 }
 
 .detalhes-img {
@@ -20,7 +33,8 @@
 
 .detalhes-img-border {
   /* border: 1px solid rebeccapurple; */
-  max-height: 200px;
+  border-radius: 0 150px 150px 0;
+  max-height: 250px;
   overflow: hidden;
 }
 
@@ -34,38 +48,44 @@
 .detalhes-bar {
   /* border: 1px solid firebrick; */
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  width: 600px;
+  width: 50%;
 }
 
 .detalhes-title {
-  font-size: 30px;
+  font-size: 100px;
   margin-top: 5px;
 }
 
 .detalhes-subtitle {
-  color: gray;
-  font-size: 18px;
+  color: #eff7ffff;
+  font-size: 40px;
   margin-top: 15px;
 }
 
 .detalhes-buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  padding-bottom: 10px;
+  width: 35%;
 }
 
 .detalhes-share, .detalhes-fav {
   border: none;
   background: none;
   cursor: pointer;
-  margin: 0 5px;
+  margin-right: 80px;
   outline: none;
 }
 
 /* ARTICLE */
 .detalhes-article {
-  border: 1px solid red;
-  margin-bottom: 20px;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 80px;
 }
 
 .detalhes-ingredients{

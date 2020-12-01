@@ -1,4 +1,12 @@
 @media only screen and (max-width: 360px) {
+  .header-icons {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    justify-content: space-between;
+    padding: 10px 20px 0;
+  }
+
   .comidas-body, .bebidas-body {
     align-items: center;
     box-sizing: border-box;

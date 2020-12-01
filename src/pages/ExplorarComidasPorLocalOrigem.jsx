@@ -38,46 +38,49 @@ function ExplorarComidasPorLocalOrigem() {
   }, [filterArea]);
 
   return (
-    <div>
+    <main className="comidas-container">
       <Header />
-      <section className="origem-select">
-        <select
-          onChange={ ({ target }) => setFilterArea(target.value) }
-          data-testid="explore-by-area-dropdown"
-        >
-          <option value="Pesquise por Area">Pesquise por Area</option>
-          <option data-testid="All-option" value="All">All</option>
+      <section className="comidas-body">
+        <section className="comidas-origin">
+          <select
+            onChange={ ({ target }) => setFilterArea(target.value) }
+            data-testid="explore-by-area-dropdown"
+            className="comidas-select"
+          >
+            <option value="Pesquise por Area">Pesquise por Area</option>
+            <option data-testid="All-option" value="All">All</option>
+            {isFetching
+              ? ''
+              : areas.map((area, idx) => (
+                <option
+                  data-testid={ `${area.strArea}-option` }
+                  key={ idx }
+                  value={ area.strArea }
+                >
+                  {area.strArea}
+                </option>
+              ))}
+          </select>
+        </section>
+        <section className="cards-list">
           {isFetching
-            ? ''
-            : areas.map((area, idx) => (
-              <option
-                data-testid={ `${area.strArea}-option` }
-                key={ idx }
-                value={ area.strArea }
-              >
-                {area.strArea}
-              </option>
+            ? <h2>Loading...</h2>
+            : recipesMeals.map((meal, index) => (
+              index < twelve ? <Card
+                indexId={ index }
+                key={ index }
+                imagePath={ meal.strMealThumb }
+                itemName={ meal.strMeal }
+                id={ meal.idMeal }
+                itemType="comidas"
+                cardType="recipe"
+              />
+                : null
             ))}
-        </select>
-      </section>
-      <section className="cards-list">
-        {isFetching
-          ? <h2>Loading...</h2>
-          : recipesMeals.map((meal, index) => (
-            index < twelve ? <Card
-              indexId={ index }
-              key={ index }
-              imagePath={ meal.strMealThumb }
-              itemName={ meal.strMeal }
-              id={ meal.idMeal }
-              itemType="comidas"
-              cardType="recipe"
-            />
-              : null
-          ))}
+        </section>
       </section>
       <Footer />
-    </div>
+    </main>
   );
 }
 

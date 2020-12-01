@@ -28,11 +28,11 @@ function ReceitaDetalhada({ match }) {
   }, []);
 
   return (
-    <div>
+    <main className="detalhes-main">
       {isFetching
         ? <h2>Loading...</h2>
         : (
-          <main className="detalhes-main">
+          <div>
             <header className="detalhes-header">
               <section className="detalhes-img">
                 <section className="detalhes-img-border">
@@ -96,9 +96,9 @@ function ReceitaDetalhada({ match }) {
                 <Recomended itemType={ type === 'meal' ? 'bebidas' : 'comidas' } />
               </section>
             </article>
-          </main>
+          </div>
         )}
-    </div>
+    </main>
   );
 }
 
