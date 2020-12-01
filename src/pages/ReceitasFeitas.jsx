@@ -6,17 +6,7 @@ import ReceitasContext from '../context/ReceitasContext';
 function ReceitasFeitas() {
   const { isFetching, setIsFetching, setTitleHeader,
     setDisabledSearchIcon, setShowSearchBar } = useContext(ReceitasContext);
-  const [feitas, setFeitas] = useState([{
-    id: 'id-da-receita',
-    type: 'comida-ou-bebida',
-    area: 'area-da-receita-ou-texto-vazio',
-    category: 'categoria-da-receita-ou-texto-vazio',
-    alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-    name: 'nome-da-receita',
-    image: 'imagem-da-receita',
-    doneDate: 'quando-a-receita-foi-concluida',
-    tags: ['array-de-tags-da-receita', 'ou-array-vazio'],
-  }]);
+  const [feitas, setFeitas] = useState([]);
 
   useEffect(() => {
     setTitleHeader('Receitas Feitas');
@@ -26,10 +16,10 @@ function ReceitasFeitas() {
     const localStorageFeitas = localStorage.getItem('doneRecipes');
     console.log(localStorageFeitas);
     if (localStorageFeitas !== null) {
-      const { doneRecipes } = JSON.parse(localStorageFeitas);
+      const doneRecipes = JSON.parse(localStorageFeitas);
+      setIsFetching(false);
       setFeitas(doneRecipes);
     }
-    setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

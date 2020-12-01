@@ -6,7 +6,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import CopyToClipBoard from './CopyToClipBoard';
 
-function FavoriteButton({ recipe, type }) {
+function FavoriteButton({ recipe, type, testId = '' }) {
   const { favoriteRecipes, setFavoriteRecipes,
     isFetching, setIsFetching } = useContext(ReceitasContext);
   const textTime = 3000;
@@ -81,7 +81,7 @@ function FavoriteButton({ recipe, type }) {
   return (
     <section className="detalhes-buttons">
       <button
-        data-testid="share-btn"
+        data-testid={ testId === '' ? 'share-btn' : `${testId}-horizontal-share-btn` }
         type="button"
         className="detalhes-share"
         onClick={ () => setClipboard(`/${urlByType}/${id}`) }
@@ -92,7 +92,8 @@ function FavoriteButton({ recipe, type }) {
       {!isFetching
       && (
         <button
-          data-testid="favorite-btn"
+          data-testid={ testId === ''
+            ? 'favorite-btn' : `${testId}-horizontal-favorite-btn` }
           type="button"
           className="detalhes-fav"
           onClick={ checkFavorite }
@@ -111,6 +112,7 @@ function FavoriteButton({ recipe, type }) {
 FavoriteButton.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
+  testId: propTypes.string.isRequired,
 };
 
 export default FavoriteButton;
