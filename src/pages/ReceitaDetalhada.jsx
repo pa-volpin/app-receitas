@@ -3,23 +3,15 @@ import propTypes from 'prop-types';
 import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fetchFood from '../servicesAPI/foodAPI';
 import fetchDrink from '../servicesAPI/drinkAPI';
-import CopyToClipBoard from '../components/CopyToClipBoard';
-// import FavoriteButton from '../components/FavoriteButton';
+import FavoriteShareButtons from '../components/FavoriteShareButtons';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
   const type = (match.path.match('comidas')) ? 'meal' : 'drink';
-  const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
   const [recipe, setRecipe] = useState([]);
   const { id } = match.params;
-  const textTime = 3000;
-  const [copied, setClipboard] = CopyToClipBoard(textTime);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     setIsFetching(true);
@@ -33,37 +25,6 @@ function ReceitaDetalhada({ match }) {
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (localStorage.favoriteRecipes) {
-      const favoriteRecipes = JSON.parse(localStorage.favoriteRecipes);
-      favoriteRecipes.forEach((favorite) => {
-        if (favorite.id === id) {
-          setIsFavorite(true);
-        }
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const checkFavorite = () => {
-    setIsFavorite(!isFavorite);
-    if (!isFavorite) {
-      localStorage.favoriteRecipes = JSON.stringify([{
-        id,
-        type: type === 'meal' ? 'comida' : 'bebida',
-        area: recipe.strArea,
-        category: recipe.strCategory,
-        alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
-        name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
-        image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
-        doneDate: new Date(),
-        tags: [...recipe.strTags],
-      }]);
-    } else {
-      localStorage.removeItem('favoriteRecipes');
-    }
-  };
 
   return (
     <div>
@@ -90,28 +51,7 @@ function ReceitaDetalhada({ match }) {
                     { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
                   </h4>
                 </section>
-                <section className="detalhes-buttons">
-                  <button
-                    data-testid="share-btn"
-                    type="button"
-                    className="detalhes-share"
-                    onClick={ () => setClipboard(`/${urlByType}/${id}`) }
-                  >
-                    <img src={ shareIcon } alt="compartilhe" />
-                    { copied ? <p>Link copiado!</p> : true }
-                  </button>
-                  <button
-                    data-testid="favorite-btn"
-                    type="button"
-                    className="detalhes-fav"
-                    onClick={ () => checkFavorite() }
-                  >
-                    <img
-                      src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-                      alt="Favorite"
-                    />
-                  </button>
-                </section>
+                <FavoriteShareButtons recipe={ recipe } type={ type } />
               </section>
             </header>
             <article className="detalhes-article">
