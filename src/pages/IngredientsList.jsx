@@ -68,9 +68,9 @@ function IngredientsList({ recipe, type }) {
           <button
             type="button"
             data-testid="start-recipe-btn"
+            className="detalhes-new-recipe-btn"
           >
             {!recipesIsInProg ? 'Iniciar Receita' : 'Continuar Receita'}
-
           </button>
         </Link>
       )}
@@ -81,6 +81,6 @@ function IngredientsList({ recipe, type }) {
 export default IngredientsList;
 
 IngredientsList.propTypes = {
-  recipe: propTypes.objectOf(propTypes.object).isRequired,
+  recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
 };

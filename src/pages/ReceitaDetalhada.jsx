@@ -3,10 +3,9 @@ import propTypes from 'prop-types';
 import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
 import Recomended from '../components/Recomended';
-import shareIcon from '../images/shareIcon.svg';
-import heartIcon from '../images/whiteHeartIcon.svg';
 import fetchFood from '../servicesAPI/foodAPI';
 import fetchDrink from '../servicesAPI/drinkAPI';
+import FavoriteShareButtons from '../components/FavoriteShareButtons';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
@@ -52,22 +51,7 @@ function ReceitaDetalhada({ match }) {
                     { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
                   </h4>
                 </section>
-                <section className="detalhes-buttons">
-                  <button
-                    data-testid="share-btn"
-                    type="button"
-                    className="detalhes-share"
-                  >
-                    <img src={ shareIcon } alt="compartilhe" />
-                  </button>
-                  <button
-                    data-testid="favorite-btn"
-                    type="button"
-                    className="detalhes-fav"
-                  >
-                    <img src={ heartIcon } alt="compartilhe" />
-                  </button>
-                </section>
+                <FavoriteShareButtons recipe={ recipe } type={ type } />
               </section>
             </header>
             <article className="detalhes-article">
