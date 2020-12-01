@@ -6,15 +6,7 @@ import ReceitasContext from '../context/ReceitasContext';
 function ReceitasFavoritas() {
   const { isFetching, setIsFetching, setTitleHeader,
     setDisabledSearchIcon, setShowSearchBar } = useContext(ReceitasContext);
-  const [favoritas, setFavoritas] = useState([{
-    id: 'id-da-receita',
-    type: 'comidas-ou-bebidas',
-    area: 'area-da-receita-ou-texto-vazio',
-    category: 'categoria-da-receita-ou-texto-vazio',
-    alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-    name: 'nome-da-receita',
-    image: 'imagem-da-receita',
-  }]);
+  const [favoritas, setFavoritas] = useState([]);
 
   useEffect(() => {
     setTitleHeader('Receitas Favoritas');
@@ -22,12 +14,12 @@ function ReceitasFavoritas() {
     setShowSearchBar(false);
     setIsFetching(true);
     const localStorageFavoritas = localStorage.getItem('favoriteRecipes');
-    console.log(localStorageFavoritas);
-    if (localStorageFavoritas !== null) {
-      const { favoriteRecipes } = JSON.parse(localStorageFavoritas);
+    if (localStorageFavoritas) {
+      const favoriteRecipes = JSON.parse(localStorageFavoritas);
+      console.log(favoriteRecipes);
       setFavoritas(favoriteRecipes);
+      setIsFetching(false);
     }
-    setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -57,7 +49,6 @@ function ReceitasFavoritas() {
                 category={ favorita.category }
                 alcoholic={ favorita.alcoholicOrNot }
                 titlePage="Receitas Favoritas"
-                // {tags.map(data-testid={ `${indexId}-${tagName}-horizontal-tag` })}
               />
             ))
           )}

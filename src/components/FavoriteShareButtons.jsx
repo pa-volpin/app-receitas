@@ -6,7 +6,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import CopyToClipBoard from './CopyToClipBoard';
 
-function FavoriteButton({ recipe, type }) {
+function FavoriteButton({ recipe, type, testId = '' }) {
   const { favoriteRecipes, setFavoriteRecipes,
     isFetching, setIsFetching } = useContext(ReceitasContext);
   const textTime = 3000;
@@ -14,17 +14,12 @@ function FavoriteButton({ recipe, type }) {
 
   // Configuração de chaves e id conforme tipo da receita
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
-  // const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
-  // Recebe as receitas em progresso do local storage ou do estado global
-  // const favoriteRecipesLS = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  // const recipesInFavorite = (favoriteRecipesLS !== null)
-  //   ? favoriteRecipesLS : favoriteRecipes;
-
-  // Verificação se a receita está em progresso e se está feita
-  // const isDone = recipesDone.find((recipeId) => recipeId === id);
   const [isFavorite, setIsFavorite] = useState('');
+
+  // Ao clicar no coração
+  const checkFavorite = () => setIsFavorite((prevState) => !prevState);
 
   // Ao montar
   useEffect(() => {
@@ -39,12 +34,10 @@ function FavoriteButton({ recipe, type }) {
 
     setIsFavorite(recipeIsAlreadyFavorite);
     setIsFetching(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Ao clicar no coração
-  const checkFavorite = () => setIsFavorite((prevState) => !prevState);
-
-  // Atualiza o estado global que o estado local mudar
+  // Atualiza quando o estado local mudar (isFavorite)
   useEffect(() => {
     if (isFavorite) {
       setFavoriteRecipes((prevState) => {
@@ -57,13 +50,11 @@ function FavoriteButton({ recipe, type }) {
           {
             id,
             type: type === 'meal' ? 'comida' : 'bebida',
-            area: recipe.strArea,
+            area: recipe.strArea || '',
             category: recipe.strCategory,
             alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
             name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
             image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
-            doneDate: new Date(),
-            tags: recipe.strTags,
           },
           ...prevState.slice(favoriteIndex + 1),
         ]);
@@ -92,10 +83,12 @@ function FavoriteButton({ recipe, type }) {
       {!isFetching
       && (
         <button
-          data-testid="favorite-btn"
+          data-testid={ testId === ''
+            ? 'favorite-btn' : `${testId}-horizontal-favorite-btn` }
           type="button"
           className="detalhes-fav"
           onClick={ checkFavorite }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         >
           <img
             src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
@@ -116,9 +109,10 @@ function FavoriteButton({ recipe, type }) {
   );
 }
 
-export default FavoriteButton;
-
 FavoriteButton.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
+  testId: propTypes.string.isRequired,
 };
+
+export default FavoriteButton;

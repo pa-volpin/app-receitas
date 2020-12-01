@@ -14,13 +14,15 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
             data-testid={ `${indexId}-horizontal-share-btn` }
             type="button"
             className="card-share"
+            src={ shareIcon }
           >
             <img src={ shareIcon } alt="compartilhe" />
           </button>
           <button
-            data-testid="favorite-btn"
+            data-testid={ `${indexId}-${cardType}-favorite-btn` }
             type="button"
             className="card-fav"
+            src={ heartIcon }
           >
             <img src={ heartIcon } alt="compartilhe" />
           </button>
@@ -33,6 +35,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
           data-testid={ `${indexId}-horizontal-share-btn` }
           type="button"
           className="card-share"
+          src={ shareIcon }
         >
           <img src={ shareIcon } alt="compartilhe" />
         </button>
@@ -44,7 +47,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
     if (origin || category) {
       return (
         <span data-testid={ `${indexId}-${cardType}-top-text` }>
-          {`${origin} -`}
+          {`${origin} - `}
           {`${category}`}
         </span>
       );
@@ -80,7 +83,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
             </div>
           </div>
           <img
-            data-testid={ `${indexId}-${cardType}-img` }
+            data-testid={ `${indexId}-${cardType}-image` }
             alt="recipe cover"
             className="card-image"
             src={ imagePath }

@@ -8,6 +8,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
     recipesInProgress, setRecipesInProgress,
     isFetching, setIsFetching } = useContext(ReceitasContext);
 
+  // const [isCheckBox, setIsCheckBox] = useState(false);
+
   // Configuração de chaves e id conforme tipo da receita
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
   const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
@@ -72,25 +74,32 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 
   // Ao dar check atualiza o estado global e o local storage
   const check = ({ target }) => {
+    console.log(target);
+    console.log(target.value);
     const { value, checked } = target;
+    const isChecked = !(checked === false);
+    console.log(isChecked);
+    console.log(checked);
     const zero = 0;
     setRecipesInProgress((prevState) => {
-      const objIngThatContainsIngName = prevState[keyByType][id]
-        .find((ingredient) => ingredient.name === value);
+      if (prevState) {
+        const objIngThatContainsIngName = prevState[keyByType][id]
+          .find((ingredient) => ingredient.name === value);
 
-      const ingredientIndex = prevState[keyByType][id]
-        .indexOf(objIngThatContainsIngName);
-      return ({
-        ...prevState,
-        [keyByType]: {
-          ...prevState[keyByType],
-          [id]: [
-            ...prevState[keyByType][id].slice(zero, ingredientIndex),
-            { ...prevState[keyByType][id][ingredientIndex], checked },
-            ...prevState[keyByType][id].slice(ingredientIndex + 1),
-          ],
-        },
-      });
+        const ingredientIndex = prevState[keyByType][id]
+          .indexOf(objIngThatContainsIngName);
+        return ({
+          ...prevState,
+          [keyByType]: {
+            ...prevState[keyByType],
+            [id]: [
+              ...prevState[keyByType][id].slice(zero, ingredientIndex),
+              { ...prevState[keyByType][id][ingredientIndex], checked: isChecked },
+              ...prevState[keyByType][id].slice(ingredientIndex + 1),
+            ],
+          },
+        });
+      }
     });
     localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
   };
@@ -113,26 +122,14 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                     htmlFor={ index }
                     data-testid={ `${index}-ingredient-step` }
                   >
-                    {checked === 'checked'
-                      ? (
-                        <input
-                          id={ index }
-                          key={ index }
-                          type="checkbox"
-                          onClick={ ({ target }) => check({ target }) }
-                          checked
-                          value={ name }
-                        />
-                      )
-                      : (
-                        <input
-                          id={ index }
-                          key={ index }
-                          type="checkbox"
-                          onClick={ ({ target }) => check({ target }) }
-                          value={ name }
-                        />
-                      )}
+                    <input
+                      id={ index }
+                      key={ index }
+                      type="checkbox"
+                      onChange={ ({ target }) => check({ target }, index) }
+                      checked={ checked }
+                      value={ name }
+                    />
                     {`${name} ${measure}`}
                   </label>
                 );
