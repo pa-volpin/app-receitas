@@ -20,7 +20,7 @@ function SearchBar({ requestAPI }) {
               id="ingrediente"
               className="radio"
             />
-            <span className="checkmark" />
+            {/* <span className="checkmark" /> */}
             Ingrediente
           </label>
         </section>
@@ -34,7 +34,7 @@ function SearchBar({ requestAPI }) {
               id="first-letter"
               className="radio"
             />
-            <span className="checkmark" />
+            {/* <span className="checkmark" /> */}
             Primeira letra
           </label>
         </section>
@@ -48,7 +48,7 @@ function SearchBar({ requestAPI }) {
               id="name"
               className="radio"
             />
-            <span className="checkmark" />
+            {/* <span className="checkmark" /> */}
             Nome
           </label>
         </section>

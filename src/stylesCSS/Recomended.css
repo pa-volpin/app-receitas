@@ -57,3 +57,22 @@
   font-size: 14px;
   margin: 10px 0 0;
 }
+
+/* ::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #defaee; 
+  box-shadow: inset 0 0 5px #558c8cff; 
+  border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #558c8cff; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #558c8cff; 
+} */

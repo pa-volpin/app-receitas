@@ -3,29 +3,6 @@ h1, h2, h3, h4 {
   padding: 0;
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 15px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #defaee; 
-  box-shadow: inset 0 0 5px #558c8cff; 
-  border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #558c8cff; 
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #558c8cff; 
-}
-
 .header-container {
   background-image: linear-gradient(0deg, #ff901dff 50%, #ff6d3aff 100%, #ed5729ff 100%);
   border-bottom: 2px solid #ff6e3ab3;
@@ -133,9 +110,9 @@ h1, h2, h3, h4 {
   flex-direction: row;
  }
 
-.radio {
+/* .radio {
   display: none;
-}
+} */
 
 .checkmark {
   background-color: #eff7ffff;

@@ -88,9 +88,9 @@
   flex-direction: row;
   }
 
-  .radio {
+  /* .radio {
   display: none;
-  }
+  } */
 
   .checkmark {
   background-color: #eff7ffff;
