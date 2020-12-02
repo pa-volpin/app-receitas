@@ -47,24 +47,25 @@ function IngredientsList({ recipe, type }) {
 
   return (
     <div>
+      <h4 className="detalhes-ingredients-title">Ingredientes</h4>
       <section className="detalhes-ingredients">
         { list
           .map((ingredient, index) => {
             const { name, measure } = ingredient;
             return (
-              <p
+              <span
                 data-testid={ `${index}-ingredient-name-and-measure` }
                 key={ index }
+                className="ingredient"
               >
-                {`${name}
-                ${measure}`}
-              </p>
+                {`${name}${' -'}${'- '}${measure}`}
+              </span>
             );
           })}
       </section>
       {!isDone
       && (
-        <Link className="card-details-link" to={ `/${urlByType}/${id}/in-progress` }>
+        <Link className="detalhes-btn-link" to={ `/${urlByType}/${id}/in-progress` }>
           <button
             type="button"
             data-testid="start-recipe-btn"

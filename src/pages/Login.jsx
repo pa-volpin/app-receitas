@@ -23,27 +23,37 @@ function Login({ history }) {
 
   return (
     <section className="login-container">
-      <input
-        data-testid="email-input"
-        type="email"
-        placeholder="Email"
-        onChange={ ({ target }) => setEmail(target.value) }
-      />
-      <input
-        data-testid="password-input"
-        type="password"
-        placeholder="Password"
-        onChange={ ({ target }) => setPass(target.value) }
-      />
-      <button
-        onClick={ () => { handleClick(); } }
-        data-testid="login-submit-btn"
-        type="button"
-        className="login-btn"
-        disabled={ !enable }
-      >
-        Entrar
-      </button>
+      <h2 className="login-title">APP DE RECEITAS</h2>
+      <section className="login-input-btn">
+        <div className="login-image" />
+        <section className="login-inputs">
+          <input
+            className="login-email"
+            data-testid="email-input"
+            type="email"
+            placeholder="Email"
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+          <input
+            className="login-pass"
+            data-testid="password-input"
+            type="password"
+            placeholder="Password"
+            onChange={ ({ target }) => setPass(target.value) }
+          />
+          <section className="login-button-container">
+            <button
+              onClick={ () => { handleClick(); } }
+              data-testid="login-submit-btn"
+              type="button"
+              className="login-button"
+              disabled={ !enable }
+            >
+              Entrar
+            </button>
+          </section>
+        </section>
+      </section>
     </section>
   );
 }

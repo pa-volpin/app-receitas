@@ -106,12 +106,14 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 
   const list = (recipesIsInProg) ? recipesInProg[keyByType][id] : createIngredientList();
 
-  const shouldDisable = list.map((ingredient) => ingredient.checked).includes(false);
+  const shouldDisable = list && list
+    .map((ingredient) => ingredient.checked).includes(false);
 
   return (
     <div>
       {list ? (
         <div>
+          <h4 className="detalhes-ingredients-title">Ingredientes</h4>
           <section className="detalhes-ingredients">
             {!isFetching && list
               .map((ingredient, index) => {
@@ -121,6 +123,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                     key={ index }
                     htmlFor={ index }
                     data-testid={ `${index}-ingredient-step` }
+                    className="ingredient"
                   >
                     <input
                       id={ index }
@@ -130,24 +133,29 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                       checked={ checked }
                       value={ name }
                     />
-                    {`${name} ${measure}`}
+                    {`${name}${' -'}${'- '}${measure}`}
                   </label>
                 );
               })}
           </section>
           <div>
-            <Link className="card-details-link" to={ `/${urlByType}` }>
-              <button
-                className="detalhes-new-recipe-btn"
-                data-testid="finish-recipe-btn"
-                type="button"
-                onClick={ () => finishRecipe() }
-                disabled={ shouldDisable }
-              >
-                Finalizar Receita
-              </button>
+            {list
+            && (
+              <Link className="detalhes-btn-link" to="/receitas-feitas">
+                <button
+                  className="detalhes-new-recipe-btn"
+                  data-testid="finish-recipe-btn"
+                  type="button"
+                  onClick={ () => finishRecipe() }
+                  disabled={ shouldDisable }
+                >
+                  Finalizar Receita
+                </button>
+              </Link>
+            )}
+            <Link className="detalhes-btn-link" to={ `/${urlByType}` }>
+              <span className="detalhes-save-recipe-btn">Salvar Para Mais Tarde</span>
             </Link>
-            <Link to={ `/${urlByType}` }>Salvar Para Mais Tarde</Link>
           </div>
         </div>
       ) : <div>loading</div>}

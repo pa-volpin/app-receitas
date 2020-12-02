@@ -7,15 +7,16 @@ function Card({ imagePath, itemName, id, itemType, indexId, cardType }) {
     <div data-testid={ `${indexId}-${cardType}-card` } className="card-container">
       <div className="card-datails">
         <Link className="card-details-link" to={ `/${itemType}/${id}` }>
-          <div data-testid={ `${indexId}-card-name` } className="card-info">
-            <h4 className="card-title">{itemName}</h4>
-          </div>
           <img
             data-testid={ `${indexId}-card-img` }
             alt="recipe cover"
             className="card-image"
             src={ imagePath }
           />
+          <div data-testid={ `${indexId}-card-name` } className="card-info">
+            <h4 className="card-title">{itemName}</h4>
+          </div>
+          {id && <button type="button" className="card-ver-receita">ver receita</button>}
         </Link>
       </div>
     </div>

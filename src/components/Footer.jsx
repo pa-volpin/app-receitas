@@ -9,26 +9,21 @@ const linkElement = (imgSrc, linkTestId, url) => (
     data-testid={ linkTestId }
     src={ imgSrc }
     alt=""
-    style={ { width: '40px', height: '40px' } }
+    className="footer-icon"
   >
+    {/* <span>{name}</span> */}
     <img src={ imgSrc } alt="" />
   </a>
 );
 
-const footerStyle = {
-  backgroundColor: 'rgb(234,29,44)',
-  bottom: '0px',
-  position: 'fixed',
-  textAlign: 'center',
-  width: '100%',
-};
-
 function Footer() {
   return (
-    <footer data-testid="footer" style={ footerStyle }>
-      { linkElement(drinkIncon, 'drinks-bottom-btn', '/bebidas') }
-      { linkElement(exploreIcon, 'explore-bottom-btn', '/explorar') }
-      { linkElement(mealIcon, 'food-bottom-btn', '/comidas') }
+    <footer data-testid="footer" className="footer-container">
+      <section className="footer-icons">
+        { linkElement(drinkIncon, 'drinks-bottom-btn', '/bebidas', 'bebidas') }
+        { linkElement(exploreIcon, 'explore-bottom-btn', '/explorar', 'explore') }
+        { linkElement(mealIcon, 'food-bottom-btn', '/comidas', 'comidas') }
+      </section>
     </footer>
   );
 }

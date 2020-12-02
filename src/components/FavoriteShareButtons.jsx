@@ -80,15 +80,6 @@ function FavoriteButton({ recipe, type, testId = '' }) {
 
   return (
     <section className="detalhes-buttons">
-      <button
-        data-testid={ testId === '' ? 'share-btn' : `${testId}-horizontal-share-btn` }
-        type="button"
-        className="detalhes-share"
-        onClick={ () => setClipboard(`/${urlByType}/${id}`) }
-      >
-        <img src={ shareIcon } alt="compartilhe" />
-        { copied ? <p>Link copiado!</p> : true }
-      </button>
       {!isFetching
       && (
         <button
@@ -105,9 +96,22 @@ function FavoriteButton({ recipe, type, testId = '' }) {
           />
         </button>
       )}
+      <button
+        data-testid="share-btn"
+        type="button"
+        className="detalhes-share"
+        onClick={ () => setClipboard(`/${urlByType}/${id}`) }
+      >
+        <img src={ shareIcon } alt="compartilhe" />
+        { copied ? <span className="share-copiado">Link copiado!</span> : true }
+      </button>
     </section>
   );
 }
+
+// FavoriteButton.defaultProps = {
+//   testId: 'favorite-btn',
+// };
 
 FavoriteButton.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,

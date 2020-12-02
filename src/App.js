@@ -10,9 +10,16 @@ import NotFound from './pages/NotFound';
 import ReceitasProvider from './context/ReceitasProvider';
 import './App.css';
 import './stylesCSS/Card.css';
+import './stylesCSS/Login.css';
+import './stylesCSS/Profile.css';
 import './stylesCSS/Recomended.css';
+import './stylesCSS/InitialPages.css';
 import './stylesCSS/PageDetalhada.css';
+import './stylesCSS/ExplorarPages.css';
+import './stylesCSS/ResponsiveApp.css';
+import './stylesCSS/ReceitasDoneFav.css';
 import './stylesCSS/DetalhesResponsive.css';
+import './stylesCSS/RecomendedResponsive.css';
 import ReceitaEmProgresso from './pages/ReceitaEmProgresso';
 
 function App() {
