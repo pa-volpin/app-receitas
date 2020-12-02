@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
+import { useEffect } from 'react';
 
 function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
@@ -29,6 +30,26 @@ function ReceitasProvider({ children }) {
   const keyProps = { meal: 'Meal', drink: 'Drink' };
   const keyURL = { meal: 'comidas', drink: 'bebidas' };
   const keyObj = { meal: 'meals', drink: 'drinks' };
+
+  // RECOVER====================================================================
+  const [isRecovering, setIsRecovering] = useState(true);
+
+  // Mount
+  // Adicionar 1 if dentro do Mount para cada estado global necessário
+  useEffect(() => {
+    const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (recipesInProgLS !== null && isRecovering) setRecipesInProgress(recipesInProgLS);
+    setIsRecovering(false)
+  }, []);
+
+  // Update
+  // Replicar 1 Update para cada estado global necessário
+  useEffect(() => {
+    if(!isRecovering) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
+    }
+  }, [recipesInProgress]);
+  // ===========================================================================
 
   function renderEmail(param) {
     return (
@@ -89,6 +110,7 @@ function ReceitasProvider({ children }) {
     renderEmail,
     favoriteRecipes,
     setFavoriteRecipes,
+    isRecovering,
   };
 
   return (
