@@ -14,14 +14,30 @@ function ReceitasFeitas() {
     setShowSearchBar(false);
     setIsFetching(true);
     const localStorageFeitas = localStorage.getItem('doneRecipes');
-    console.log(localStorageFeitas);
+    // console.log(localStorageFeitas);
     if (localStorageFeitas !== null) {
       const doneRecipes = JSON.parse(localStorageFeitas);
       setIsFetching(false);
       setFeitas(doneRecipes);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [feitas]);
+
+  // const filterFoodOrDrink = () => {
+  //   setIsFetching(true);
+  //   const localStorageFeitas = localStorage.getItem('doneRecipes');
+  //   if (localStorageFeitas !== null) {
+  //     const doneRecipes = JSON.parse(localStorageFeitas);
+  //     if (doneRecipes.area !== '') {
+  //       setFeitas(doneRecipes.includes(doneRecipes.area));
+  //       setIsFetching(false);
+  //     } else {
+  //       setFeitas(doneRecipes.includes(doneRecipes.alcoholicOrNot));
+  //       setIsFetching(false);
+  //     }
+  //   }
+  // };
+
   return (
     <main className="receitas-container">
       <Header />
@@ -61,7 +77,7 @@ function ReceitasFeitas() {
                   itemType={ feita.type }
                   indexId={ idx }
                   cardType="horizontal"
-                  origin={ feita.area }
+                  area={ feita.area }
                   category={ feita.category }
                   alcoholic={ feita.alcoholicOrNot }
                   titlePage="Receitas Feitas"
@@ -70,7 +86,7 @@ function ReceitasFeitas() {
                     <button
                       type="button"
                       key={ idxTag }
-                      data-testid={ `${idxTag}-${tagName}-horizontal-tag` }
+                      data-testid={ `${idx}-${tagName}-horizontal-tag` }
                     >
                       {tagName}
                     </button>
