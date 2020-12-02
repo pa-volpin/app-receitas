@@ -109,10 +109,14 @@ function FavoriteButton({ recipe, type, testId = '' }) {
   );
 }
 
+FavoriteButton.defaultProps = {
+  testId: 'favorite-btn',
+};
+
 FavoriteButton.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
-  testId: propTypes.string.isRequired,
+  testId: propTypes.string,
 };
 
 export default FavoriteButton;

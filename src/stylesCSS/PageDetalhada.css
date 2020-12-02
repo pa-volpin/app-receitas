@@ -76,7 +76,7 @@ hr {
 
 .detalhes-buttons {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-bottom: 10px;
   width: 55%;
 }
@@ -88,7 +88,7 @@ hr {
   cursor: pointer;
   display: flex;
   height: 50px;
-  justify-content: start;
+  justify-content: flex-start;
   outline: none;
   padding: 15px 0 10px 0;
   width: 160px;

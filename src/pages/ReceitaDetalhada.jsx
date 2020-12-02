@@ -24,7 +24,7 @@ function ReceitaDetalhada({ match }) {
     };
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [type]);
 
   return (
     <main className="detalhes-main">

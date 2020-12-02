@@ -106,7 +106,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 
   const list = (recipesIsInProg) ? recipesInProg[keyByType][id] : createIngredientList();
 
-  const shouldDisable = list.map((ingredient) => ingredient.checked).includes(false);
+  const shouldDisable = list && list
+    .map((ingredient) => ingredient.checked).includes(false);
 
   return (
     <div>
@@ -136,17 +137,20 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
               })}
           </section>
           <div>
-            <Link className="card-details-link" to={ `/${urlByType}` }>
-              <button
-                className="detalhes-new-recipe-btn"
-                data-testid="finish-recipe-btn"
-                type="button"
-                onClick={ () => finishRecipe() }
-                disabled={ shouldDisable }
-              >
-                Finalizar Receita
-              </button>
-            </Link>
+            {list
+            && (
+              <Link className="card-details-link" to={ `/${urlByType}` }>
+                <button
+                  className="detalhes-new-recipe-btn"
+                  data-testid="finish-recipe-btn"
+                  type="button"
+                  onClick={ () => finishRecipe() }
+                  disabled={ shouldDisable }
+                >
+                  Finalizar Receita
+                </button>
+              </Link>
+            )}
             <Link to={ `/${urlByType}` }>Salvar Para Mais Tarde</Link>
           </div>
         </div>
