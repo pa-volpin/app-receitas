@@ -11,7 +11,7 @@ function Bebidas({ history }) {
   const { recipesDrinks, setRecipesDrinks, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filterDrink } = useContext(ReceitasContext);
+    searchInput, filterDrink, filterIngredient } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
@@ -33,6 +33,19 @@ function Bebidas({ history }) {
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterDrink]);
+
+  useEffect(() => {
+    setIsFetching(true);
+    const firstRequestAPI = async () => {
+      const response = (filterIngredient === '' || filterIngredient === 'All')
+        ? await fetchDrink('itemName', '')
+        : await fetchDrink('ingredient', filterIngredient);
+      setRecipesDrinks(response);
+      setIsFetching(false);
+    };
+    firstRequestAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterIngredient]);
 
   return (
     <main className="bebidas-container">

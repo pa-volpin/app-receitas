@@ -15,6 +15,7 @@ function ReceitasProvider({ children }) {
   const [titleHeader, setTitleHeader] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [filterFood, setFilterFood] = useState('');
+  const [filterIngredient, setFilterIngredient] = useState('');
   const [filterDrink, setFilterDrink] = useState('');
   const [executeFilter, setExecuteFilter] = useState(false);
   const [filterDisabled, setFilterDisabled] = useState(false);
@@ -70,6 +71,8 @@ function ReceitasProvider({ children }) {
     setIsFetching,
     filterFood,
     setFilterFood,
+    filterIngredient,
+    setFilterIngredient,
     filterDrink,
     setFilterDrink,
     executeFilter,

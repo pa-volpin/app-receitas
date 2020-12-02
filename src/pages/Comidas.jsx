@@ -11,7 +11,7 @@ function Comidas({ history }) {
   const { recipesMeals, setRecipesMeals, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filterFood } = useContext(ReceitasContext);
+    searchInput, filterFood, filterIngredient } = useContext(ReceitasContext);
   const twelve = 12;
 
   useEffect(() => {
@@ -33,6 +33,19 @@ function Comidas({ history }) {
     firstRequestAPI();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterFood]);
+
+  useEffect(() => {
+    setIsFetching(true);
+    const firstRequestAPI = async () => {
+      const response = (filterIngredient === '' || filterIngredient === 'All')
+        ? await fetchFood('itemName', '')
+        : await fetchFood('ingredient', filterIngredient);
+      setRecipesMeals(response);
+      setIsFetching(false);
+    };
+    firstRequestAPI();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterIngredient]);
 
   return (
     <main className="comidas-container">
