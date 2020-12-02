@@ -1,11 +1,15 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import CopyToClipBoard from './CopyToClipBoard';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
 
 function Card({ imagePath, itemName, id, itemType, titlePage,
-  indexId, cardType, origin, category, alcoholic, date, tagsRecipe }) {
+  indexId, cardType, area, category, alcoholic, date, tagsRecipe }) {
+  const textTime = 3000;
+  const [copied, setClipboard] = CopyToClipBoard(textTime);
+  const urlByType = (area) ? 'comidas' : 'bebidas';
   const iconsAccordingPage = (title) => {
     if (title === 'Receitas Favoritas') {
       return (
@@ -15,8 +19,10 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
             type="button"
             className="card-share"
             src={ shareIcon }
+            onClick={ () => setClipboard(`/${urlByType}/${id}`) }
           >
             <img src={ shareIcon } alt="compartilhe" />
+            { copied ? <span className="share-copiado">Link copiado!</span> : true }
           </button>
           <button
             data-testid={ `${indexId}-${cardType}-favorite-btn` }
@@ -36,29 +42,29 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
           type="button"
           className="card-share"
           src={ shareIcon }
+          onClick={ () => setClipboard(`/${urlByType}/${id}`) }
         >
           <img src={ shareIcon } alt="compartilhe" />
+          { copied ? <span className="share-copiado">Link copiado!</span> : true }
         </button>
       </section>
     );
   };
 
   const foodOrDrink = () => {
-    if (origin || category) {
+    if (area && category) {
       return (
         <span data-testid={ `${indexId}-${cardType}-top-text` }>
-          {`${origin} - `}
+          {`${area} - `}
           {`${category}`}
         </span>
       );
     }
-    if (alcoholic) {
-      return (
-        <span data-testid={ `${indexId}-${cardType}-top-text` }>
-          {alcoholic}
-        </span>
-      );
-    }
+    return (
+      <span data-testid={ `${indexId}-${cardType}-top-text` }>
+        {alcoholic}
+      </span>
+    );
   };
 
   return (
@@ -114,7 +120,7 @@ Card.propTypes = {
   itemType: propTypes.string.isRequired,
   indexId: propTypes.number.isRequired,
   cardType: propTypes.string.isRequired,
-  origin: propTypes.string.isRequired,
+  area: propTypes.string.isRequired,
   category: propTypes.string.isRequired,
   alcoholic: propTypes.string.isRequired,
   titlePage: propTypes.string.isRequired,
