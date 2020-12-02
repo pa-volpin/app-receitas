@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
-import { useEffect } from 'react';
 
 function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
@@ -39,13 +38,13 @@ function ReceitasProvider({ children }) {
   useEffect(() => {
     const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (recipesInProgLS !== null && isRecovering) setRecipesInProgress(recipesInProgLS);
-    setIsRecovering(false)
+    setIsRecovering(false);
   }, []);
 
   // Update
   // Replicar 1 Update para cada estado global necessário
   useEffect(() => {
-    if(!isRecovering) {
+    if (!isRecovering) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     }
   }, [recipesInProgress]);
