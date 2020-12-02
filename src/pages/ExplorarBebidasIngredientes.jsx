@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExplorarBebidasIngredientes() {
-  const { setDisabledSearchIcon,
+  const { setDisabledSearchIcon, setFilterIngredient,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
   const [ingredientes, setIngredientes] = useState([]);
@@ -43,7 +43,8 @@ function ExplorarBebidasIngredientes() {
                     <div className="recomended-datails-ingredient">
                       <Link
                         className="recomended-details-link"
-                        to={ `/bebidas/${drink.strIngredient1}` }
+                        to="/bebidas"
+                        onClick={ () => setFilterIngredient(drink.strIngredient1) }
                       >
                         <div className="recomended-img-body">
                           <img
