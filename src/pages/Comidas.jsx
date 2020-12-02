@@ -22,30 +22,29 @@ function Comidas({ history }) {
   }, []);
 
   useEffect(() => {
-    setIsFetching(true);
-    const firstRequestAPI = async () => {
-      const response = (filterFood === '' || filterFood === 'All')
-        ? await fetchFood('itemName', '')
-        : await fetchFood('byCategory', filterFood);
-      setRecipesMeals(response);
-      setIsFetching(false);
-    };
-    firstRequestAPI();
+    if (filterFood) {
+      setIsFetching(true);
+      const firstRequestAPI = async () => {
+        const response = (filterFood === '' || filterFood === 'All')
+          ? await fetchFood('itemName', '')
+          : await fetchFood('byCategory', filterFood);
+        setRecipesMeals(response);
+        setIsFetching(false);
+      };
+      firstRequestAPI();
+    } else {
+      setIsFetching(true);
+      const firstRequestAPI = async () => {
+        const response = (filterIngredient === '')
+          ? await fetchFood('itemName', '')
+          : await fetchFood('ingredient', filterIngredient);
+        setRecipesMeals(response);
+        setIsFetching(false);
+      };
+      firstRequestAPI();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterFood]);
-
-  useEffect(() => {
-    setIsFetching(true);
-    const firstRequestAPI = async () => {
-      const response = (filterIngredient === '' || filterIngredient === 'All')
-        ? await fetchFood('itemName', '')
-        : await fetchFood('ingredient', filterIngredient);
-      setRecipesMeals(response);
-      setIsFetching(false);
-    };
-    firstRequestAPI();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterIngredient]);
+  }, [filterFood, filterIngredient]);
 
   return (
     <main className="comidas-container">

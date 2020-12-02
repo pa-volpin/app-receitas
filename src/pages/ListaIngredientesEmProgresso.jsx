@@ -16,8 +16,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
   // Recebe as receitas em progresso do local storage ou do estado global
-  const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const recipesInProg = (recipesInProgLS !== null) ? recipesInProgLS : recipesInProgress;
+  // const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const recipesInProg = recipesInProgress;
 
   // Verificação se a receita está em progresso e se está feita
   // const isDone = recipesDone.find((recipeId) => recipeId === id);
@@ -60,16 +60,27 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
         },
       }));
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Ao finalizar receita atualiza o estado global e o local storage
   function finishRecipe() {
-    setRecipesDone((prevState) => ([...prevState, id]));
+    setRecipesDone((prevState) => ([
+      ...prevState,
+      {
+        id,
+        type: type === 'meal' ? 'comida' : 'bebida',
+        area: recipe.strArea || '',
+        category: recipe.strCategory,
+        alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
+        image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
+        name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
+        doneDate: recipe.dateModified,
+        tags: recipe.strTags,
+      },
+    ]));
     delete recipesInProgress[keyByType][id];
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
   }
 
   // Ao dar check atualiza o estado global e o local storage
@@ -101,7 +112,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
         });
       }
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
+    // localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
   };
 
   const list = (recipesIsInProg) ? recipesInProg[keyByType][id] : createIngredientList();

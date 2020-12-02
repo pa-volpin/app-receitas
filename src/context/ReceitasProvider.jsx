@@ -38,7 +38,10 @@ function ReceitasProvider({ children }) {
   useEffect(() => {
     const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (recipesInProgLS !== null && isRecovering) setRecipesInProgress(recipesInProgLS);
+    const recipesDoneLS = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (recipesDoneLS !== null && isRecovering) setRecipesDone(recipesDoneLS);
     setIsRecovering(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update
@@ -47,8 +50,16 @@ function ReceitasProvider({ children }) {
     if (!isRecovering) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipesInProgress]);
   // ===========================================================================
+
+  useEffect(() => {
+    if (!isRecovering) {
+      localStorage.setItem('doneRecipes', JSON.stringify(recipesDone));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [recipesDone]);
 
   function renderEmail(param) {
     return (

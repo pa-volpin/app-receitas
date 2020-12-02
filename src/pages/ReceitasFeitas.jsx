@@ -23,20 +23,20 @@ function ReceitasFeitas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feitas]);
 
-  // const filterFoodOrDrink = () => {
-  //   setIsFetching(true);
-  //   const localStorageFeitas = localStorage.getItem('doneRecipes');
-  //   if (localStorageFeitas !== null) {
-  //     const doneRecipes = JSON.parse(localStorageFeitas);
-  //     if (doneRecipes.area !== '') {
-  //       setFeitas(doneRecipes.includes(doneRecipes.area));
-  //       setIsFetching(false);
-  //     } else {
-  //       setFeitas(doneRecipes.includes(doneRecipes.alcoholicOrNot));
-  //       setIsFetching(false);
-  //     }
-  //   }
-  // };
+  const filterFoodOrDrink = (filter) => {
+    const localStorageFeitas = localStorage.getItem('doneRecipes');
+    if (localStorageFeitas !== null) {
+      const doneRecipes = JSON.parse(localStorageFeitas);
+      console.log(doneRecipes);
+      if (filter === 'Food') {
+        setFeitas(doneRecipes.filter((recipe) => recipe.type === 'comida'));
+      } else if (filter === 'Drinks') {
+        setFeitas(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
+      } else {
+        setFeitas(doneRecipes);
+      }
+    }
+  };
 
   return (
     <main className="receitas-container">
@@ -47,18 +47,24 @@ function ReceitasFeitas() {
             <button
               data-testid="filter-by-all-btn"
               type="button"
+              value="All"
+              onClick={ ({ target }) => filterFoodOrDrink(target.value) }
             >
               All
             </button>
             <button
               data-testid="filter-by-food-btn"
               type="button"
+              value="Food"
+              onClick={ ({ target }) => filterFoodOrDrink(target.value) }
             >
               Food
             </button>
             <button
               data-testid="filter-by-drink-btn"
               type="button"
+              value="Drinks"
+              onClick={ ({ target }) => filterFoodOrDrink(target.value) }
             >
               Drinks
             </button>
@@ -74,7 +80,7 @@ function ReceitasFeitas() {
                   imagePath={ feita.image }
                   itemName={ feita.name }
                   id={ feita.id }
-                  itemType={ feita.type }
+                  itemType={ `${feita.type}s` }
                   indexId={ idx }
                   cardType="horizontal"
                   area={ feita.area }
