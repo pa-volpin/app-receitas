@@ -1,6 +1,5 @@
 .profile-container {
   align-items: center;
-  background: radial-gradient(circle, #defaee 50%, #c5dfd3 100%);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

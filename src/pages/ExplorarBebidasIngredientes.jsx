@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchDrink from '../servicesAPI/drinkAPI';
-import Card from '../components/Card';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -35,15 +34,39 @@ function ExplorarBebidasIngredientes() {
           {isFetching
             ? <h2>Loading...</h2>
             : ingredientes.map((drink, index) => (
-              index < twelve ? <Card
-                indexId={ index }
-                key={ index }
-                imagePath={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
-                itemName={ drink.strIngredient1 }
-                id=""
-                itemType="bebidas"
-                cardType="ingredient"
-              />
+              index < twelve
+                ? (
+                  <div
+                    key={ index }
+                    data-testid={ `${index}-ingredient-card` }
+                  >
+                    <div className="recomended-datails-ingredient">
+                      <Link
+                        className="recomended-details-link"
+                        to={ `/bebidas/${drink.strIngredient1}` }
+                      >
+                        <div className="recomended-img-body">
+                          <img
+                            data-testid={ `${index}-card-img` }
+                            alt="recipe cover"
+                            className="recomended-image"
+                            src={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+                          />
+                        </div>
+                        <div
+                          className="recomended-info"
+                        >
+                          <h4
+                            data-testid={ `${index}-card-name` }
+                            className="recomended-title"
+                          >
+                            {drink.strIngredient1}
+                          </h4>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )
                 : null
             ))}
         </section>

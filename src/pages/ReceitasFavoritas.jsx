@@ -23,8 +23,8 @@ function ReceitasFavoritas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="favoritas-container">
-      <header className="favoritas-header">
+    <main className="comidas-container">
+      <header>
         <Header />
       </header>
       <section className="favoritas-filtros">

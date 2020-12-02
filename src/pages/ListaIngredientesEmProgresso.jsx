@@ -113,6 +113,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
     <div>
       {list ? (
         <div>
+          <h4 className="detalhes-ingredients-title">Ingredientes</h4>
           <section className="detalhes-ingredients">
             {!isFetching && list
               .map((ingredient, index) => {
@@ -122,6 +123,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                     key={ index }
                     htmlFor={ index }
                     data-testid={ `${index}-ingredient-step` }
+                    className="ingredient"
                   >
                     <input
                       id={ index }
@@ -131,7 +133,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                       checked={ checked }
                       value={ name }
                     />
-                    {`${name} ${measure}`}
+                    {`${name}${' -'}${'- '}${measure}`}
                   </label>
                 );
               })}
@@ -139,7 +141,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
           <div>
             {list
             && (
-              <Link className="card-details-link" to={ `/${urlByType}` }>
+              <Link className="detalhes-btn-link" to="/receitas-feitas">
                 <button
                   className="detalhes-new-recipe-btn"
                   data-testid="finish-recipe-btn"
@@ -151,7 +153,9 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                 </button>
               </Link>
             )}
-            <Link to={ `/${urlByType}` }>Salvar Para Mais Tarde</Link>
+            <Link className="detalhes-btn-link" to={ `/${urlByType}` }>
+              <span className="detalhes-save-recipe-btn">Salvar Para Mais Tarde</span>
+            </Link>
           </div>
         </div>
       ) : <div>loading</div>}

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
 import fetchFood from '../servicesAPI/foodAPI';
-import Card from '../components/Card';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -35,15 +34,39 @@ function ExplorarComidasIngredientes() {
           {isFetching
             ? <h2>Loading...</h2>
             : ingredientes.map((meal, index) => (
-              index < twelve ? <Card
-                indexId={ index }
-                key={ index }
-                imagePath={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
-                itemName={ meal.strIngredient }
-                id=""
-                itemType="comidas"
-                cardType="ingredient"
-              />
+              index < twelve
+                ? (
+                  <div
+                    key={ index }
+                    data-testid={ `${index}-ingredient-card` }
+                  >
+                    <div className="recomended-datails-ingredient">
+                      <Link
+                        className="recomended-details-link"
+                        to={ `/comidas/${meal.strIngredient}` }
+                      >
+                        <div className="recomended-img-body">
+                          <img
+                            data-testid={ `${index}-card-img` }
+                            alt="recipe cover"
+                            className="recomended-image"
+                            src={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
+                          />
+                        </div>
+                        <div
+                          className="recomended-info"
+                        >
+                          <h4
+                            data-testid={ `${index}-card-name` }
+                            className="recomended-title"
+                          >
+                            {meal.strIngredient}
+                          </h4>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )
                 : null
             ))}
         </section>

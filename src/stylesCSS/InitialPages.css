@@ -1,6 +1,4 @@
 .comidas-container, .bebidas-container {
-  background: radial-gradient(circle, #defaee 50%, #c5dfd3 100%);
-  background-size: 120vh;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

@@ -26,11 +26,11 @@ function ReceitaEmProgresso({ match }) {
   }, []);
 
   return (
-    <div>
+    <main className="detalhes-main">
       {isFetching
         ? <h2>Loading...</h2>
         : (
-          <main className="detalhes-main">
+          <div>
             <header className="detalhes-header">
               <section className="detalhes-img">
                 <section className="detalhes-img-border">
@@ -55,13 +55,17 @@ function ReceitaEmProgresso({ match }) {
               { recipe !== '' ? (
                 <ListaIngredientesEmProgresso recipe={ recipe } type={ type } />
               ) : <p>Loading...</p>}
-              <section className="detalhes-instructions">
-                <p data-testid="instructions">{recipe.strInstructions}</p>
+              <hr />
+              <section className="detalhes-instructions-container">
+                <h4 className="detalhes-titles">Instruções de preparo</h4>
+                <section className="detalhes-instructions">
+                  <p data-testid="instructions">{recipe.strInstructions}</p>
+                </section>
               </section>
             </article>
-          </main>
+          </div>
         )}
-    </div>
+    </main>
   );
 }
 
