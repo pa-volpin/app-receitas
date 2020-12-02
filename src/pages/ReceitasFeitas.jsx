@@ -23,15 +23,30 @@ function ReceitasFeitas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="comidas-container">
-      <header>
-        <Header />
-      </header>
-      <section className="comidas-body">
-        <section className="comidas-filters">
-          <button data-testid="filter-by-all-btn" type="button">All</button>
-          <button data-testid="filter-by-food-btn" type="button">Food</button>
-          <button data-testid="filter-by-drink-btn" type="button">Drinks</button>
+    <main className="receitas-container">
+      <Header />
+      <section className="receitas-body">
+        <section className="receitas-filters">
+          <section className="done-fav-container">
+            <button
+              data-testid="filter-by-all-btn"
+              type="button"
+            >
+              All
+            </button>
+            <button
+              data-testid="filter-by-food-btn"
+              type="button"
+            >
+              Food
+            </button>
+            <button
+              data-testid="filter-by-drink-btn"
+              type="button"
+            >
+              Drinks
+            </button>
+          </section>
         </section>
         <section className="cards-list">
           {isFetching

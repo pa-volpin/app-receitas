@@ -23,35 +23,54 @@ function ReceitasFavoritas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main className="comidas-container">
+    <main className="favoritas-container">
       <header>
         <Header />
       </header>
-      <section className="favoritas-filtros">
-        <button data-testid="filter-by-all-btn" type="button">All</button>
-        <button data-testid="filter-by-food-btn" type="button">Food</button>
-        <button data-testid="filter-by-drink-btn" type="button">Drinks</button>
-      </section>
-      <section className="favoritas-cards">
-        {isFetching
-          ? <p>Loading...</p>
-          : (
-            favoritas.map((favorita, idx) => (
-              <CardFavorite
-                key={ idx }
-                imagePath={ favorita.image }
-                itemName={ favorita.name }
-                id={ favorita.id }
-                itemType={ favorita.type }
-                indexId={ idx }
-                cardType="horizontal"
-                origin={ favorita.area }
-                category={ favorita.category }
-                alcoholic={ favorita.alcoholicOrNot }
-                titlePage="Receitas Favoritas"
-              />
-            ))
-          )}
+      <section className="favoritas-body">
+        <section className="favoritas-filters">
+          <section className="done-fav-container">
+            <button
+              data-testid="filter-by-all-btn"
+              type="button"
+            >
+              All
+            </button>
+            <button
+              data-testid="filter-by-food-btn"
+              type="button"
+            >
+              Food
+            </button>
+            <button
+              data-testid="filter-by-drink-btn"
+              type="button"
+            >
+              Drinks
+            </button>
+          </section>
+        </section>
+        <section className="cards-list">
+          {isFetching
+            ? <p>Loading...</p>
+            : (
+              favoritas.map((favorita, idx) => (
+                <CardFavorite
+                  key={ idx }
+                  imagePath={ favorita.image }
+                  itemName={ favorita.name }
+                  id={ favorita.id }
+                  itemType={ favorita.type }
+                  indexId={ idx }
+                  cardType="horizontal"
+                  origin={ favorita.area }
+                  category={ favorita.category }
+                  alcoholic={ favorita.alcoholicOrNot }
+                  titlePage="Receitas Favoritas"
+                />
+              ))
+            )}
+        </section>
       </section>
     </main>
   );
