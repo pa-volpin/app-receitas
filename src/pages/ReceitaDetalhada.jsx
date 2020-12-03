@@ -8,7 +8,8 @@ import fetchDrink from '../servicesAPI/drinkAPI';
 import FavoriteShareButtons from '../components/FavoriteShareButtons';
 
 function ReceitaDetalhada({ match }) {
-  const { setIsFetching, isFetching, keyProps } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching, keyProps,
+    setRecipeGlobal } = useContext(ReceitasContext);
   const type = (match.path.match('comidas')) ? 'meal' : 'drink';
   const [recipe, setRecipe] = useState([]);
   const { id } = match.params;
@@ -20,6 +21,7 @@ function ReceitaDetalhada({ match }) {
         ? await fetchFood('byId', id)
         : await fetchDrink('byId', id);
       setRecipe(...response);
+      setRecipeGlobal(...response);
       setIsFetching(false);
     };
     firstRequestAPI();
@@ -49,7 +51,7 @@ function ReceitaDetalhada({ match }) {
                 <h4 data-testid="recipe-category" className="detalhes-subtitle">
                   { recipe[type === 'meal' ? 'strCategory' : 'strAlcoholic'] }
                 </h4>
-                <FavoriteShareButtons recipe={ recipe } type={ type } />
+                <FavoriteShareButtons recipeId={ id } type={ type } />
               </section>
             </header>
             <article className="detalhes-article">

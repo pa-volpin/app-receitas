@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import CopyToClipBoard from './CopyToClipBoard';
 import shareIcon from '../images/shareIcon.svg';
 import heartIcon from '../images/whiteHeartIcon.svg';
+import FavoriteShareButtons from './FavoriteShareButtons';
 
-function Card({ imagePath, itemName, id, itemType, titlePage,
+function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
   indexId, cardType, area, category, alcoholic, date, tagsRecipe }) {
   const textTime = 3000;
   const [copied, setClipboard] = CopyToClipBoard(textTime);
-  const urlByType = (area) ? 'comidas' : 'bebidas';
+  const urlByType = itemType;
+
   const iconsAccordingPage = (title) => {
     if (title === 'Receitas Favoritas') {
       return (
@@ -37,16 +39,12 @@ function Card({ imagePath, itemName, id, itemType, titlePage,
     }
     return (
       <section className="card-buttons">
-        <button
-          data-testid={ `${indexId}-horizontal-share-btn` }
-          type="button"
-          className="card-share"
-          src={ shareIcon }
-          onClick={ () => setClipboard(`/${urlByType}/${id}`) }
-        >
-          <img src={ shareIcon } alt="compartilhe" />
-          { copied ? <span className="share-copiado">Link copiado!</span> : true }
-        </button>
+        <FavoriteShareButtons
+          recipeId={ id }
+          type={ itemType === 'comidas' ? 'meal' : 'drink' }
+          testId={ indexId }
+          page={ pageType }
+        />
       </section>
     );
   };
@@ -126,6 +124,7 @@ Card.propTypes = {
   titlePage: propTypes.string.isRequired,
   tagsRecipe: propTypes.arrayOf(propTypes.shape()),
   date: propTypes.string,
+  pageType: propTypes.string.isRequired,
 };
 
 export default Card;

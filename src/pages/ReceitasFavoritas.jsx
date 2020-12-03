@@ -3,70 +3,84 @@ import Header from '../components/Header';
 import CardFavorite from '../components/CardFavorite';
 import ReceitasContext from '../context/ReceitasContext';
 
-function ReceitasFavoritas() {
-  const { isFetching, setIsFetching, setTitleHeader,
+function ReceitasFeitas() {
+  const { isFetching, setIsFetching, setTitleHeader, favoriteRecipes,
     setDisabledSearchIcon, setShowSearchBar } = useContext(ReceitasContext);
-  const [favoritas, setFavoritas] = useState([]);
 
   useEffect(() => {
     setTitleHeader('Receitas Favoritas');
     setDisabledSearchIcon(true);
     setShowSearchBar(false);
     setIsFetching(true);
-    const localStorageFavoritas = localStorage.getItem('favoriteRecipes');
-    if (localStorageFavoritas) {
-      const favoriteRecipes = JSON.parse(localStorageFavoritas);
-      console.log(favoriteRecipes);
-      setFavoritas(favoriteRecipes);
-      setIsFetching(false);
-    }
+    setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [filter, setFilter] = useState('All');
+  const typeByFilter = { Foods: 'comida', Drinks: 'bebida' };
+  const feitas = (filter === 'All') ? favoriteRecipes : favoriteRecipes
+    .filter((recipe) => recipe.type === typeByFilter[filter]);
+
   return (
-    <main className="favoritas-container">
-      <header>
-        <Header />
-      </header>
-      <section className="favoritas-body">
-        <section className="favoritas-filters">
+    <main className="receitas-container">
+      <Header />
+      <section className="receitas-body">
+        <section className="receitas-filters">
           <section className="done-fav-container">
             <button
               data-testid="filter-by-all-btn"
               type="button"
+              value="All"
+              onClick={ () => setFilter('All') }
             >
               All
             </button>
             <button
               data-testid="filter-by-food-btn"
               type="button"
+              value="Foods"
+              onClick={ () => setFilter('Foods') }
             >
               Food
             </button>
             <button
               data-testid="filter-by-drink-btn"
               type="button"
+              value="Drinks"
+              onClick={ () => setFilter('Drinks') }
             >
               Drinks
             </button>
           </section>
         </section>
         <section className="cards-list">
-          {isFetching
-            ? <p>Loading...</p>
+          {isFetching && feitas === []
+            ? <p>Nenhuma Receita Favorita</p>
             : (
-              favoritas.map((favorita, idx) => (
+              feitas.map((feita, idx) => (
                 <CardFavorite
+                  pageType="favorite-recipes"
                   key={ idx }
-                  imagePath={ favorita.image }
-                  itemName={ favorita.name }
-                  id={ favorita.id }
-                  itemType={ favorita.type }
+                  imagePath={ feita.image }
+                  itemName={ feita.name }
+                  id={ feita.id }
+                  itemType={ `${feita.type}s` }
                   indexId={ idx }
                   cardType="horizontal"
-                  origin={ favorita.area }
-                  category={ favorita.category }
-                  alcoholic={ favorita.alcoholicOrNot }
-                  titlePage="Receitas Favoritas"
+                  area={ feita.area }
+                  category={ feita.category }
+                  alcoholic={ feita.alcoholicOrNot }
+                  titlePage="Receitas Feitas"
+                  date={ feita.doneDate }
+                  // tagsRecipe={ feita.tags.map((tagName, idxTag) => (
+                  //   <button
+                  //     type="button"
+                  //     key={ idxTag }
+                  //     data-testid={ `${idx}-${tagName}-horizontal-tag` }
+                  //   >
+                  //     {tagName}
+                  //   </button>
+                  // )) }
                 />
               ))
             )}
@@ -76,4 +90,4 @@ function ReceitasFavoritas() {
   );
 }
 
-export default ReceitasFavoritas;
+export default ReceitasFeitas;

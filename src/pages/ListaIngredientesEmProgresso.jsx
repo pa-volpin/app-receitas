@@ -8,19 +8,15 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
     recipesInProgress, setRecipesInProgress,
     isFetching, setIsFetching } = useContext(ReceitasContext);
 
-  // const [isCheckBox, setIsCheckBox] = useState(false);
-
   // Configuração de chaves e id conforme tipo da receita
   const id = recipe[`id${(type === 'meal') ? 'Meal' : 'Drink'}`];
   const keyByType = (type === 'meal') ? 'meals' : 'cocktails';
   const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
-  // Recebe as receitas em progresso do local storage ou do estado global
-  const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const recipesInProg = (recipesInProgLS !== null) ? recipesInProgLS : recipesInProgress;
+  // Recebe as receitas em progresso do do estado global
+  const recipesInProg = recipesInProgress;
 
-  // Verificação se a receita está em progresso e se está feita
-  // const isDone = recipesDone.find((recipeId) => recipeId === id);
+  // Verificação se a receita está em progresso
   const recipesIsInProg = Object.keys(recipesInProg[keyByType])
     .find((recipeId) => recipeId === id) === id;
 
@@ -42,7 +38,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
     const ingredients = ingredientsName.map((name, index) => ({
       name,
       measure: measures[index],
-      checked: '',
+      checked: false,
     }));
 
     return ingredients;
@@ -60,31 +56,41 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
         },
       }));
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Ao finalizar receita atualiza o estado global e o local storage
   function finishRecipe() {
-    setRecipesDone((prevState) => ([...prevState, id]));
+    setRecipesDone((prevState) => ([
+      ...prevState,
+      {
+        id,
+        type: type === 'meal' ? 'comida' : 'bebida',
+        area: recipe.strArea || '',
+        category: recipe.strCategory,
+        alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
+        image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
+        name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
+        doneDate: recipe.dateModified,
+        tags: (recipe.strTags !== null) ? recipe.strTags.split(',') : [],
+      },
+    ]));
     delete recipesInProgress[keyByType][id];
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
   }
 
   // Ao dar check atualiza o estado global e o local storage
   const check = ({ target }) => {
-    console.log(target);
-    console.log(target.value);
     const { value, checked } = target;
+    const valueName = value.split('-medida-')[0];
+    const valueMeasure = value.split('-medida-')[1];
     const isChecked = !(checked === false);
-    console.log(isChecked);
-    console.log(checked);
     const zero = 0;
     setRecipesInProgress((prevState) => {
       if (prevState) {
         const objIngThatContainsIngName = prevState[keyByType][id]
-          .find((ingredient) => ingredient.name === value);
+          .find((ingredient) => ingredient.name === valueName
+            && ingredient.measure === valueMeasure);
 
         const ingredientIndex = prevState[keyByType][id]
           .indexOf(objIngThatContainsIngName);
@@ -101,7 +107,6 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
         });
       }
     });
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
   };
 
   const list = (recipesIsInProg) ? recipesInProg[keyByType][id] : createIngredientList();
@@ -131,7 +136,7 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
                       type="checkbox"
                       onChange={ ({ target }) => check({ target }, index) }
                       checked={ checked }
-                      value={ name }
+                      value={ `${name}-medida-${measure}` }
                     />
                     {`${name}${' -'}${'- '}${measure}`}
                   </label>

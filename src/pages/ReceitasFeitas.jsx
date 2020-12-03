@@ -4,39 +4,22 @@ import CardFavorite from '../components/CardFavorite';
 import ReceitasContext from '../context/ReceitasContext';
 
 function ReceitasFeitas() {
-  const { isFetching, setIsFetching, setTitleHeader,
+  const { isFetching, setIsFetching, setTitleHeader, recipesDone,
     setDisabledSearchIcon, setShowSearchBar } = useContext(ReceitasContext);
-  const [feitas, setFeitas] = useState([]);
 
   useEffect(() => {
+    setIsFetching(true);
     setTitleHeader('Receitas Feitas');
     setDisabledSearchIcon(true);
     setShowSearchBar(false);
-    setIsFetching(true);
-    const localStorageFeitas = localStorage.getItem('doneRecipes');
-    // console.log(localStorageFeitas);
-    if (localStorageFeitas !== null) {
-      const doneRecipes = JSON.parse(localStorageFeitas);
-      setIsFetching(false);
-      setFeitas(doneRecipes);
-    }
+    setIsFetching(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [feitas]);
+  }, []);
 
-  // const filterFoodOrDrink = () => {
-  //   setIsFetching(true);
-  //   const localStorageFeitas = localStorage.getItem('doneRecipes');
-  //   if (localStorageFeitas !== null) {
-  //     const doneRecipes = JSON.parse(localStorageFeitas);
-  //     if (doneRecipes.area !== '') {
-  //       setFeitas(doneRecipes.includes(doneRecipes.area));
-  //       setIsFetching(false);
-  //     } else {
-  //       setFeitas(doneRecipes.includes(doneRecipes.alcoholicOrNot));
-  //       setIsFetching(false);
-  //     }
-  //   }
-  // };
+  const [filter, setFilter] = useState('All');
+  const typeByFilter = { Foods: 'comida', Drinks: 'bebida' };
+  const feitas = (filter === 'All') ? recipesDone : recipesDone
+    .filter((recipe) => recipe.type === typeByFilter[filter]);
 
   return (
     <main className="receitas-container">
@@ -47,18 +30,24 @@ function ReceitasFeitas() {
             <button
               data-testid="filter-by-all-btn"
               type="button"
+              value="All"
+              onClick={ () => setFilter('All') }
             >
               All
             </button>
             <button
               data-testid="filter-by-food-btn"
               type="button"
+              value="Foods"
+              onClick={ () => setFilter('Foods') }
             >
               Food
             </button>
             <button
               data-testid="filter-by-drink-btn"
               type="button"
+              value="Drinks"
+              onClick={ () => setFilter('Drinks') }
             >
               Drinks
             </button>
@@ -70,11 +59,12 @@ function ReceitasFeitas() {
             : (
               feitas.map((feita, idx) => (
                 <CardFavorite
+                  pageType="recipes-done"
                   key={ idx }
                   imagePath={ feita.image }
                   itemName={ feita.name }
                   id={ feita.id }
-                  itemType={ feita.type }
+                  itemType={ `${feita.type}s` }
                   indexId={ idx }
                   cardType="horizontal"
                   area={ feita.area }
