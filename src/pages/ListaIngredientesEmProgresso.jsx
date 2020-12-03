@@ -89,7 +89,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
     setRecipesInProgress((prevState) => {
       if (prevState) {
         const objIngThatContainsIngName = prevState[keyByType][id]
-          .find((ingredient) => ingredient.name === valueName && ingredient.measure === valueMeasure);
+          .find((ingredient) => ingredient.name === valueName
+            && ingredient.measure === valueMeasure);
 
         const ingredientIndex = prevState[keyByType][id]
           .indexOf(objIngThatContainsIngName);
@@ -110,7 +111,8 @@ function ListaIngredientesEmProgresso({ recipe, type }) {
 
   const list = (recipesIsInProg) ? recipesInProg[keyByType][id] : createIngredientList();
 
-  const shouldDisable = list && list.map((ingredient) => ingredient.checked).includes(false);
+  const shouldDisable = list && list
+    .map((ingredient) => ingredient.checked).includes(false);
 
   return (
     <div>

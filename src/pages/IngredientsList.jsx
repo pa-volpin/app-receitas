@@ -16,7 +16,7 @@ function IngredientsList({ recipe, type }) {
   const recipesInProg = (recipesInProgLS !== null) ? recipesInProgLS : recipesInProgress;
 
   // Verificação se a receita está em progresso e se está feita
-  const isDone = recipesDone.find((recipe) => recipe.id === id);
+  const isDone = recipesDone.find((recipeDone) => recipeDone.id === id);
   const recipesIsInProg = Object.keys(recipesInProg[keyByType])
     .find((recipeId) => recipeId === id) === id;
 

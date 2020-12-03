@@ -16,10 +16,10 @@ function ReceitasFeitas() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [filter, setFilter] = useState('All'); 
+  const [filter, setFilter] = useState('All');
   const typeByFilter = { Foods: 'comida', Drinks: 'bebida' };
-  console.log('oii')
-  const feitas = (filter === 'All') ? favoriteRecipes : favoriteRecipes.filter((recipe) => recipe.type === typeByFilter[filter]);
+  const feitas = (filter === 'All') ? favoriteRecipes : favoriteRecipes
+    .filter((recipe) => recipe.type === typeByFilter[filter]);
 
   return (
     <main className="receitas-container">
@@ -39,7 +39,7 @@ function ReceitasFeitas() {
               data-testid="filter-by-food-btn"
               type="button"
               value="Foods"
-              onClick={ () => setFilter('Foods')  }
+              onClick={ () => setFilter('Foods') }
             >
               Food
             </button>
@@ -47,7 +47,7 @@ function ReceitasFeitas() {
               data-testid="filter-by-drink-btn"
               type="button"
               value="Drinks"
-              onClick={ () => setFilter('Drinks')  }
+              onClick={ () => setFilter('Drinks') }
             >
               Drinks
             </button>

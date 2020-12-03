@@ -16,15 +16,14 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
   const id = recipeId;
   let recipe;
   if (page === 'recipes-done') {
-    recipe = recipesDone.filter((recipeObj) => recipeObj.id === id)[0];
+    recipe = recipesDone.find((recipeObj) => recipeObj.id === id);
   } else if (page === 'favorite-recipes') {
-    recipe = favoriteRecipes.filter((recipeObj) => recipeObj.id === id)[0];
+    recipe = favoriteRecipes.find((recipeObj) => recipeObj.id === id);
   } else {
     recipe = recipeGlobal;
   }
-  
-    const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
 
+  const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
   const [isFavorite, setIsFavorite] = useState('');
 
   // Ao montar
@@ -51,24 +50,24 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
           .find((eachRecipe) => eachRecipe.id === id);
         const favoriteIndex = prevState.indexOf(favoritedRecipe);
         const obj = (page === '')
-        ? {
-          id,
-          type: type === 'meal' ? 'comida' : 'bebida',
-          area: recipe.strArea || '',
-          category: recipe.strCategory,
-          alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
-          name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
-          image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
-        }
-        : {
-          id,
-          type: recipe.type,
-          area: recipe.area || '',
-          category: recipe.category,
-          alcoholicOrNot: recipe.alcoholicOrNot,
-          name: recipe.name,
-          image: recipe.image,
-        }
+          ? {
+            id,
+            type: type === 'meal' ? 'comida' : 'bebida',
+            area: recipe.strArea || '',
+            category: recipe.strCategory,
+            alcoholicOrNot: type === 'meal' ? '' : recipe.strAlcoholic,
+            name: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}`],
+            image: recipe[`str${(type === 'meal') ? 'Meal' : 'Drink'}Thumb`],
+          }
+          : {
+            id,
+            type: recipe.type,
+            area: recipe.area || '',
+            category: recipe.category,
+            alcoholicOrNot: recipe.alcoholicOrNot,
+            name: recipe.name,
+            image: recipe.image,
+          };
         return ([
           ...prevState.slice(zero, favoriteIndex),
           obj,
@@ -111,8 +110,8 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
         </button>
       )}
       <button
-         data-testid={ testId === ''
-         ? 'share-btn' : `${testId}-horizontal-share-btn` }
+        data-testid={ testId === ''
+          ? 'share-btn' : `${testId}-horizontal-share-btn` }
         type="button"
         className="detalhes-share"
         onClick={ () => setClipboard(`/${urlByType}/${id}`) }
@@ -130,9 +129,10 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
 // };
 
 FavoriteButton.propTypes = {
-  recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
   testId: propTypes.string.isRequired,
+  recipeId: propTypes.string.isRequired,
+  page: propTypes.string.isRequired,
 };
 
 export default FavoriteButton;

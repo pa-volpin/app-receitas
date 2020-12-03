@@ -8,7 +8,8 @@ import fetchDrink from '../servicesAPI/drinkAPI';
 import FavoriteShareButtons from '../components/FavoriteShareButtons';
 
 function ReceitaDetalhada({ match }) {
-  const { setIsFetching, isFetching, keyProps, setRecipeGlobal } = useContext(ReceitasContext);
+  const { setIsFetching, isFetching, keyProps,
+    setRecipeGlobal } = useContext(ReceitasContext);
   const type = (match.path.match('comidas')) ? 'meal' : 'drink';
   const [recipe, setRecipe] = useState([]);
   const { id } = match.params;

@@ -44,7 +44,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
           type={ itemType === 'comidas' ? 'meal' : 'drink' }
           testId={ indexId }
           page={ pageType }
-      />
+        />
       </section>
     );
   };
@@ -124,6 +124,7 @@ Card.propTypes = {
   titlePage: propTypes.string.isRequired,
   tagsRecipe: propTypes.arrayOf(propTypes.shape()),
   date: propTypes.string,
+  pageType: propTypes.string.isRequired,
 };
 
 export default Card;

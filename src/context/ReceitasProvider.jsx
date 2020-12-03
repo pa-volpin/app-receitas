@@ -144,7 +144,7 @@ function ReceitasProvider({ children }) {
     setFavoriteRecipes,
     isRecovering,
     recipeGlobal,
-    setRecipeGlobal
+    setRecipeGlobal,
   };
 
   return (
