@@ -9,9 +9,9 @@ const linkElement = (imgSrc, linkTestId, url) => (
     data-testid={ linkTestId }
     src={ imgSrc }
     alt=""
+    style={{height: "50px", width: "50px" }}
     className="footer-icon"
   >
-    {/* <span>{name}</span> */}
     <img src={ imgSrc } alt="" />
   </a>
 );

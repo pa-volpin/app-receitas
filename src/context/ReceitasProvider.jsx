@@ -19,12 +19,14 @@ function ReceitasProvider({ children }) {
   const [filterDrink, setFilterDrink] = useState('');
   const [executeFilter, setExecuteFilter] = useState(false);
   const [filterDisabled, setFilterDisabled] = useState(false);
+  const [recipeGlobal, setRecipeGlobal] = useState('');
+
   const [recipesDone, setRecipesDone] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [recipesInProgress, setRecipesInProgress] = useState({
     cocktails: {},
     meals: {},
   });
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   const keyProps = { meal: 'Meal', drink: 'Drink' };
   const keyURL = { meal: 'comidas', drink: 'bebidas' };
@@ -36,30 +38,50 @@ function ReceitasProvider({ children }) {
   // Mount
   // Adicionar 1 if dentro do Mount para cada estado global necessário
   useEffect(() => {
+    // Receitas em progresso
     const recipesInProgLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (recipesInProgLS !== null && isRecovering) setRecipesInProgress(recipesInProgLS);
+
+    // Receitas feitas
     const recipesDoneLS = JSON.parse(localStorage.getItem('doneRecipes'));
     if (recipesDoneLS !== null && isRecovering) setRecipesDone(recipesDoneLS);
+
+    // Receitas favoritas
+    const favoriteRecipesLS = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipesLS !== null && isRecovering) setFavoriteRecipes(favoriteRecipesLS);
+
     setIsRecovering(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update
   // Replicar 1 Update para cada estado global necessário
+
+  // Receitas em progresso
   useEffect(() => {
     if (!isRecovering) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(recipesInProgress));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipesInProgress]);
-  // ===========================================================================
 
+  // Receitas feitas
   useEffect(() => {
     if (!isRecovering) {
       localStorage.setItem('doneRecipes', JSON.stringify(recipesDone));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recipesDone]);
+
+  // Receitas favoritas
+  useEffect(() => {
+    if (!isRecovering) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [favoriteRecipes]);
+
+  // ===========================================================================
 
   function renderEmail(param) {
     return (
@@ -121,6 +143,8 @@ function ReceitasProvider({ children }) {
     favoriteRecipes,
     setFavoriteRecipes,
     isRecovering,
+    recipeGlobal,
+    setRecipeGlobal
   };
 
   return (
