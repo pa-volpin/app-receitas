@@ -26,35 +26,35 @@ function App() {
   return (
     <ReceitasProvider>
       <Switch>
-        <Route path="/app-receitas-g20/bebidas/:id/in-progress" component={ ReceitaEmProgresso } />
-        <Route path="/app-receitas-g20/comidas/:id/in-progress" component={ ReceitaEmProgresso } />
-        <Route path="/app-receitas-g20/comidas/:id" component={ ReceitaDetalhada } />
-        <Route path="/app-receitas-g20/bebidas/:id" component={ ReceitaDetalhada } />
-        <Route path="/app-receitas-g20/comidas" component={ Comidas } />
-        <Route path="/app-receitas-g20/bebidas" component={ Bebidas } />
+        <Route path="/app-receitas/bebidas/:id/in-progress" component={ ReceitaEmProgresso } />
+        <Route path="/app-receitas/comidas/:id/in-progress" component={ ReceitaEmProgresso } />
+        <Route path="/app-receitas/comidas/:id" component={ ReceitaDetalhada } />
+        <Route path="/app-receitas/bebidas/:id" component={ ReceitaDetalhada } />
+        <Route path="/app-receitas/comidas" component={ Comidas } />
+        <Route path="/app-receitas/bebidas" component={ Bebidas } />
         <Route
-          path="/app-receitas-g20/explorar/comidas/ingredientes"
+          path="/app-receitas/explorar/comidas/ingredientes"
           component={ ExplorarComidasIngredientes }
         />
         <Route
-          path="/app-receitas-g20/explorar/bebidas/ingredientes"
+          path="/app-receitas/explorar/bebidas/ingredientes"
           component={ ExplorarBebidasIngredientes }
         />
         <Route
-          path="/app-receitas-g20/explorar/comidas/area"
+          path="/app-receitas/explorar/comidas/area"
           component={ ExplorarComidasPorLocalOrigem }
         />
         <Route
-          path="/app-receitas-g20/explorar/bebidas/area"
+          path="/app-receitas/explorar/bebidas/area"
           component={ NotFound }
         />
-        <Route path="/app-receitas-g20/receitas-feitas" component={ ReceitasFeitas } />
-        <Route path="/app-receitas-g20/receitas-favoritas" component={ ReceitasFavoritas } />
-        <Route path="/app-receitas-g20/perfil" component={ Perfil } />
-        <Route path="/app-receitas-g20/explorar/comidas" component={ ExplorarComidas } />
-        <Route path="/app-receitas-g20/explorar/bebidas" component={ ExplorarBebidas } />
-        <Route path="/app-receitas-g20/explorar" component={ Explorar } />
-        <Route exact path="/app-receitas-g20/" component={ Login } />
+        <Route path="/app-receitas/receitas-feitas" component={ ReceitasFeitas } />
+        <Route path="/app-receitas/receitas-favoritas" component={ ReceitasFavoritas } />
+        <Route path="/app-receitas/perfil" component={ Perfil } />
+        <Route path="/app-receitas/explorar/comidas" component={ ExplorarComidas } />
+        <Route path="/app-receitas/explorar/bebidas" component={ ExplorarBebidas } />
+        <Route path="/app-receitas/explorar" component={ Explorar } />
+        <Route exact path="/app-receitas/" component={ Login } />
       </Switch>
     </ReceitasProvider>
   );
