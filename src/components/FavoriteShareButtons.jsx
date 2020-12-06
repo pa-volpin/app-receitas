@@ -91,10 +91,26 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
 
-  return (
-    <section className="detalhes-buttons">
-      {!isFetching
-      && (
+  const checkPageBeforeRenderBtns = () => {
+    if (page === 'recipes-done') {
+      return (
+        <section className="detalhes-buttons">
+          <button
+            data-testid={ testId === ''
+              ? 'share-btn' : `${testId}-horizontal-share-btn` }
+            type="button"
+            className="detalhes-share"
+            onClick={ () => setClipboard(`/${urlByType}/${id}`) }
+            src={ shareIcon }
+          >
+            <img src={ shareIcon } alt="compartilhe" />
+            { copied ? <span className="share-copiado">Link copiado!</span> : true }
+          </button>
+        </section>
+      );
+    }
+    return (
+      <section className="detalhes-buttons">
         <button
           data-testid={ testId === ''
             ? 'favorite-btn' : `${testId}-horizontal-favorite-btn` }
@@ -108,18 +124,24 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
             alt="compartilhe"
           />
         </button>
-      )}
-      <button
-        data-testid={ testId === ''
-          ? 'share-btn' : `${testId}-horizontal-share-btn` }
-        type="button"
-        className="detalhes-share"
-        onClick={ () => setClipboard(`/${urlByType}/${id}`) }
-        src={ shareIcon }
-      >
-        <img src={ shareIcon } alt="compartilhe" />
-        { copied ? <span className="share-copiado">Link copiado!</span> : true }
-      </button>
+        <button
+          data-testid={ testId === ''
+            ? 'share-btn' : `${testId}-horizontal-share-btn` }
+          type="button"
+          className="detalhes-share"
+          onClick={ () => setClipboard(`/${urlByType}/${id}`) }
+          src={ shareIcon }
+        >
+          <img src={ shareIcon } alt="compartilhe" />
+          { copied ? <span className="share-copiado">Link copiado!</span> : true }
+        </button>
+      </section>
+    );
+  };
+
+  return (
+    <section>
+      {!isFetching && checkPageBeforeRenderBtns()}
     </section>
   );
 }

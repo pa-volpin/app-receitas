@@ -70,17 +70,8 @@ function ReceitasFeitas() {
                   area={ feita.area }
                   category={ feita.category }
                   alcoholic={ feita.alcoholicOrNot }
-                  titlePage="Receitas Feitas"
+                  titlePage="Receitas Favoritas"
                   date={ feita.doneDate }
-                  // tagsRecipe={ feita.tags.map((tagName, idxTag) => (
-                  //   <button
-                  //     type="button"
-                  //     key={ idxTag }
-                  //     data-testid={ `${idx}-${tagName}-horizontal-tag` }
-                  //   >
-                  //     {tagName}
-                  //   </button>
-                  // )) }
                 />
               ))
             )}
