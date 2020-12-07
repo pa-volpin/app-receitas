@@ -1,39 +1,20 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CopyToClipBoard from './CopyToClipBoard';
-import shareIcon from '../images/shareIcon.svg';
-import heartIcon from '../images/whiteHeartIcon.svg';
 import FavoriteShareButtons from './FavoriteShareButtons';
 
 function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
   indexId, cardType, area, category, alcoholic, date, tagsRecipe }) {
-  const textTime = 3000;
-  const [copied, setClipboard] = CopyToClipBoard(textTime);
-  const urlByType = itemType;
-
   const iconsAccordingPage = (title) => {
     if (title === 'Receitas Favoritas') {
       return (
         <section className="card-buttons">
-          <button
-            data-testid={ `${indexId}-horizontal-share-btn` }
-            type="button"
-            className="card-share"
-            src={ shareIcon }
-            onClick={ () => setClipboard(`/${urlByType}/${id}`) }
-          >
-            <img src={ shareIcon } alt="compartilhe" />
-            { copied ? <span className="share-copiado">Link copiado!</span> : true }
-          </button>
-          <button
-            data-testid={ `${indexId}-${cardType}-favorite-btn` }
-            type="button"
-            className="card-fav"
-            src={ heartIcon }
-          >
-            <img src={ heartIcon } alt="compartilhe" />
-          </button>
+          <FavoriteShareButtons
+            recipeId={ id }
+            type={ itemType === 'comidas' ? 'meal' : 'drink' }
+            testId={ indexId }
+            page={ pageType }
+          />
         </section>
       );
     }
@@ -70,13 +51,20 @@ function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
       <div className="card-datails">
         <Link className="card-details-link" to={ `/${itemType}/${id}` }>
           <div className="card-info">
-            {foodOrDrink()}
             <h4
               data-testid={ `${indexId}-${cardType}-name` }
               className="card-title"
             >
+              {foodOrDrink()}
+              {' - '}
               {itemName}
             </h4>
+            <img
+              data-testid={ `${indexId}-${cardType}-image` }
+              alt="recipe cover"
+              className="card-image"
+              src={ imagePath }
+            />
             <div className="card-date-container">
               <div
                 data-testid={ `${indexId}-${cardType}-done-date` }
@@ -86,19 +74,13 @@ function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
               </div>
             </div>
           </div>
-          <img
-            data-testid={ `${indexId}-${cardType}-image` }
-            alt="recipe cover"
-            className="card-image"
-            src={ imagePath }
-          />
         </Link>
         <div className="card-clickable">
-          <div className="card-icons">
-            {iconsAccordingPage(titlePage)}
-          </div>
           <div className="card-tags">
             {tagsRecipe}
+          </div>
+          <div className="card-icons">
+            {iconsAccordingPage(titlePage)}
           </div>
         </div>
       </div>
