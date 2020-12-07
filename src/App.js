@@ -60,7 +60,7 @@ function App() {
         <Route path="/explorar/comidas" component={ ExplorarComidas } />
         <Route path="/explorar/bebidas" component={ ExplorarBebidas } />
         <Route path="/explorar" component={ Explorar } />
-        <Route exact path="/app-receitas" component={ Login } />
+        <Route exact path="/" component={ Login } />
       </Switch>
     </ReceitasProvider>
   );
