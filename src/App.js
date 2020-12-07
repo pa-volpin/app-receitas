@@ -26,8 +26,14 @@ function App() {
   return (
     <ReceitasProvider>
       <Switch>
-        <Route path="/app-receitas/bebidas/:id/in-progress" component={ ReceitaEmProgresso } />
-        <Route path="/app-receitas/comidas/:id/in-progress" component={ ReceitaEmProgresso } />
+        <Route
+          path="/app-receitas/bebidas/:id/in-progress"
+          component={ ReceitaEmProgresso }
+        />
+        <Route
+          path="/app-receitas/comidas/:id/in-progress"
+          component={ ReceitaEmProgresso }
+        />
         <Route path="/app-receitas/comidas/:id" component={ ReceitaDetalhada } />
         <Route path="/app-receitas/bebidas/:id" component={ ReceitaDetalhada } />
         <Route path="/app-receitas/comidas" component={ Comidas } />
@@ -54,7 +60,7 @@ function App() {
         <Route path="/app-receitas/explorar/comidas" component={ ExplorarComidas } />
         <Route path="/app-receitas/explorar/bebidas" component={ ExplorarBebidas } />
         <Route path="/app-receitas/explorar" component={ Explorar } />
-        <Route exact path="/app-receitas/" component={ Login } />
+        <Route exact path="/app-receitas" component={ Login } />
       </Switch>
     </ReceitasProvider>
   );
