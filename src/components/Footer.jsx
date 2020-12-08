@@ -20,9 +20,9 @@ function Footer() {
   return (
     <footer data-testid="footer" className="footer-container">
       <section className="footer-icons">
-        { linkElement(drinkIncon, 'drinks-bottom-btn', '/bebidas', 'bebidas') }
-        { linkElement(exploreIcon, 'explore-bottom-btn', '/explorar', 'explore') }
-        { linkElement(mealIcon, 'food-bottom-btn', '/comidas', 'comidas') }
+        { linkElement(drinkIncon, 'drinks-bottom-btn', '#/bebidas', 'bebidas') }
+        { linkElement(exploreIcon, 'explore-bottom-btn', '#/explorar', 'explore') }
+        { linkElement(mealIcon, 'food-bottom-btn', '#/comidas', 'comidas') }
       </section>
     </footer>
   );
