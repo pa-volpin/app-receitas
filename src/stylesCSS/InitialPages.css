@@ -26,7 +26,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 10px 0 30px;
+  margin: 20px 0 30px;
 }
 
 .category-container button {
