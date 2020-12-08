@@ -74,11 +74,12 @@ function ReceitasFeitas() {
                   date={ feita.doneDate }
                   tagsRecipe={ feita.tags.map((tagName, idxTag) => (
                     <button
+                      className="card-tags"
                       type="button"
                       key={ idxTag }
                       data-testid={ `${idx}-${tagName}-horizontal-tag` }
                     >
-                      {tagName}
+                      <span className="tag">{tagName}</span>
                     </button>
                   )) }
                 />

@@ -57,8 +57,8 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-left: 40px;
-  width: 50%;
+  /* margin-left: 40px; */
+  width: 50vw;
 }
 
 .detalhes-title {
@@ -88,8 +88,9 @@ hr {
   height: 50px;
   justify-content: flex-start;
   outline: none;
-  padding: 15px 0 10px 0;
-  width: 160px;
+  /* padding: 15px 0 10px 0; */
+  /* width: 160px; */
+  width: 50px;
 }
 
 .share-copiado {
