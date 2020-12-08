@@ -49,6 +49,7 @@
 .card-tags {
   border: none;
   cursor: default;
+  outline: none;
 }
 
 .tag {
@@ -56,6 +57,7 @@
   border-radius: 3px;
   margin: 0;
   margin-left: 1px;
+  outline: none;
   padding: 3px 10px;
 }
 

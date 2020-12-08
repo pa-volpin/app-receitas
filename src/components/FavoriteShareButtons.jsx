@@ -32,7 +32,7 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
     const recipesInFavorite = favoriteRecipes;
 
     const recipeIsAlreadyFavorite = recipesInFavorite
-      .map((eachRecipe) => eachRecipe.id).find((eachId) => eachId === id) === id;
+      .map((eachRecipe) => eachRecipe.id).includes(id);
 
     setIsFavorite(recipeIsAlreadyFavorite);
     setIsFetching(false);
@@ -45,10 +45,6 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
     // Se for true exclui a receita em favoriteRecipes
     if (!isFavorite) {
       setFavoriteRecipes((prevState) => {
-        const zero = 0;
-        const favoritedRecipe = prevState
-          .find((eachRecipe) => eachRecipe.id === id);
-        const favoriteIndex = prevState.indexOf(favoritedRecipe);
         const obj = (page === '')
           ? {
             id,
@@ -69,18 +65,18 @@ function FavoriteButton({ recipeId, type, testId = '', page = '' }) {
             image: recipe.image,
           };
         return ([
-          ...prevState.slice(zero, favoriteIndex),
+          ...prevState,
           obj,
-          ...prevState.slice(favoriteIndex + 1),
         ]);
       });
       setIsFavorite((prevState) => !prevState);
     } else {
       setFavoriteRecipes((prevState) => {
         const zero = 0;
-        const favoritedRecipe = prevState
-          .find((eachRecipe) => eachRecipe.id === id);
-        const favoriteIndex = prevState.indexOf(favoritedRecipe);
+        let favoriteIndex;
+        prevState.forEach((recipeFavorited, index) => {
+          if (recipeFavorited.id === id) favoriteIndex = index;
+        });
         return ([
           ...prevState.slice(zero, favoriteIndex),
           ...prevState.slice(favoriteIndex + 1),
