@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import profile from '../images/profileIcon.svg';
-import search from '../images/searchIcon.svg';
+import { ProfileIcon, SearchIcon } from '../images';
 import ReceitasContext from '../context/ReceitasContext';
 import SearchBar from './SearchBar';
 
@@ -17,13 +16,13 @@ function Header({ requestAPI }) {
 
   const profileIcon = (
     <Link to="/perfil">
-      <img data-testid="profile-top-btn" src={ profile } alt="" />
+      <img data-testid="profile-top-btn" src={ ProfileIcon } alt="" />
     </Link>
   );
 
   const searchIcon = (
     <button className="header-icon-search" type="button" onClick={ toggleSearchBar }>
-      <img data-testid="search-top-btn" src={ search } alt="" />
+      <img data-testid="search-top-btn" src={ SearchIcon } alt="" />
     </button>
   );
 

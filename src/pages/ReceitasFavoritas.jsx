@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Header from '../components/Header';
-import CardFavorite from '../components/CardFavorite';
+import { Header, CardFavorite } from '../components';
 import ReceitasContext from '../context/ReceitasContext';
 
 function ReceitasFeitas() {

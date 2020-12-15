@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import fetchDrink from '../servicesAPI/drinkAPI';
-import fetchFood from '../servicesAPI/foodAPI';
+import { fetchDrink, fetchFood } from '../servicesAPI';
 
 function Recomended({ itemType }) {
   const [isFetchingLocal, setIsFetchingLocal] = useState(false);

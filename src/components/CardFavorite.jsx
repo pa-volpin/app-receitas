@@ -10,6 +10,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
       return (
         <section className="card-buttons">
           <FavoriteShareButtons
+            key={ id }
             recipeId={ id }
             type={ itemType === 'comidas' ? 'meal' : 'drink' }
             testId={ indexId }
@@ -21,6 +22,7 @@ function Card({ imagePath, itemName, id, itemType, titlePage, pageType,
     return (
       <section className="card-buttons">
         <FavoriteShareButtons
+          key={ id }
           recipeId={ id }
           type={ itemType === 'comidas' ? 'meal' : 'drink' }
           testId={ indexId }

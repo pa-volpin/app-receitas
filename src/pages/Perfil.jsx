@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { Header, Footer } from '../components';
 import ReceitasContext from '../context/ReceitasContext';
 
 function PagePerfil() {
   const { setDisabledSearchIcon,
     setTitleHeader, setShowSearchBar,
-    isFetching, setIsFetching } = useContext(ReceitasContext);
+    isFetching, setIsFetching, setLogin } = useContext(ReceitasContext);
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function PagePerfil() {
               data-testid="profile-logout-btn"
               type="button"
               className="profile-btn-sair"
-              onClick={ () => localStorage.clear() }
+              onClick={ () => setLogin(false) }
             >
               Sair
             </button>

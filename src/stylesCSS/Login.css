@@ -59,7 +59,7 @@
 }
 
 .login-image {
-  background-image: url('../images/clipart-cookies-cooking-7-original.png');
+  background-image: url('../images/chef.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -173,7 +173,7 @@ button[disabled] {
   }
   
   .login-image {
-    background-image: url('../images/clipart-cookies-cooking-7-original.png');
+    background-image: url('../images/chef.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
