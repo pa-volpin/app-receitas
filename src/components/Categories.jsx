@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
-import fetchFood from '../servicesAPI/foodAPI';
-import fetchDrink from '../servicesAPI/drinkAPI';
+import { fetchDrink, fetchFood } from '../servicesAPI';
 
 function Categories({ type }) {
   const [categories, setCategories] = useState([]);
-  const { setFilterFood, setFilterDrink, setExecuteFilter } = useContext(ReceitasContext);
+  const { setFilterRecipe, setExecuteFilter } = useContext(ReceitasContext);
 
   useEffect(() => {
     const firstRequestAPI = async () => {
@@ -21,11 +20,7 @@ function Categories({ type }) {
 
   const executeSetFilter = (value) => {
     setExecuteFilter(true);
-    if (type === 'meals') {
-      setFilterFood((prevState) => (prevState === value ? '' : value));
-    } else {
-      setFilterDrink((prevState) => (prevState === value ? '' : value));
-    }
+    setFilterRecipe((prevState) => (prevState === value ? '' : value));
   };
 
   const maxCategoriesPerPage = 5;

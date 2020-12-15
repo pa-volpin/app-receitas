@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
-function IngredientsList({ recipe, type }) {
+function ListaIngredientes({ recipe, type }) {
   const { recipesDone, recipesInProgress } = useContext(ReceitasContext);
 
   // Configuração de chaves e id conforme tipo da receita
@@ -79,9 +79,9 @@ function IngredientsList({ recipe, type }) {
   );
 }
 
-export default IngredientsList;
+export default ListaIngredientes;
 
-IngredientsList.propTypes = {
+ListaIngredientes.propTypes = {
   recipe: propTypes.objectOf(propTypes.string).isRequired,
   type: propTypes.string.isRequired,
 };

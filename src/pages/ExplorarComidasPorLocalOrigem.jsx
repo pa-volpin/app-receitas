@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import ReceitasContext from '../context/ReceitasContext';
-import fetchFood from '../servicesAPI/foodAPI';
-import Card from '../components/Card';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { fetchFood } from '../servicesAPI';
+import { Header, Footer, Card } from '../components';
 
 function ExplorarComidasPorLocalOrigem() {
-  const { setDisabledSearchIcon, setRecipesMeals, recipesMeals,
+  const { setDisabledSearchIcon, setRecipes, recipes,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
   const [areas, setAreas] = useState([]);
@@ -29,7 +26,7 @@ function ExplorarComidasPorLocalOrigem() {
         : await fetchFood('filterByArea', filterArea);
       const areasOption = await fetchFood('byArea', '');
       setAreas(areasOption);
-      setRecipesMeals(response);
+      setRecipes(response);
       setIsFetching(false);
     };
     firstRequestAPI();
@@ -64,7 +61,7 @@ function ExplorarComidasPorLocalOrigem() {
         <section className="cards-list">
           {isFetching
             ? <h2>Loading...</h2>
-            : recipesMeals.map((meal, index) => (
+            : recipes.map((meal, index) => (
               index < twelve ? <Card
                 indexId={ index }
                 key={ index }

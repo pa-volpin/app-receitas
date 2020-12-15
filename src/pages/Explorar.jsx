@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { Header, Footer } from '../components';
 
 function Explorar({ requestAPI }) {
   const { setDisabledSearchIcon,

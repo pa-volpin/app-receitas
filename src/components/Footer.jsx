@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import drinkIncon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
-import exploreIcon from '../images/exploreIcon.svg';
+import { DrinkIcon, MealIcon, ExploreIcon } from '../images';
 
 const linkElement = (imgSrc, linkTestId, url) => (
   <Link
@@ -21,9 +19,9 @@ function Footer() {
   return (
     <footer data-testid="footer" className="footer-container">
       <section className="footer-icons">
-        { linkElement(drinkIncon, 'drinks-bottom-btn', '/bebidas', 'bebidas') }
-        { linkElement(exploreIcon, 'explore-bottom-btn', '/explorar', 'explore') }
-        { linkElement(mealIcon, 'food-bottom-btn', '/comidas', 'comidas') }
+        { linkElement(DrinkIcon, 'drinks-bottom-btn', '/bebidas', 'bebidas') }
+        { linkElement(ExploreIcon, 'explore-bottom-btn', '/explorar', 'explore') }
+        { linkElement(MealIcon, 'food-bottom-btn', '/comidas', 'comidas') }
       </section>
     </footer>
   );

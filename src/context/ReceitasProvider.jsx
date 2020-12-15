@@ -3,20 +3,19 @@ import propTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
+  const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [hidden, setHidden] = useState(true);
   const [isFetching, setIsFetching] = useState(true);
   const [searchInput, setSearchInput] = useState('');
-  const [recipesMeals, setRecipesMeals] = useState([]);
-  const [recipesDrinks, setRecipesDrinks] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [searchType, setSearchType] = useState('ingredient');
   const [disabledProfileIcon, setDisabledProfileIcon] = useState(false);
   const [disabledSearchIcon, setDisabledSearchIcon] = useState(false);
   const [titleHeader, setTitleHeader] = useState('');
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [filterFood, setFilterFood] = useState('');
   const [filterIngredient, setFilterIngredient] = useState('');
-  const [filterDrink, setFilterDrink] = useState('');
+  const [filterRecipe, setFilterRecipe] = useState('');
   const [executeFilter, setExecuteFilter] = useState(false);
   const [filterDisabled, setFilterDisabled] = useState(false);
   const [recipeGlobal, setRecipeGlobal] = useState('');
@@ -81,6 +80,13 @@ function ReceitasProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoriteRecipes]);
 
+  useEffect(() => {
+    if (!isRecovering && !login) {
+      localStorage.clear();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [login]);
+
   // ===========================================================================
 
   function renderEmail(param) {
@@ -100,16 +106,16 @@ function ReceitasProvider({ children }) {
   }
 
   const contextValue = {
+    login,
+    setLogin,
     email,
     setEmail,
     hidden,
     setHidden,
     searchType,
     setSearchType,
-    recipesMeals,
-    setRecipesMeals,
-    recipesDrinks,
-    setRecipesDrinks,
+    recipes,
+    setRecipes,
     disabledProfileIcon,
     setDisabledProfileIcon,
     disabledSearchIcon,
@@ -122,12 +128,10 @@ function ReceitasProvider({ children }) {
     setSearchInput,
     isFetching,
     setIsFetching,
-    filterFood,
-    setFilterFood,
+    filterRecipe,
+    setFilterRecipe,
     filterIngredient,
     setFilterIngredient,
-    filterDrink,
-    setFilterDrink,
     executeFilter,
     setExecuteFilter,
     filterDisabled,

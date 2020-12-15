@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import ListaIngredientesEmProgresso from './ListaIngredientesEmProgresso';
+import { ListaIngredientesEmProgresso, FavoriteShareButtons } from '../components';
 import ReceitasContext from '../context/ReceitasContext';
-import fetchFood from '../servicesAPI/foodAPI';
-import fetchDrink from '../servicesAPI/drinkAPI';
-import FavoriteShareButtons from '../components/FavoriteShareButtons';
+import { fetchDrink, fetchFood } from '../servicesAPI';
 
 function ReceitaEmProgresso({ match }) {
   const { setIsFetching, isFetching, keyProps,

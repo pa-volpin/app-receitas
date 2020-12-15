@@ -1,16 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
-import fetchDrink from '../servicesAPI/drinkAPI';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { fetchDrink, fetchFood } from '../servicesAPI';
+import { Header, Footer } from '../components';
 
-function ExplorarBebidasIngredientes() {
+function ExplorarReceitasPorIngredientes({ match }) {
   const { setDisabledSearchIcon, setFilterIngredient,
     setTitleHeader, setShowSearchBar,
     isFetching, setIsFetching } = useContext(ReceitasContext);
   const [ingredientes, setIngredientes] = useState([]);
   const twelve = 12;
+
+  const type = (match.path.match('comidas')) ? 'meal' : 'drink';
+  const urlByType = (type === 'meal') ? 'comidas' : 'bebidas';
+  const srcByType = (type === 'meal') ? 'meal' : 'cocktail';
+  const propStrIngredient = (type === 'meal') ? 'strIngredient' : 'strIngredient1';
 
   useEffect(() => {
     setDisabledSearchIcon(true);
@@ -18,7 +23,9 @@ function ExplorarBebidasIngredientes() {
     setShowSearchBar(false);
     setIsFetching(true);
     const firstRequestAPI = async () => {
-      const response = await fetchDrink('listIngredient', '');
+      const response = (type === 'meal')
+        ? await fetchFood('listIngredient', '')
+        : await fetchDrink('listIngredient', '');
       setIngredientes(response);
       setIsFetching(false);
     };
@@ -27,13 +34,13 @@ function ExplorarBebidasIngredientes() {
   }, []);
 
   return (
-    <main className="bebidas-container">
+    <main className={ `${urlByType}-container` }>
       <Header />
-      <section className="bebidas-body">
+      <section className={ `${urlByType}-body` }>
         <section className="cards-list">
           {isFetching
             ? <h2>Loading...</h2>
-            : ingredientes.map((drink, index) => (
+            : ingredientes.map((ingredient, index) => (
               index < twelve
                 ? (
                   <div
@@ -43,15 +50,17 @@ function ExplorarBebidasIngredientes() {
                     <div className="recomended-datails-ingredient">
                       <Link
                         className="recomended-details-link"
-                        to="/bebidas"
-                        onClick={ () => setFilterIngredient(drink.strIngredient1) }
+                        to={ `/${urlByType}` }
+                        onClick={ () => setFilterIngredient(
+                          ingredient[propStrIngredient],
+                        ) }
                       >
                         <div className="recomended-img-body">
                           <img
                             data-testid={ `${index}-card-img` }
                             alt="recipe cover"
                             className="recomended-image"
-                            src={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+                            src={ `https://www.the${srcByType}db.com/images/ingredients/${ingredient[propStrIngredient]}-Small.png` }
                           />
                         </div>
                         <div
@@ -61,7 +70,7 @@ function ExplorarBebidasIngredientes() {
                             data-testid={ `${index}-card-name` }
                             className="recomended-title"
                           >
-                            {drink.strIngredient1}
+                            {ingredient[propStrIngredient]}
                           </h4>
                         </div>
                       </Link>
@@ -77,4 +86,17 @@ function ExplorarBebidasIngredientes() {
   );
 }
 
-export default ExplorarBebidasIngredientes;
+ExplorarReceitasPorIngredientes.propTypes = {
+  match: propTypes.shape({
+    isExact: propTypes.bool,
+    params: propTypes.shape({
+      id: propTypes.string,
+      path: propTypes.string,
+      url: propTypes.string,
+    }),
+    path: propTypes.string,
+    url: propTypes.string,
+  }).isRequired,
+};
+
+export default ExplorarReceitasPorIngredientes;

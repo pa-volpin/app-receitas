@@ -3,11 +3,12 @@ import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 
 function Login({ history }) {
-  const { email, setEmail } = useContext(ReceitasContext);
+  const { email, setEmail, setLogin } = useContext(ReceitasContext);
   const [enable, setEnable] = useState(false);
   const [pass, setPass] = useState('');
 
   function handleClick() {
+    setLogin(true);
     localStorage.setItem('user', JSON.stringify({ email }));
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
@@ -26,33 +27,37 @@ function Login({ history }) {
       <h2 className="login-title">ZÉ RECEITAS</h2>
       <section className="login-input-btn">
         <div className="login-image" />
-        <section className="login-inputs">
-          <input
-            className="login-email"
-            data-testid="email-input"
-            type="email"
-            placeholder="Email"
-            onChange={ ({ target }) => setEmail(target.value) }
-          />
-          <input
-            className="login-pass"
-            data-testid="password-input"
-            type="password"
-            placeholder="Password"
-            onChange={ ({ target }) => setPass(target.value) }
-          />
-          <section className="login-button-container">
-            <button
-              onClick={ () => { handleClick(); } }
-              data-testid="login-submit-btn"
-              type="button"
-              className="login-button"
-              disabled={ !enable }
-            >
-              Entrar
-            </button>
+        <form>
+          <section className="login-inputs">
+            <input
+              className="login-email"
+              data-testid="email-input"
+              autoComplete="user-email"
+              type="email"
+              placeholder="Email"
+              onChange={ ({ target }) => setEmail(target.value) }
+            />
+            <input
+              className="login-pass"
+              data-testid="password-input"
+              type="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              onChange={ ({ target }) => setPass(target.value) }
+            />
+            <section className="login-button-container">
+              <button
+                onClick={ () => { handleClick(); } }
+                data-testid="login-submit-btn"
+                type="button"
+                className="login-button"
+                disabled={ !enable }
+              >
+                Entrar
+              </button>
+            </section>
           </section>
-        </section>
+        </form>
       </section>
     </section>
   );

@@ -1,11 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import IngredientsList from './IngredientsList';
 import ReceitasContext from '../context/ReceitasContext';
-import Recomended from '../components/Recomended';
-import fetchFood from '../servicesAPI/foodAPI';
-import fetchDrink from '../servicesAPI/drinkAPI';
-import FavoriteShareButtons from '../components/FavoriteShareButtons';
+import { Recomended, ListaIngredientes, FavoriteShareButtons } from '../components';
+import { fetchDrink, fetchFood } from '../servicesAPI';
 
 function ReceitaDetalhada({ match }) {
   const { setIsFetching, isFetching, keyProps,
@@ -55,7 +52,7 @@ function ReceitaDetalhada({ match }) {
               </section>
             </header>
             <article className="detalhes-article">
-              <IngredientsList recipe={ recipe } type={ type } />
+              <ListaIngredientes recipe={ recipe } type={ type } />
               <hr />
               <section className="detalhes-instructions-container">
                 <h4 className="detalhes-titles">Instruções de preparo</h4>
