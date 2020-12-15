@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 import ReceitasContext from '../context/ReceitasContext';
 import { fetchDrink, fetchFood } from '../servicesAPI';
 import { Header, Footer } from '../components';
