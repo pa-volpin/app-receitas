@@ -82,9 +82,6 @@ function ReceitasProvider({ children }) {
 
   useEffect(() => {
     if (!isRecovering && !login) {
-      setFavoriteRecipes([]);
-      setRecipesDone([]);
-      setRecipesInProgress({ cocktails: {}, meals: {} });
       localStorage.clear();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -8,7 +8,7 @@ function Receitas({ history, match }) {
   const { recipes, setRecipes, setShowSearchBar,
     setTitleHeader, setDisabledSearchIcon,
     isFetching, setIsFetching, searchType,
-    searchInput, filterRecipe, setFilterRecipe,
+    searchInput, filterRecipe,
     filterIngredient } = useContext(ReceitasContext);
   const twelve = 12;
 
@@ -19,7 +19,6 @@ function Receitas({ history, match }) {
   const prefixByType = (type === 'meal') ? 'Meal' : 'Drink';
 
   useEffect(() => {
-    setFilterRecipe('');
     setDisabledSearchIcon(false);
     setTitleHeader(titleByType);
     setShowSearchBar(false);
@@ -47,12 +46,12 @@ function Receitas({ history, match }) {
     } else {
       setIsFetching(true);
       const firstRequestAPI = async () => {
-        const responseFood = (filterRecipe === '' || filterRecipe === 'All')
+        const responseFood = (filterIngredient === '')
           ? await fetchFood('itemName', '')
-          : await fetchFood('byCategory', filterRecipe);
-        const responseDrink = (filterRecipe === '' || filterRecipe === 'All')
+          : await fetchFood('ingredient', filterIngredient);
+        const responseDrink = (filterIngredient === '')
           ? await fetchDrink('itemName', '')
-          : await fetchDrink('byCategory', filterRecipe);
+          : await fetchDrink('ingredient', filterIngredient);
         const response = (type === 'meal') ? responseFood : responseDrink;
         setRecipes(response);
         setIsFetching(false);

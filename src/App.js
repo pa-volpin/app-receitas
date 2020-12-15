@@ -48,6 +48,10 @@ function App() {
           path="/explorar/comidas/area"
           component={ ExplorarComidasPorLocalOrigem }
         />
+        <Route
+          path="/explorar/bebidas/area"
+          component={ NotFound }
+        />
         <Route path="/receitas-feitas" component={ ReceitasFeitas } />
         <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
         <Route path="/perfil" component={ Perfil } />
