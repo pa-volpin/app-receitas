@@ -1,4 +1,4 @@
-# Bem vindo ao app [***Zé Receitas***](https://pa-volpin.github.io/app-eceitas/#/?target=_blank)
+# Bem vindo ao app [***Zé Receitas***](https://pa-volpin.github.io/app-eceitas/#/ "title" target="_blank")
 
 A aplicação batizada como Zé Receitas é fruto de um projeto de desenvolvimento do modulo de front-end do curso da Trybe.
 
@@ -81,7 +81,7 @@ Ao final do projeto houve apresentação para banca avaliadora onde foram aponta
 
 ## Repositório base do projeto (Trybe)
 
-https://github.com/tryber/sd-06-project-recipes-app?target=_blank
+(https://github.com/tryber/sd-06-project-recipes-app?target=_blank
 
 <details>
 <summary>README OFICIAL DA TRYBE</summary></br>
