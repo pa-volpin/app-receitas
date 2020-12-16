@@ -5,7 +5,7 @@ A aplicação batizada como Zé Receitas é fruto de um projeto de desenvolvimen
 O objetivo do projeto foi desenvolver uma aplicação com foco em mobile, onde a partir do consumo de duas APIs, o app oferece ao usuário uma ferramenta de busca de receitas de bebidas e comidas, além de outras funcionalidades.
 
 Acesse o app Zé Receitas pelo link:
-https://pa-volpin.github.io/app-eceitas/#/
+https://pa-volpin.github.io/app-receitas/#/
 
 ## Principais elementos
 
