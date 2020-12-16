@@ -1,3 +1,28 @@
+# INTRODUÇÃO PESSOAL
+
+Projeto de desenvolvimento de uma aplicação em React usando as mais modernas funcionalidades da tecnologia como ContextAPI. 
+
+O objetivo do projeto foi desenvolver uma aplicação com foco em mobile, onde a partir do consumo de duas APIs, o app oferece ao usuário uma ferramenta de busca de receitas de bebidas e comidas, além de outras funcionalidades como a filtragem de receitas por local de origem e por ingrediente. Almejando uma boa experiência ao usuário, o projeto especificou algumas funcionalidades como a possibilidade de favoritar receitas (similar a uma wish list), a possibilidade de checar os ingredientes já adicionados conforme avanço no preparo da receita (similar a uma to do list) e por fim uma lista de recordação de todas as receitas já preparadas.
+
+O projeto foi concluído com 98.85% de cumprimento dos requisitos, tendo como principais aprendizados a colaboração e a importância da utilização de metodologias ageis (Kanban e Scrum) na construção de um projeto em equipe, resaltando que o projeto foi desenvolvido por um grupo de 3 desenvolvedores ao longo de 10 dias.
+
+Ao final do projeto houve apresentação para banca avaliadora onde foram apontados alguns pontos positivos e negativos a melhorar no projeto:
+
+- Positivos:
+-- Fluidez e maturidade da aplicação
+-- Deploy usando GitHub Pages
+-- Validação da perfomance através do PageSpeed Insights
+
+- A melhorar:
+-- Contraste de cores em botões pensando na usabilidade
+
+Desenvolvedores:
+- Guilherme Sila [perfil] (https://github.com/Gui-Alucard)
+- Paulo Af. Volpin [perfil] (https://github.com/pa-volpin)
+- William Gomes [perfil] (https://github.com/williamjog)
+
+# README OFICIAL DA TRYBE
+
 Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
 
 # Boas vindas ao repositório do projeto de Receitas!
