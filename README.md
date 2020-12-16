@@ -1,4 +1,4 @@
-# Bem vindo ao app <a target="_blank" href="https://pa-volpin.github.io/app-eceitas/#/"><b><i>Zé Receitas</i></b></a>
+# Bem vindo ao app [***Zé Receitas***](https://pa-volpin.github.io/app-eceitas/#/?target=_blank)
 
 A aplicação batizada como Zé Receitas é fruto de um projeto de desenvolvimento do modulo de front-end do curso da Trybe.
 
@@ -6,7 +6,7 @@ O objetivo do projeto foi desenvolver uma aplicação com foco em mobile, onde a
 
 Acesse o app Zé Receitas pelo link:
 
-<a target="_blank" href="https://pa-volpin.github.io/app-eceitas/#/">https://pa-volpin.github.io/app-receitas/#/</a>
+(https://pa-volpin.github.io/app-receitas/#/?target=_blank)
 
 ## Principais elementos
 
@@ -75,13 +75,13 @@ Ao final do projeto houve apresentação para banca avaliadora onde foram aponta
 
 ## Desenvolvedores
 
-- Guilherme Silva (<a target="_blank" href="https://github.com/Gui-Alucard">perfil</a>)
-- Paulo Afonso Volpin (<a target="_blank" href="https://github.com/pa-volpin">perfil</a>)
-- William Gomes (<a target="_blank" href="https://github.com/williamjog">perfil</a>)
+- Guilherme Silva ([perfil](https://github.com/Gui-Alucard?target=_blank)
+- Paulo Afonso Volpin ([perfil](https://github.com/pa-volpin?target=_blank)
+- William Gomes ([perfil](https://github.com/williamjog?target=_blank)
 
 ## Repositório base do projeto (Trybe)
 
-<a href="https://github.com/tryber/sd-06-project-recipes-app" target="_blank">https://github.com/tryber/sd-06-project-recipes-app</a>
+https://github.com/tryber/sd-06-project-recipes-app?target=_blank
 
 <details>
 <summary>README OFICIAL DA TRYBE</summary></br>
