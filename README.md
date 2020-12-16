@@ -1,27 +1,88 @@
-# INTRODUÇÃO PESSOAL
+# Bem vindo ao app [***Zé Receitas***](https://pa-volpin.github.io/app-eceitas/#/)
 
-Projeto de desenvolvimento de uma aplicação em React usando as mais modernas funcionalidades da tecnologia como ContextAPI. 
+A aplicação batizada como Zé Receitas é fruto de um projeto de desenvolvimento do modulo de front-end do curso da Trybe.
 
-O objetivo do projeto foi desenvolver uma aplicação com foco em mobile, onde a partir do consumo de duas APIs, o app oferece ao usuário uma ferramenta de busca de receitas de bebidas e comidas, além de outras funcionalidades como a filtragem de receitas por local de origem e por ingrediente. Almejando uma boa experiência ao usuário, o projeto especificou algumas funcionalidades como a possibilidade de favoritar receitas (similar a uma wish list), a possibilidade de checar os ingredientes já adicionados conforme avanço no preparo da receita (similar a uma to do list) e por fim uma lista de recordação de todas as receitas já preparadas.
+O objetivo do projeto foi desenvolver uma aplicação com foco em mobile, onde a partir do consumo de duas APIs, o app oferece ao usuário uma ferramenta de busca de receitas de bebidas e comidas, além de outras funcionalidades.
 
-O projeto foi concluído com 98.85% de cumprimento dos requisitos, tendo como principais aprendizados a colaboração e a importância da utilização de metodologias ageis (Kanban e Scrum) na construção de um projeto em equipe, resaltando que o projeto foi desenvolvido por um grupo de 3 desenvolvedores ao longo de 10 dias.
+Acesse o app Zé Receitas pelo link:
+https://pa-volpin.github.io/app-eceitas/#/
 
-Ao final do projeto houve apresentação para banca avaliadora onde foram apontados alguns pontos positivos e negativos a melhorar no projeto:
+## Principais elementos
 
-- Positivos:
--- Fluidez e maturidade da aplicação
--- Deploy usando GitHub Pages
--- Validação da perfomance através do PageSpeed Insights
+O projeto foi composto dos seguintes elementos:
 
-- A melhorar:
--- Contraste de cores em botões pensando na usabilidade
+- Login
+- Footer
+- Header
+- Perfil
+- Galeria de Receitas
+- Barra de buscar
+- Filtros de busca
+- Lista de receitas favoritas (wish list)
+- Lista de receitas já preparadas
+- Checklist de ingredientes (to do list)
 
-Desenvolvedores:
-- Guilherme Sila [perfil] (https://github.com/Gui-Alucard)
-- Paulo Af. Volpin [perfil] (https://github.com/pa-volpin)
-- William Gomes [perfil] (https://github.com/williamjog)
+## Objetivo técnico
 
-# README OFICIAL DA TRYBE
+Tecnicamente, objetivou-se a construção da aplicação web em React usando as mais modernas funcionalidades da tecnologia como:
+
+- Context API
+- React Hook useState
+- React Hook useContext
+- React Hook useEffect
+- Hooks customizados
+
+## Bibliotecas utilizadas
+
+- React
+- React Router DOM
+- GitHub Pages
+- Clipboard Copy
+- Prop Types
+- Jest
+- Cypress
+- Eslint
+
+## Metodologias utilizadas
+
+- Kanban
+- Scrum
+
+## Ferramentas de desenvolvimento
+
+- Git e GitHub para versionamento
+- Trello para gestão do projetos
+- Zoom para reuniões síncronas
+- Slack para comunicação assíncrona
+- VSCode como editor
+
+## Conclusão
+
+O projeto foi concluído com 98.85% de cumprimento dos requisitos, tendo como principais aprendizados a colaboração e a importância da utilização das metodologias ágeis na construção de um projeto em equipe. O projeto foi desenvolvido por um grupo de 3 desenvolvedores ao longo de 10 dias.
+
+Ao final do projeto houve apresentação para banca avaliadora onde foram apontados alguns pontos positivos e negativos a melhorar no projeto.
+
+### Pontos positivos
+
+- Fluidez e maturidade da aplicação
+- Deploy usando GitHub Pages
+- Validação da perfomance através do PageSpeed Insights
+
+### Pontos a melhorar
+
+- Contraste de cores em botões pensando na usabilidade
+
+## Desenvolvedores
+
+- Guilherme Silva ([perfil](https://github.com/Gui-Alucard))
+- Paulo Afonso Volpin ([perfil](https://github.com/pa-volpin))
+- William Gomes ([perfil](https://github.com/williamjog))
+
+## Repositório base do projeto (Trybe)
+https://github.com/tryber/sd-06-project-recipes-app
+
+<details>
+<summary>README OFICIAL DA TRYBE</summary></br>
 
 Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
 
@@ -1494,3 +1555,4 @@ Link: [FORMULÁRIO DE AVALIAÇÃO DE PROJETO](https://be-trybe.typeform.com/to/Z
 O avaliador automático não necessariamente avalia seu projeto na ordem em que os requisitos aparecem no readme. Isso acontece para deixar o processo de avaliação mais rápido. Então, não se assuste se isso acontecer, ok?
 
 ---
+</details>
